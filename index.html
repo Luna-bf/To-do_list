@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>To-do list JavaScript</title>
+    <script type="text/javascript" src="js/app.js" defer></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="icon" type="image/x-icon" href="favicon/favicon-48x48.png" />
+</head>
+<body>
+    <h1>To-do list JavaScript</h1>
+    
+    <section id="all-tasks">
+        <h2>Votre liste de tâches</h2>
+        <ul id="tasks-list"></ul>
+    </section>
+    
+    <section id="task-form">
+        <form>
+            <article>
+                <label for="category">Catégorie</label>
+                <select name="choose_category" id="choose-category">
+                    <option value="Sélectionner">-- Sélectionner une catégorie --</option>
+                    <option value="Travail">Travail</option>
+                    <option value="Alimentation">Alimentation</option>
+                    <option value="Maison">Maison</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Hygiène">Hygiène</option>
+                    <option value="Autre">Autre</option>
+                </select>
+            </article>
+            
+            <article>
+                <label for="priority">Priorité</label>
+                <select name="choose_priority" id="choose-priority">
+                    <option value="Sélectionner">-- Sélectionner une priorité --</option>
+                    <option value="1">Elevée</option>
+                    <option value="2">Normale</option>
+                    <option value="3">Basse</option>
+                </select>
+            </article>
+            
+            <button>Ajouter la tâche</button>
+        </form>
+        
+        <button id="delete-task-btn">Supprimer les tâches terminées</button>
+    </section>
+</body>
+</html>
