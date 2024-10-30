@@ -2,21 +2,53 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>To-do list JavaScript</title>
+    <title>To-do list - JavaScript</title>
     <script type="text/javascript" src="js/app.js" defer></script>
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="icon" type="image/x-icon" href="favicon/favicon-48x48.png" />
 </head>
 <body>
-    <h1>To-do list JavaScript</h1>
-    
     <section id="all-tasks">
-        <h2>Votre liste de tâches</h2>
+        <h1>Vos tâches</h1>
         <ul id="tasks-list"></ul>
     </section>
     
     <section id="task-form">
         <form>
+            <h2>Filtrer par :</h2>
+            <article>
+                <label for="filter-priority">Priorité</label>
+                <select name="choose_priority" id="choose-priority">
+                    <option value="Sélectionner">-- Sélectionner une priorité --</option>
+                    <option value="1">Elevée</option>
+                    <option value="2">Normale</option>
+                    <option value="3">Basse</option>
+                    <option value="Sans priorité">Sans priorité</option>
+                </select>
+            </article>
+            
+            <article>
+                <label for="filter-category">Catégorie</label>    
+                <select name="choose_category" id="choose-category">
+                    <option value="Sélectionner">-- Sélectionner une catégorie --</option>
+                    <option value="Travail">Travail</option>
+                    <option value="Alimentation">Alimentation</option>
+                    <option value="Maison">Maison</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Hygiène">Hygiène</option>
+                    <option value="Autre">Autre</option>
+                    <option value="Sans catégorie">Sans catégorie</option>
+                </select>
+            </article>
+        </form>
+        
+        <form>
+            <h2>Créer une nouvelle tâche :</h2>
+            <article>
+                <label for="task-name">Nom de la tâche</label>
+                <input type="text" name="write_name" id="write-name" placeholder="Ex : Faire les courses" required />
+            </article>
+            
             <article>
                 <label for="category">Catégorie</label>
                 <select name="choose_category" id="choose-category">
@@ -42,8 +74,11 @@
             
             <button>Ajouter la tâche</button>
         </form>
-        
+        <!-- mettre une fenêtre (window prompt ?) avertissant que des tâches
+        sont sur le point d'être supprimées (avec leur nom) -->
         <button id="delete-task-btn">Supprimer les tâches terminées</button>
+        
+        <button id="delete-all-btn">Supprimer toutes les tâches</button>
     </section>
 </body>
 </html>
