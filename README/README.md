@@ -67,14 +67,30 @@ La liste des tâches s'affichent de la priorité la plus élevée à la moins é
 
 Lorsque vous réactulisez, toutes les tâches créées disparaissent. Mettre en place un système pour les conserver (localstorage).
 
+
+### Mes consignes
+
+
 ### Modification de la priorité
 
-Permettre à l'utilisateur de modifier la priorité d'une tâche.
+Permettre à l'utilisateur de modifier la priorité ainsi que le nom d'une tâche.
 
 ### Filtrer des tâches
 
 Filtrer les tâches en fonction de leur priorité et/ou catégorie.
 
-### Window prompt
+### Window prompt 1 : Suppression (non désactivable)
 
-Mettre une fenêtre (window prompt ?) avertissant que des tâches sont sur le point d'être supprimées (avec leur nom)
+Mettre une fenêtre (window prompt ?) avertissant que des tâches sont sur le point d'être supprimées (indiqué avec un nombre). Pareil si on supprime toutes les tâches
+
+### Window prompt 2 : Félicitation
+
+Mettre une fenêtre (window prompt ?) félicitant l'utilisateur d'avoir terminé une tâche : "Félicitation ! Vous avez terminé la tâche : ${myTask.title}".
+
+### Cacher le window prompt (félicitation)
+
+Rendre possible le fait de désactiver ce message en cochant un input checkbox.
+
+### Bouton "Réactiver le prompt" (félicitation)
+
+Ce bouton n'est pas cliquable quand le prompt est activé, il faudra lui retirer l'attribut disabled quand le prompt félicitation est désactivé.
