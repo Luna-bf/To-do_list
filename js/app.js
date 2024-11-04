@@ -45,6 +45,7 @@ function addTask() {
         const label = document.createElement('label');
         const input = document.createElement('input');
         const type = document.createElement('type', 'checkbox');
+        const icon = e.appendChild('<i class="fa-solid fa-pen" aria-hidden="false"></i>');
     }
     /*
     let newTask = document.createElement('label');
