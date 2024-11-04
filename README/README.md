@@ -55,22 +55,26 @@ Si aucune priorité ou qu'aucun champ n'est sélectionné, afficher la tâche en
 
 Créer en-dessous du formulaire un bouton "Supprimer toutes les tâches". Lorsque l'on clique sur ce bouton cela supprime toutes les tâches qui ont été sélectionnées (cochées).
 
-### [BONUS] Afficher un message de notification
+### Afficher un message de notification
 
 Lorsqu'une ou plusieurs tâches ont été supprimées, afficher un message de notification à l'utilisateur du type "x tâches supprimées avec succès".
 
-### [BONUS] Tri des tâches
+### Tri des tâches
 
 La liste des tâches s'affichent de la priorité la plus élevée à la moins élevée.
 
-### [BONUS] Persistence des tâches
+### Persistence des tâches
 
 Lorsque vous réactulisez, toutes les tâches créées disparaissent. Mettre en place un système pour les conserver (localstorage).
 
-### [BONUS] Modification de la priorité
+### Modification de la priorité
 
 Permettre à l'utilisateur de modifier la priorité d'une tâche.
 
-### [BONUS] Filtrer des tâches
+### Filtrer des tâches
 
-Filtrer les tâches en fonction de leur priorité et/ou catégorie. Ajouter une icone font awesome pour effectuer cela.
+Filtrer les tâches en fonction de leur priorité et/ou catégorie.
+
+### Window prompt
+
+Mettre une fenêtre (window prompt ?) avertissant que des tâches sont sur le point d'être supprimées (avec leur nom)
