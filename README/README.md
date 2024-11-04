@@ -49,7 +49,7 @@ Le texte de la tâche doit s'afficher en rouge si la priorité est élevée (val
 
 Créer un formulaire avec un champ texte, un menu déroulant et un bouton. Le champ texte correspondra au texte de la tâche et le menu déroulant sa priorité (il y aura donc 3 valeurs possibles : 1, 2, 3). Lorsque l'on valide le formulaire en cliquant sur le bouton, une nouvelle tâche est créée dans la liste, avec la bonne couleur pour la priorité.
 
-Si aucune priorité ou qu'aucun champ n'est sélectionné, afficher la tâche en noir.
+Si aucune priorité n'est sélectionnée, afficher la tâche en noir.
 
 ### Supprimer une tâche
 
