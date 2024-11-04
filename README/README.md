@@ -81,7 +81,9 @@ Filtrer les tâches en fonction de leur priorité et/ou catégorie.
 
 ### Window prompt 1 : Suppression (non désactivable)
 
-Mettre une fenêtre (window prompt ?) avertissant que des tâches sont sur le point d'être supprimées (indiqué avec un nombre). Pareil si on supprime toutes les tâches
+Mettre une fenêtre (window prompt ?) avertissant que des tâches sont sur le point d'être supprimées (sous forme d'une liste, avec leur nom).
+
+Si on supprime toutes les tâches, afficher le nombre de tâches sur le point d'être supprimées (il faudra plus que certainement une boucle).
 
 ### Window prompt 2 : Félicitation
 
