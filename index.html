@@ -2,14 +2,15 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>To-do list - JavaScript</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Todo list - JavaScript</title>
     <script type="text/javascript" src="js/app.js" defer></script>
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="icon" type="image/x-icon" href="favicon/favicon-48x48.png" />
 </head>
 <body>
+    <h1>Vos tâches</h1>
     <section id="all-tasks">
-        <h1>Vos tâches</h1>
         <ul id="tasks-list"></ul>
     </section>
     
@@ -18,7 +19,7 @@
             <h2>Filtrer par :</h2>
             <article>
                 <label for="filter-priority">Priorité</label>
-                <select name="choose_priority" id="choose-priority">
+                <select name="filter_priority" id="filter-priority">
                     <option value="Sélectionner">-- Sélectionner une priorité --</option>
                     <option value="1">Elevée</option>
                     <option value="2">Normale</option>
@@ -29,7 +30,7 @@
             
             <article>
                 <label for="filter-category">Catégorie</label>    
-                <select name="choose_category" id="choose-category">
+                <select name="filter_category" id="filter-category">
                     <option value="Sélectionner">-- Sélectionner une catégorie --</option>
                     <option value="Travail">Travail</option>
                     <option value="Alimentation">Alimentation</option>
@@ -46,11 +47,11 @@
             <h2>Créer une nouvelle tâche :</h2>
             <article>
                 <label for="task-name">Nom de la tâche</label>
-                <input type="text" name="write_name" id="write-name" placeholder="Ex : Faire les courses" required />
+                <input type="text" name="task_name" id="task-name" placeholder="Ex : Faire les courses" required />
             </article>
             
             <article>
-                <label for="category">Catégorie</label>
+                <label for="choose-category">Catégorie</label>
                 <select name="choose_category" id="choose-category">
                     <option value="Sélectionner">-- Sélectionner une catégorie --</option>
                     <option value="Travail">Travail</option>
@@ -63,7 +64,7 @@
             </article>
             
             <article>
-                <label for="priority">Priorité</label>
+                <label for="choose-priority">Priorité</label>
                 <select name="choose_priority" id="choose-priority">
                     <option value="Sélectionner">-- Sélectionner une priorité --</option>
                     <option value="1">Elevée</option>
