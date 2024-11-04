@@ -1,4 +1,4 @@
-//Je récupère mes élèments HTML
+//Je récupère mes éléments HTML
 const elements = {
     allTasks: document.querySelector('#all-tasks ul'),
     form: document.querySelector('#task-form form'),
@@ -13,7 +13,7 @@ const priorityLow = 3;
 
 let myTasks = [
 {
-    title: 'Finir ma todo list',
+    title: 'Savoir faire une todo list en js natif',
     priority: priorityHigh,
     isDone: false
 },
@@ -38,7 +38,7 @@ console.log(myTasks);
 //La fonction qui va me permettre d'ajouter des tâches
 function addTask() {
     
-    //J'utilise une boucle car je veux que cela se REPETE pour CHAQUE tâche
+    //J'utilise une boucle car je veux que ce qui va être déclaré se REPETE pour CHAQUE tâche
     for(let myTask of myTasks) {
         
         const li = document.createElement('li'); //Je créé l'élément qui va me servir pour cette tâche
@@ -47,17 +47,7 @@ function addTask() {
         const type = document.createElement('type', 'checkbox');
         const icon = e.appendChild('<i class="fa-solid fa-pen" aria-hidden="false"></i>');
     }
-    /*
-    let newTask = document.createElement('label');
-    
-    let checkbox = document.createElement('input');
-    checkbox.setAttribute('type', 'checkbox');
-    
-    newTask.appendChild(checkbox);
-    
-    myTasks.push(newTask);*/
 }
-        //<label><input type="checkbox">Task</label>
 
 elements.allTasks.addEventListener('click', (e) => {
     e.preventDefault();
