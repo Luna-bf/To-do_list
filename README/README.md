@@ -68,7 +68,7 @@ La liste des tâches s'affichent de la priorité la plus élevée à la moins é
 Lorsque vous réactulisez, toutes les tâches créées disparaissent. Mettre en place un système pour les conserver (localstorage).
 
 
-### Mes consignes
+## Mes consignes
 
 
 ### Modification de la priorité
