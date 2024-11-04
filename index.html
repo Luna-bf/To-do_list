@@ -10,49 +10,24 @@
     <link rel="icon" type="image/x-icon" href="favicon/favicon-48x48.png" />
 </head>
 <body>
-    <h1>Vos tâches</h1>
+    <h1>Todo list - JavaScript</h1>
+    
     <section id="all-tasks">
-        <ul id="tasks-list">
+        <h2>Vos tâches</h2>
+        <ul id="list-unstyled">
     </section>
     
     <section id="task-form">
+        <h2>Créer une nouvelle tâche :</h2>
         <form>
-            <h2>Filtrer par :</h2>
-            <article>
-                <label for="filter-priority">Priorité</label>
-                <select name="filter_priority" id="filter-priority">
-                    <option value="Sélectionner">-- Sélectionner une priorité --</option>
-                    <option value="1">Elevée</option>
-                    <option value="2">Normale</option>
-                    <option value="3">Basse</option>
-                    <option value="Sans priorité">Sans priorité</option>
-                </select>
-            </article>
-            
-            <article>
-                <label for="filter-category">Catégorie</label>    
-                <select name="filter_category" id="filter-category">
-                    <option value="Sélectionner">-- Sélectionner une catégorie --</option>
-                    <option value="Travail">Travail</option>
-                    <option value="Alimentation">Alimentation</option>
-                    <option value="Maison">Maison</option>
-                    <option value="Sport">Sport</option>
-                    <option value="Hygiène">Hygiène</option>
-                    <option value="Autre">Autre</option>
-                    <option value="Sans catégorie">Sans catégorie</option>
-                </select>
-            </article>
-        </form>
-        
-        <form>
-            <h2>Créer une nouvelle tâche :</h2>
-            <article>
-                <label for="task-name">Nom de la tâche</label>
+            <article class="form-group">
+                <label for="task-name">Nom de la tâche :</label>
+                <!--name sera le nom de la tâche, c'est important de le déclarer-->
                 <input type="text" name="task_name" id="task-name" placeholder="Ex : Faire les courses" required />
             </article>
             
-            <article>
-                <label for="choose-category">Catégorie</label>
+            <article class="form-group">
+                <label for="choose-category">Catégorie :</label>
                 <select name="choose_category" id="choose-category">
                     <option value="Sélectionner">-- Sélectionner une catégorie --</option>
                     <option value="Travail">Travail</option>
@@ -64,8 +39,8 @@
                 </select>
             </article>
             
-            <article>
-                <label for="choose-priority">Priorité</label>
+            <article class="form-group">
+                <label for="choose-priority">Priorité :</label>
                 <select name="choose_priority" id="choose-priority">
                     <option value="Sélectionner">-- Sélectionner une priorité --</option>
                     <option value="1">Elevée</option>
@@ -76,11 +51,44 @@
             
             <button>Ajouter la tâche</button>
         </form>
+    </section>
+        
+    <section id="filter-form">
+        <h2>Filtrer par :</h2>
+        <form>
+            <article class="form-group">
+                <label for="filter-priority">Priorité :</label>
+                <select name="filter_priority" id="filter-priority">
+                    <option value="Sélectionner">-- Sélectionner une priorité --</option>
+                    <option value="1">Elevée</option>
+                    <option value="2">Normale</option>
+                    <option value="3">Basse</option>
+                    <option value="0">Sans priorité</option>
+                </select>
+            </article>
+            
+            <article class="form-group">
+                <label for="filter-category">Catégorie :</label>    
+                <select name="filter_category" id="filter-category">
+                    <option value="Sélectionner">-- Sélectionner une catégorie --</option>
+                    <option value="Travail">Travail</option>
+                    <option value="Alimentation">Alimentation</option>
+                    <option value="Maison">Maison</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Hygiène">Hygiène</option>
+                    <option value="Autre">Autre</option>
+                    <option value="Aucune">Sans catégorie</option>
+                </select>
+            </article>
+        </form>
+        
         <!-- mettre une fenêtre (window prompt ?) avertissant que des tâches
         sont sur le point d'être supprimées (avec leur nom) -->
         <button id="delete-task-btn">Supprimer les tâches terminées</button>
         
         <button id="delete-all-btn">Supprimer toutes les tâches</button>
     </section>
+    
+    <button id="activate-msg">Réactiver le prompt</button>
 </body>
 </html>
