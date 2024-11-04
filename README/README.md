@@ -96,3 +96,7 @@ Rendre possible le fait de désactiver ce message en cochant un input checkbox.
 ### Bouton "Réactiver le prompt" (félicitation)
 
 Ce bouton n'est pas cliquable quand le prompt est activé, il faudra lui retirer l'attribut disabled quand le prompt félicitation est désactivé.
+
+### Texte de todo list vide
+
+Quand toutes les tâches sont terminées (cochée), afficher : "Vous avez terminé toutes vos tâches, bravo !"
