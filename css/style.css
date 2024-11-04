@@ -1,0 +1,27 @@
+.list-unstyled {
+    list-style: none;
+}
+
+#all-tasks label:has(input:checked) { /*si label a son input coché alors {...} */
+    text-decoration: line-through;
+}
+
+form .form-group {
+    margin: 0.5em 0;
+}
+
+.high {
+    color: red;
+}
+
+.normal {
+    color: forestgreen;
+}
+
+.low {
+    color: blue;
+}
+
+.none {
+    color: black;
+}
