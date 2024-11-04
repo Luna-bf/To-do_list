@@ -15,34 +15,47 @@ let myTasks = [
 {
     title: 'Finir ma todo list',
     priority: priorityHigh,
-    isChecked: false
+    isDone: false
 },
 
 {
     title: 'Préparer les cadeaux de Noël',
     priority: priorityNormal,
-    isChecked: false
+    isDone: false
 },
 
 {
     title: 'Finir Hollow Knight à 112%',
     priority: priorityLow,
-    isChecked: false
+    isDone: false
 }
 
 ];
 
 console.log(myTasks);
 
+
 //La fonction qui va me permettre d'ajouter des tâches
-function displayTasks() {
-    const newTask = document.createElement('label');
-    newTask = document.createTextNode('input');
-
+function addTask() {
     
+    //J'utilise une boucle car je veux que cela se REPETE pour CHAQUE tâche
+    for(let myTask of myTasks) {
+        
+        const li = document.createElement('li'); //Je créé l'élément qui va me servir pour cette tâche
+        const label = document.createElement('label');
+        const input = document.createElement('input');
+        const type = document.createElement('type', 'checkbox');
+    }
+    /*
+    let newTask = document.createElement('label');
+    
+    let checkbox = document.createElement('input');
+    checkbox.setAttribute('type', 'checkbox');
+    
+    newTask.appendChild(checkbox);
+    
+    myTasks.push(newTask);*/
 }
-
-console.log(displayTasks());
         //<label><input type="checkbox">Task</label>
 
 elements.allTasks.addEventListener('click', (e) => {
