@@ -45,15 +45,43 @@ function displayTasks() {
         const label = document.createElement('label');
         const input = document.createElement('input');
         input.type = 'checkbox'; //J'assigne un type à mon input
-        const icon = e.appendChild('<i class="fa-solid fa-pen" aria-hidden="false"></i>');
+        //const icon = e.appendChild('<i class="fa-solid fa-pen" aria-hidden="false"></i>');
     
         input.addEventListener('change', (e) => { //change permet de changer l'état d'un élément
             myTask.isDone = input.checked; //checked est la valeur qui correspond à l'état coché de checkbox
         });
         
+        //Je créé un noeud de texte pour l'élément label
+        //ce dernier aura la valeur de l'élément labelName
+        const labelName = document.createTextNode(myTask.title);
         
+        //Puis, toujours dans ma boucle for of, je gère les priorité avec un switch
+        switch(myTasks.priority) {
+            case priorityHigh:
+                label.classList.add('high'); //J'ajoute une classe pour chaque priorité (cela va être utile pour CSS)
+                break;
+            case priorityNormal:
+                label.classList.add('normal');
+                break;
+            case priorityLow:
+                label.classList.add('low');
+                break;
+            default:
+                label.classList.add('none');
+                break;
+        }
+        
+        //Puis j'attache tous les éléments ensemble
+        label.append(input, labelName); //Je met l'input et le nom des tâches dans le label
+        li.append(label); //Je met le label dans l'élément li
+        elements.allTasks.append(li);
+        //Et enfin je met mon élément li dans l'élément qui contient l'id all-tasks
+        //en allant le chercher dans l'objet elements et en sélectionnant allTasks
     }
 }
+
+//J'affiche la liste au chargement de la page en appelant ma fonction
+displayTasks();
 
 elements.allTasks.addEventListener('click', (e) => {
     e.preventDefault();
