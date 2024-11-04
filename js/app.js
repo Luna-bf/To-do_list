@@ -56,7 +56,7 @@ function displayTasks() {
         const labelName = document.createTextNode(myTask.title);
         
         //Puis, toujours dans ma boucle for of, je gère les priorité avec un switch
-        switch(myTasks.priority) {
+        switch(myTask.priority) {
             case priorityHigh:
                 label.classList.add('high'); //J'ajoute une classe pour chaque priorité (cela va être utile pour CSS)
                 break;
