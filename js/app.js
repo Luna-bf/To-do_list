@@ -83,20 +83,42 @@ function displayTasks() {
 //J'affiche la liste au chargement de la page en appelant ma fonction
 displayTasks();
 
-elements.allTasks.addEventListener('click', (e) => {
+elements.form.addEventListener('submit', (e) => {
+    
+    //J'empêche le rechargement de la page
     e.preventDefault();
+    
+    //Je récupère les données de mon formulaire
+    const formData = new FormData(elements.form);
+    
+    //Puis je créé une nouvelle tâche
+    const newTask = {
+        title: formData.get('task_name'), //Je récupère la donnée name (task_title) de l'input se trouvant dans le form
+        priority: Number(formData.get('choose_priority')), //J'utilise l'attribut Number pour bien récupérer un nombre et non une string
+        isDone: false //Par défaut, la tâche n'est pas finie
+    };
+    
+    //J'ajoute cette nouvelle tâche à mon tableau
+    myTasks.push(newTask);
+    
+    //Puis je met tout à jour en appelant ma fonction
+    displayTasks();
 });
 
 
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
-elements.deleteBtn.addEventListener('click', (e) => {
+elements.deleteBtn.addEventListener('click', () => {
     
-    //J'empêche le navigateur de se recharger
-    e.preventDefault();
+    //On supprime toutes les tâches qui ont la propriété isDone en true
+    //Si la tâche n'est pas complétée, on récupère un nouveau tableau uniquement avec les tâches non complétées
+    //On met pas prevent default car le bouton "Supprimer les tâches" a l'attribut 'click' et non 'submit' car le btn ne fait pas parti d'un formulaire
+    myTasks = myTasks.filter(myTask => !myTask.isDone);
     
+    //Je met à jour l'affichage en appelant ma fonction
+    displayTasks();
 });
 
-
+/*
 //La fonction qui va me permettre de supprimer toutes les tâches
 elements.deleteAllBtn.addEventListener('click', (e) => {
     
@@ -104,4 +126,4 @@ elements.deleteAllBtn.addEventListener('click', (e) => {
     e.preventDefault();
     
     myTasks.pop();
-});
+});*/
