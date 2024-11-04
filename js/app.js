@@ -12,40 +12,46 @@ const priorityNormal = 2;
 const priorityLow = 3;
 
 let myTasks = [
-{
-    title: 'Savoir faire une todo list en js natif',
-    priority: priorityHigh,
-    isDone: false
-},
-
-{
-    title: 'Préparer les cadeaux de Noël',
-    priority: priorityNormal,
-    isDone: false
-},
-
-{
-    title: 'Finir Hollow Knight à 112%',
-    priority: priorityLow,
-    isDone: false
-}
-
+    {
+        title: 'Savoir faire une todo list en js natif',
+        priority: priorityHigh,
+        isDone: false
+    },
+    {
+        title: 'Préparer les cadeaux de Noël',
+        priority: priorityNormal,
+        isDone: false
+    },
+    {
+        title: 'Finir Hollow Knight à 112%',
+        priority: priorityLow,
+        isDone: false
+    }
 ];
 
-console.log(myTasks);
 
-
-//La fonction qui va me permettre d'ajouter des tâches
-function addTask() {
+//La fonction qui va me permettre de gérer les tâches
+function displayTasks() {
     
-    //J'utilise une boucle car je veux que ce qui va être déclaré se REPETE pour CHAQUE tâche
-    for(let myTask of myTasks) {
+    //Je vide les tâches précédentes du ul
+    elements.allTasks.innerHTML = '';
+    
+    //Je créé les tâches de manière dynamique avec une BOUCLE
+    //car je veux que ce qui va être déclaré se REPETE POUR CHAQUE tâche
+    for(let myTask of myTasks) { //for of soit forEach
         
-        const li = document.createElement('li'); //Je créé l'élément qui va me servir pour cette tâche
+         //Je créé les éléments qui vont me servir pour cette tâche
+        const li = document.createElement('li');
         const label = document.createElement('label');
         const input = document.createElement('input');
-        const type = document.createElement('type', 'checkbox');
+        input.type = 'checkbox'; //J'assigne un type à mon input
         const icon = e.appendChild('<i class="fa-solid fa-pen" aria-hidden="false"></i>');
+    
+        input.addEventListener('change', (e) => { //change permet de changer l'état d'un élément
+            myTask.isDone = input.checked; //checked est la valeur qui correspond à l'état coché de checkbox
+        });
+        
+        
     }
 }
 
