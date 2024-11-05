@@ -107,4 +107,4 @@ Ce bouton n'est pas cliquable quand le prompt est activé, il faudra lui retirer
 
 ### Texte de todo list vide
 
-Quand toutes les tâches sont terminées (cochée), afficher : "Vous avez terminé toutes vos tâches, bravo !"
+Quand toutes les tâches sont terminées (cochée) ou supprimée, afficher : "Vous avez terminé toutes vos tâches, bravo !"
