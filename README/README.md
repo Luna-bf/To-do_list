@@ -1,4 +1,4 @@
-## Objectifs
+# Objectifs
 
 Réaliser une todolist en JavaScript natif (sans framework).
 
