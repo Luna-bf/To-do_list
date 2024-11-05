@@ -1,3 +1,5 @@
+'use strict';
+
 //Je récupère mes éléments HTML
 const elements = {
     allTasks: document.querySelector('#all-tasks ul'),
@@ -105,6 +107,24 @@ elements.form.addEventListener('submit', (e) => {
     displayTasks();
 });
 
+/*
+//Je vide le texte présent dans l'input
+function clearInputField() {
+    elements.form.reset();
+        }
+clearInputField();
+function emptyInput() {
+        elements.formInput.value = '';
+}
+
+emptyInput();
+   
+   let formInput = document.querySelector('#task-name');
+    
+    for(let formInputs of formInput) {
+        formInputs.value = '';
+    }
+*/
 
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
 elements.deleteBtn.addEventListener('click', () => {
@@ -118,12 +138,12 @@ elements.deleteBtn.addEventListener('click', () => {
     displayTasks();
 });
 
-/*
 //La fonction qui va me permettre de supprimer toutes les tâches
-elements.deleteAllBtn.addEventListener('click', (e) => {
+elements.deleteAllBtn.addEventListener('click', () => {
     
-    //J'empêche le navigateur de se recharger
-    e.preventDefault();
-    
-    myTasks.pop();
-});*/
+    //Je retourne mon tableau myTasks avec une longueur (length) égale à zéro
+    myTasks.length = 0;
+
+    //Puis je met tout à jour
+    displayTasks();
+});
