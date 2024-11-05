@@ -107,25 +107,6 @@ elements.form.addEventListener('submit', (e) => {
     displayTasks();
 });
 
-/*
-//Je vide le texte présent dans l'input
-function clearInputField() {
-    elements.form.reset();
-        }
-clearInputField();
-function emptyInput() {
-        elements.formInput.value = '';
-}
-
-emptyInput();
-   
-   let formInput = document.querySelector('#task-name');
-    
-    for(let formInputs of formInput) {
-        formInputs.value = '';
-    }
-*/
-
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
 elements.deleteBtn.addEventListener('click', () => {
     
