@@ -4,6 +4,7 @@
 const elements = {
     allTasks: document.querySelector('#all-tasks ul'),
     form: document.querySelector('#task-form form'),
+    checkbox: document.querySelector('#task-name'),
     deleteBtn: document.querySelector('#delete-task-btn'),
     deleteAllBtn: document.querySelector('#delete-all-btn')
 };
@@ -117,6 +118,22 @@ elements.deleteBtn.addEventListener('click', () => {
     //Si la tâche n'est pas complétée, on récupère un nouveau tableau uniquement avec les tâches non complétées
     //On met pas prevent default car le bouton "Supprimer les tâches" a l'attribut 'click' et non 'submit' car le btn ne fait pas parti d'un formulaire
     myTasks = myTasks.filter(myTask => !myTask.isDone);
+
+    //Lorsqu'une ou plusieurs tâches ont été supprimées, afficher un message de
+    //notification à l'utilisateur du type "x tâches supprimées avec succès".
+    /*function countTasks() {
+        
+        let taskCount;
+        
+        for(let i = 0; i < elements.checkbox.length; i++) {
+            if (elements.checkbox[i].type == "checkbox" && elements.checkbox[i].checked){ 
+                taskCount = Number(taskCount + 1);
+            }
+        }
+        return window.prompt(`You are about to delete ${taskCount} tasks.`);
+    }
+    
+    countTasks();*/
     
     //Je met à jour l'affichage en appelant ma fonction
     displayTasks();
@@ -127,24 +144,9 @@ elements.deleteBtn.addEventListener('click', () => {
 elements.deleteAllBtn.addEventListener('click', () => {
     
     //Je retourne mon tableau myTasks avec une longueur (length) égale à zéro
-    myTasks.length = 0;
-
-    //Lorsqu'une ou plusieurs tâches ont été supprimées, afficher un message de
-    //notification à l'utilisateur du type "x tâches supprimées avec succès".
-    /*function countTasks() {
-        
-        const checkbox = document.getElementsByTagName('input'); 
-        let taskCount;
-        
-        for(let i = 0; i < checkbox.length; i++) {
-            if (checkbox[i].type == "checkbox" && checkbox[i].checked){ 
-                taskCount = taskCount + 1;
-            }
-        }
-        return window.prompt(`You are about to delete ${taskCount} tasks.`);
+    if(window.confirm("Souhaitez vous vraiment supprimer toutes les tâches ?")) {
+        myTasks.length = 0;
     }
-    
-    countTasks();*/
 
     //Puis je met tout à jour
     displayTasks();
