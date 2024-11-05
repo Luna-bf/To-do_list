@@ -10,25 +10,42 @@ const elements = {
 };
 
 //J'indique mes priorités et leur valeur
-const priorityHigh = 1;
-const priorityNormal = 2;
-const priorityLow = 3;
+const priorities = {
+    priorityHigh: 1,
+    priorityNormal: 2,
+    priorityLow: 3
+};
+
+//J'indique mes catégories et leur valeur
+const categories = {
+    work: 'Travail',
+    studies: 'Etudes',
+    food: 'Alimentation',
+    house: 'Maison',
+    sport: 'Sport',
+    hygiene: 'Hygiène',
+    hobbies: 'Hobbies',
+    other: 'Autre'
+};
 
 
 let myTasks = [
     {
         title: 'Savoir faire une todo list en js natif',
-        priority: priorityHigh,
+        priority: priorities.priorityHigh,
+        category: categories.studies,
         isDone: false
     },
     {
         title: 'Préparer les cadeaux de Noël',
-        priority: priorityNormal,
+        priority: priorities.priorityNormal,
+        category: categories.other,
         isDone: false
     },
     {
         title: 'Finir Hollow Knight à 112%',
-        priority: priorityLow,
+        priority: priorities.priorityLow,
+        category: categories.hobbies,
         isDone: false
     }
 ];
@@ -61,13 +78,13 @@ function displayTasks() {
         
         //Puis, toujours dans ma boucle for of, je gère les priorité avec un switch
         switch(myTask.priority) {
-            case priorityHigh:
+            case priorities.priorityHigh:
                 label.classList.add('high'); //J'ajoute une classe pour chaque priorité (cela va être utile pour CSS)
                 break;
-            case priorityNormal:
+            case priorities.priorityNormal:
                 label.classList.add('normal');
                 break;
-            case priorityLow:
+            case priorities.priorityLow:
                 label.classList.add('low');
                 break;
             default:
@@ -118,22 +135,6 @@ elements.deleteBtn.addEventListener('click', () => {
     //Si la tâche n'est pas complétée, on récupère un nouveau tableau uniquement avec les tâches non complétées
     //On met pas prevent default car le bouton "Supprimer les tâches" a l'attribut 'click' et non 'submit' car le btn ne fait pas parti d'un formulaire
     myTasks = myTasks.filter(myTask => !myTask.isDone);
-
-    //Lorsqu'une ou plusieurs tâches ont été supprimées, afficher un message de
-    //notification à l'utilisateur du type "x tâches supprimées avec succès".
-    /*function countTasks() {
-        
-        let taskCount;
-        
-        for(let i = 0; i < elements.checkbox.length; i++) {
-            if (elements.checkbox[i].type == "checkbox" && elements.checkbox[i].checked){ 
-                taskCount = Number(taskCount + 1);
-            }
-        }
-        return window.prompt(`You are about to delete ${taskCount} tasks.`);
-    }
-    
-    countTasks();*/
     
     //Je met à jour l'affichage en appelant ma fonction
     displayTasks();
@@ -143,9 +144,9 @@ elements.deleteBtn.addEventListener('click', () => {
 //La fonction qui va me permettre de supprimer toutes les tâches
 elements.deleteAllBtn.addEventListener('click', () => {
     
-    //Je retourne mon tableau myTasks avec une longueur (length) égale à zéro
     if(window.confirm("Souhaitez vous vraiment supprimer toutes les tâches ?")) {
-        myTasks.length = 0;
+        
+        myTasks.length = 0; //Je retourne mon tableau myTasks avec une longueur (length) égale à zéro
     }
 
     //Puis je met tout à jour
