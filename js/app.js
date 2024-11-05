@@ -18,14 +18,14 @@ const priorities = {
 
 //J'indique mes catégories et leur valeur
 const categories = {
-    work: 'Travail',
-    studies: 'Etudes',
-    food: 'Alimentation',
-    house: 'Maison',
-    sport: 'Sport',
-    hygiene: 'Hygiène',
-    hobbies: 'Hobbies',
-    other: 'Autre'
+    work: '(Travail)',
+    studies: '(Etudes)',
+    food: '(Alimentation)',
+    house: '(Maison)',
+    sport: '(Sport)',
+    hygiene: '(Hygiène)',
+    hobbies: '(Hobbies)',
+    other: '(Autre)'
 };
 
 
@@ -64,17 +64,19 @@ function displayTasks() {
          //Je créé les éléments qui vont me servir pour cette tâche
         const li = document.createElement('li');
         const label = document.createElement('label');
+        const span = document.createElement('span');
         const input = document.createElement('input');
         input.type = 'checkbox'; //J'assigne un type à mon input
+        //span.innerHTML = myTasks.category;
         //const icon = e.appendChild('<i class="fa-solid fa-pen" aria-hidden="false"></i>');
     
         input.addEventListener('change', (e) => { //change permet de changer l'état d'un élément
             myTask.isDone = input.checked; //checked est la valeur qui correspond à l'état coché de checkbox
         });
         
-        //Je créé un noeud de texte pour l'élément label
-        //ce dernier aura la valeur de l'élément labelName
+        //Je créé un noeud de texte pour mes éléments label et span, ces derniers s'afficheront dans leurs balises respectives
         const labelName = document.createTextNode(myTask.title);
+        const spanName = document.createTextNode(myTask.category);
         
         //Puis, toujours dans ma boucle for of, je gère les priorité avec un switch
         switch(myTask.priority) {
@@ -92,9 +94,40 @@ function displayTasks() {
                 break;
         }
         
+        //Je gère également les catégories avec un switch
+        switch(myTask.category) {
+            case categories.work:
+                span.classList.add('work'); //Les classes sont ajoutées dans la balise span car les catégories seront affichées dans celle-ci
+                break;
+            case categories.studies:
+                span.classList.add('studies');
+                break;
+            case categories.food:
+                span.classList.add('food');
+                break;
+            case categories.house:
+                span.classList.add('house');
+                break;
+            case categories.sport:
+                span.classList.add('sport');
+                break;
+            case categories.hygiene:
+                span.classList.add('hygiene');
+                break;
+            case categories.hobbies:
+                span.classList.add('hobbies');
+                break;
+            case categories.other:
+                span.classList.add('other');
+                break;
+            default:
+                span.classList.add('none');
+                break;
+        }
+        
         //Puis j'attache tous les éléments ensemble
         label.append(input, labelName); //Je met l'input et le nom des tâches dans le label
-        li.append(label); //Je met le label dans l'élément li
+        li.append(label, span, spanName); //Je met le label dans l'élément li
         elements.allTasks.append(li);
         //Et enfin je met mon élément li dans l'élément qui contient l'id all-tasks
         //en allant le chercher dans l'objet elements et en sélectionnant allTasks
@@ -117,6 +150,7 @@ elements.form.addEventListener('submit', (e) => {
     const newTask = {
         title: formData.get('task_name'), //Je récupère la donnée name (task_title) de l'input se trouvant dans le form
         priority: Number(formData.get('choose_priority')), //J'utilise l'attribut Number pour bien récupérer un nombre et non une string
+        category: formData.get('choose_category'),
         isDone: false //Par défaut, la tâche n'est pas finie
     };
     
