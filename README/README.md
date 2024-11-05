@@ -53,7 +53,7 @@ Si aucune priorité n'est sélectionnée, afficher la tâche en noir.
 
 ### Supprimer une tâche (FAIT !)
 
-Créer en-dessous du formulaire un bouton "Supprimer toutes les tâches". Lorsque l'on clique sur ce bouton cela supprime toutes les tâches qui ont été sélectionnées (cochées).
+Créer en-dessous du formulaire un bouton "Supprimer une tâche". Lorsque l'on clique sur ce bouton cela supprime toutes les tâches qui ont été cochées.
 
 ### Afficher un message de notification
 
@@ -70,6 +70,14 @@ Lorsque vous réactulisez, toutes les tâches créées disparaissent. Mettre en 
 
 ## Mes consignes
 
+
+### Supprimer toutes les tâches (FAIT !)
+
+Créer en-dessous du formulaire un bouton "Supprimer toutes les tâches". Lorsque l'on clique sur ce bouton cela supprime toutes les tâches, qu'elles soient terminées ou non.
+
+### Etat des tâches
+
+Faire en sorte que les tâches terminées restent comme tel même après avoir actualisé la page.
 
 ### Modification de la priorité
 
