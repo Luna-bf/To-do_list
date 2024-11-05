@@ -23,15 +23,15 @@ const tasks = [
 ];
 ```
 
-### Mettre en place le projet
+### Mettre en place le projet  (FAIT !)
 
-* Créer un fichier *index.html*, un fichier *main.js* dans un sous-dossier *js* et un fichier *main.css* dans un sous-dossier *css*
+* Créer un fichier *index.html*, un fichier *app.js* dans un sous-dossier *js* et un fichier *style.css* dans un sous-dossier *css*
 * Sur le fichier *index.html*, créer une structure html classique ainsi que 2 sections : une pour la liste des tâches et une autre pour le formulaire d'ajout d'une tâche
 * Sur le fichier *main.css*, créer des classes pour les couleurs des 3 priorités (1 pour élevée, 2 pour normale, 3 pour basse)
 
-### Afficher la liste des tâches
+### Afficher la liste des tâches (FAIT !)
 
-Lors du chargement de la page, afficher sous forme de liste toutes les tâches du tableau *tasks*.
+Lors du chargement de la page, afficher sous forme de liste toutes les tâches du tableau *myTasks*.
 
 Une tâche devra ressembler à ça :
 ```html
@@ -45,13 +45,13 @@ Une tâche devra ressembler à ça :
 
 Le texte de la tâche doit s'afficher en rouge si la priorité est élevée (valeur 1), en vert si la priorité est normale (valeur 2), en bleu si la priorité est basse (valeur 3).
 
-### Ajouter une nouvelle tâche
+### Ajouter une nouvelle tâche (FAIT !)
 
 Créer un formulaire avec un champ texte, un menu déroulant et un bouton. Le champ texte correspondra au texte de la tâche et le menu déroulant sa priorité (il y aura donc 3 valeurs possibles : 1, 2, 3). Lorsque l'on valide le formulaire en cliquant sur le bouton, une nouvelle tâche est créée dans la liste, avec la bonne couleur pour la priorité.
 
 Si aucune priorité n'est sélectionnée, afficher la tâche en noir.
 
-### Supprimer une tâche
+### Supprimer une tâche (FAIT !)
 
 Créer en-dessous du formulaire un bouton "Supprimer toutes les tâches". Lorsque l'on clique sur ce bouton cela supprime toutes les tâches qui ont été sélectionnées (cochées).
 
