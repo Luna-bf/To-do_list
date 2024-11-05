@@ -13,6 +13,7 @@ const priorityHigh = 1;
 const priorityNormal = 2;
 const priorityLow = 3;
 
+
 let myTasks = [
     {
         title: 'Savoir faire une todo list en js natif',
@@ -85,6 +86,7 @@ function displayTasks() {
 //J'affiche la liste au chargement de la page en appelant ma fonction
 displayTasks();
 
+
 elements.form.addEventListener('submit', (e) => {
     
     //J'empêche le rechargement de la page
@@ -107,6 +109,7 @@ elements.form.addEventListener('submit', (e) => {
     displayTasks();
 });
 
+
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
 elements.deleteBtn.addEventListener('click', () => {
     
@@ -119,11 +122,29 @@ elements.deleteBtn.addEventListener('click', () => {
     displayTasks();
 });
 
+
 //La fonction qui va me permettre de supprimer toutes les tâches
 elements.deleteAllBtn.addEventListener('click', () => {
     
     //Je retourne mon tableau myTasks avec une longueur (length) égale à zéro
     myTasks.length = 0;
+
+    //Lorsqu'une ou plusieurs tâches ont été supprimées, afficher un message de
+    //notification à l'utilisateur du type "x tâches supprimées avec succès".
+    /*function countTasks() {
+        
+        const checkbox = document.getElementsByTagName('input'); 
+        let taskCount;
+        
+        for(let i = 0; i < checkbox.length; i++) {
+            if (checkbox[i].type == "checkbox" && checkbox[i].checked){ 
+                taskCount = taskCount + 1;
+            }
+        }
+        return window.prompt(`You are about to delete ${taskCount} tasks.`);
+    }
+    
+    countTasks();*/
 
     //Puis je met tout à jour
     displayTasks();
