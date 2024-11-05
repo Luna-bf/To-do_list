@@ -85,7 +85,7 @@ Permettre à l'utilisateur de modifier la priorité, la catégorie et le nom d'u
 
 ### Filtrer des tâches
 
-Filtrer les tâches en fonction de leur priorité et/ou catégorie.
+Filtrer les tâches pour les afficher en fonction de leur priorité et/ou catégorie.
 
 ### Window prompt 1 : Suppression (non désactivable)
 
