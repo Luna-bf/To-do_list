@@ -18,6 +18,7 @@ const priorities = {
 
 //J'indique mes catégories et leur valeur
 const categories = {
+    none: '(Sans catégorie)',
     work: '(Travail)',
     studies: '(Etudes)',
     food: '(Alimentation)',
