@@ -70,6 +70,9 @@ Lorsque vous réactulisez, toutes les tâches créées disparaissent. Mettre en 
 
 # Mes consignes
 
+### Ajouter une catégorie (FAIT !)
+
+Permettre à l'utilisateur d'ajouter une catégorie à ses tâches, gérer l'absence de catégorie. (Trouver un autre moyen que celui actuel pour gérer l'absence de catégorie)
 
 ### Supprimer toutes les tâches (FAIT !)
 
@@ -89,8 +92,6 @@ Filtrer les tâches pour les afficher en fonction de leur priorité et/ou catég
 
 ### Window prompt 1 : Suppression (non désactivable)
 
-Mettre une fenêtre (window prompt ?) avertissant que des tâches sont sur le point d'être supprimées (sous forme d'une liste, avec leur nom).
-
 Si on supprime toutes les tâches, afficher le nombre de tâches sur le point d'être supprimées (il faudra plus que certainement une boucle).
 
 ### Window prompt 2 : Félicitation
@@ -99,7 +100,7 @@ Mettre une fenêtre (window prompt ?) félicitant l'utilisateur d'avoir terminé
 
 ### Cacher le window prompt (félicitation)
 
-Rendre possible le fait de désactiver ce message en cochant un input checkbox.
+Rendre possible le fait de désactiver ce message en cliquant sur un input checkbox ou un bouton.
 
 ### Bouton "Réactiver le prompt" (félicitation)
 
