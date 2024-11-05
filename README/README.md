@@ -1,4 +1,4 @@
-# Objectifs
+## Objectifs
 
 Réaliser une todolist en JavaScript natif (sans framework).
 
@@ -68,7 +68,7 @@ La liste des tâches s'affichent de la priorité la plus élevée à la moins é
 Lorsque vous réactulisez, toutes les tâches créées disparaissent. Mettre en place un système pour les conserver (localstorage).
 
 
-## Mes consignes
+# Mes consignes
 
 
 ### Supprimer toutes les tâches (FAIT !)
@@ -81,7 +81,7 @@ Faire en sorte que les tâches terminées restent comme tel même après avoir a
 
 ### Modification de la priorité
 
-Permettre à l'utilisateur de modifier la priorité ainsi que le nom d'une tâche.
+Permettre à l'utilisateur de modifier la priorité, la catégorie et le nom d'une tâche.
 
 ### Filtrer des tâches
 
