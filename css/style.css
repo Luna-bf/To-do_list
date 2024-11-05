@@ -10,6 +10,9 @@ form .form-group {
     margin: 0.5em 0;
 }
 
+
+/* Priorities */
+
 .high {
     color: red;
 }
@@ -24,4 +27,52 @@ form .form-group {
 
 .none {
     color: black;
+}
+
+
+/* Categories */
+
+.work {
+    color: silver;
+    margin-left: 0.5em;
+}
+
+.studies {
+    color: silver;
+    margin-left: 0.5em;
+}
+
+.food {
+    color: silver;
+    margin-left: 0.5em;
+}
+
+.house {
+    color: silver;
+    margin-left: 0.5em;
+}
+
+.sport {
+    color: silver;
+    margin-left: 0.5em;
+}
+
+.hygiene {
+    color: silver;
+    margin-left: 0.5em;
+}
+
+.hobbies {
+    color: silver;
+    margin-left: 0.5em;
+}
+
+.other {
+    color: silver;
+    margin-left: 0.5em;
+}
+
+.none {
+    color: silver;
+    margin-left: 0.5em;
 }
