@@ -32,10 +32,6 @@ form .form-group {
 
 /* Categories */
 
-span {
-    margin-left: 0.5em;
-}
-
 .work {
     color: silver;
 }
@@ -122,4 +118,9 @@ span {
     font-family: "Lato", sans-serif;
     font-weight: 300;
     font-style: normal;
+    margin-left: 0.5em;
+}
+
+.button {
+    margin: 1em 0 0 0.1em; /*top right bottom left*/
 }
