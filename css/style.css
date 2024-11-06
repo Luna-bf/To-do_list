@@ -133,8 +133,12 @@ span:after {
 }
 */
 fieldset {
-    width: 30%;
+    width: 40%;
     padding-bottom: 35px;
+}
+
+.task-input {
+    padding: 0.3em;
 }
 
 #add-btn {
