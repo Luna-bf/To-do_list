@@ -22,77 +22,84 @@
     </section>
     
     <section id="task-form">
-        <h2>Créer une nouvelle tâche :</h2>
         <form>
-            <article class="form-group">
-                <label for="task-name">Nom de la tâche :</label>
-                <!--name sera le nom de la tâche, c'est important de le déclarer-->
-                <input type="text" name="task_name" id="task-name" placeholder="Ex : Faire les courses" required />
-            </article>
-            
-            <article class="form-group">
-                <label for="choose-category">Catégorie :</label>
-                <select name="choose_category" id="choose-category">
-                    <option value="Sélectionner" disabled>-- Sélectionner une catégorie --</option>
-                    <option value="(Sans catégorie)" selected>Sans catégorie</option>
-                    <option value="(Travail)">Travail</option>
-                    <option value="(Etudes)">Etudes</option>
-                    <option value="(Alimentation)">Alimentation</option>
-                    <option value="(Maison)">Maison</option>
-                    <option value="(Sport)">Sport</option>
-                    <option value="(Hygiène)">Hygiène</option>
-                    <option value="(Hobbies)">Hobbies</option>
-                    <option value="(Autre)">Autre</option>
-                </select>
-            </article>
-            
-            <article class="form-group">
-                <label for="choose-priority">Priorité :</label>
-                <select name="choose_priority" id="choose-priority">
-                    <option value="Sélectionner">-- Sélectionner une priorité --</option>
-                    <option value="1">Elevée</option>
-                    <option value="2">Normale</option>
-                    <option value="3">Basse</option>
-                </select>
-            </article>
-            
-            <button>Ajouter la tâche</button>
+            <fieldset>
+                <legend>
+                    <h2>Créer une nouvelle tâche :</h2>
+                </legend>
+                    <article class="form-group">
+                        <label for="task-name">Nom de la tâche :</label>
+                        <!--name sera le nom de la tâche, c'est important de le déclarer-->
+                        <input type="text" name="task_name" id="task-name" placeholder="Ex : Faire les courses" required />
+                    </article>
+                    
+                    <article class="form-group">
+                        <label for="choose-category">Catégorie :</label>
+                        <select name="choose_category" id="choose-category">
+                            <option value="Sélectionner" disabled>-- Sélectionner une catégorie --</option>
+                            <option value="(Sans catégorie)" selected>Sans catégorie</option>
+                            <option value="(Travail)">Travail</option>
+                            <option value="(Etudes)">Etudes</option>
+                            <option value="(Alimentation)">Alimentation</option>
+                            <option value="(Maison)">Maison</option>
+                            <option value="(Sport)">Sport</option>
+                            <option value="(Hygiène)">Hygiène</option>
+                            <option value="(Hobbies)">Hobbies</option>
+                            <option value="(Autre)">Autre</option>
+                        </select>
+                    </article>
+                    
+                    <article class="form-group">
+                        <label for="choose-priority">Priorité :</label>
+                        <select name="choose_priority" id="choose-priority">
+                            <option value="Sélectionner">-- Sélectionner une priorité --</option>
+                            <option value="1">Elevée</option>
+                            <option value="2">Normale</option>
+                            <option value="3">Basse</option>
+                        </select>
+                    </article>
+                    
+                    <button>Ajouter la tâche</button>
+            </fieldset>
         </form>
     </section>
         
     <section id="filter-form">
-        <h2>Filtrer par :</h2>
+        
         <form>
-            <article class="form-group">
-                <label for="filter-priority">Priorité :</label>
-                <select name="filter_priority" id="filter-priority">
-                    <option value="Sélectionner">-- Sélectionner une priorité --</option>
-                    <option value="1">Elevée</option>
-                    <option value="2">Normale</option>
-                    <option value="3">Basse</option>
-                    <option value="0">Sans priorité</option>
-                </select>
-            </article>
-            
-            <article class="form-group">
-                <label for="filter-category">Catégorie :</label>    
-                <select name="filter_category" id="filter-category">
-                    <option value="Sans catégorie">-- Sélectionner une catégorie --</option>
-                    <option value="Travail">Travail</option>
-                    <option value="Etudes">Etudes</option>
-                    <option value="Alimentation">Alimentation</option>
-                    <option value="Maison">Maison</option>
-                    <option value="Sport">Sport</option>
-                    <option value="Hygiène">Hygiène</option>
-                    <option value="Hobbies">Hobbies</option>
-                    <option value="Autre">Autre</option>
-                </select>
-            </article>
+            <fieldset>
+                <legend><h2>Filtrer par :</h2></legend>
+                    <article class="form-group">
+                        <label for="filter-priority">Priorité :</label>
+                        <select name="filter_priority" id="filter-priority">
+                            <option value="Sélectionner">-- Sélectionner une priorité --</option>
+                            <option value="1">Elevée</option>
+                            <option value="2">Normale</option>
+                            <option value="3">Basse</option>
+                            <option value="0">Sans priorité</option>
+                        </select>
+                    </article>
+                    
+                    <article class="form-group">
+                        <label for="filter-category">Catégorie :</label>    
+                        <select name="filter_category" id="filter-category">
+                            <option value="Sans catégorie">-- Sélectionner une catégorie --</option>
+                            <option value="Travail">Travail</option>
+                            <option value="Etudes">Etudes</option>
+                            <option value="Alimentation">Alimentation</option>
+                            <option value="Maison">Maison</option>
+                            <option value="Sport">Sport</option>
+                            <option value="Hygiène">Hygiène</option>
+                            <option value="Hobbies">Hobbies</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </article>
+            </fieldset>
         </form>
     </section>
     
-    <button id="delete-task-btn">Supprimer les tâches terminées</button>
-    <button id="delete-all-btn">Supprimer toutes les tâches</button>
-    <button id="activate-msg" disabled>Réactiver le prompt</button>
+    <button id="delete-task-btn" class="button">Supprimer les tâches terminées</button>
+    <button id="delete-all-btn" class="button">Supprimer toutes les tâches</button>
+    <button id="activate-msg" class="button" disabled>Réactiver le prompt</button>
 </body>
 </html>
