@@ -120,7 +120,18 @@ span {
     font-style: normal;
     margin-left: 0.5em;
 }
-
+/*
+span:after {
+   font-family: "Font Awesome 5 Free";
+   content: "\f304";
+   display: inline-block;
+   padding: 0 15px 5px 15px;
+   vertical-align: middle;
+   font-weight: 600;
+   color: black;
+   font-size: 16px;
+}
+*/
 fieldset {
     width: 30%;
     padding-bottom: 35px;
