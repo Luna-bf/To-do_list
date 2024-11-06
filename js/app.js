@@ -68,7 +68,6 @@ function displayTasks() {
         const span = document.createElement('span');
         const input = document.createElement('input');
         input.type = 'checkbox'; //J'assigne un type à mon input
-        //span.innerHTML = myTasks.category;
         //const icon = e.appendChild('<i class="fa-solid fa-pen" aria-hidden="false"></i>');
     
         input.addEventListener('change', (e) => { //change permet de changer l'état d'un élément
@@ -179,7 +178,7 @@ elements.deleteBtn.addEventListener('click', () => {
 //La fonction qui va me permettre de supprimer toutes les tâches
 elements.deleteAllBtn.addEventListener('click', () => {
     
-    if(window.confirm("Souhaitez vous vraiment supprimer toutes les tâches ?")) {
+    if(window.confirm("Souhaitez vous vraiment supprimer toutes les tâches ?") === true) {
         
         myTasks.length = 0; //Je retourne mon tableau myTasks avec une longueur (length) égale à zéro
     }
