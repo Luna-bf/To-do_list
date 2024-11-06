@@ -5,6 +5,8 @@ const elements = {
     allTasks: document.querySelector('#all-tasks ul'),
     form: document.querySelector('#task-form form'),
     checkbox: document.querySelector('#task-name'),
+    filterPriority: document.querySelector('#filter-priority'),
+    filterCategory: document.querySelector('#filter-category'),
     deleteBtn: document.querySelector('#delete-task-btn'),
     deleteAllBtn: document.querySelector('#delete-all-btn')
 };
@@ -166,10 +168,48 @@ elements.form.addEventListener('submit', (e) => {
 });
 
 
+//Fonction qui va me permettre de filtrer mes tâches (priorités)
+/*
 function filterTasks() {
     
+    switch(myTasks = myTasks.filter(myTask => myTask.priority)) {
+        case myTasks.priority.priorityHigh:
+            myTasks = myTasks.filter(myTask => myTask.priority.priorityHigh);
+            break;
+        case myTasks.priority.priorityNormal:
+            myTasks = myTasks.filter(myTask => myTask.priority.priorityNormal);
+            break;
+        case myTasks.priority.priorityLow:
+            myTasks = myTasks.filter(myTask => myTask.priority.priorityLow);
+            break;
+        default:
+            displayTasks();
+            break;
+    }
 }
 
+filterTasks();
+
+
+elements.filterPriority.addEventListener('submit', (e) => {
+    
+    //J'empêche le rechargement de la page
+    e.preventDefault();
+    
+    //Je récupère les données de mon formulaire
+    const formData = new FormData(elements.filterPriority);
+    
+    //Puis je créé une nouvelle tâche
+    const filterTasks = {
+        title: formData.get('task_name'), //Je récupère la donnée name (task_title) de l'input se trouvant dans le form
+        priority: Number(formData.get('choose_priority')), //J'utilise l'attribut Number pour bien récupérer un nombre et non une string
+        isDone: false //Par défaut, la tâche n'est pas finie
+    };
+    
+    //Puis je met tout à jour en appelant ma fonction
+    displayTasks();
+});
+*/
 
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
 elements.deleteBtn.addEventListener('click', () => {
