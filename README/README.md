@@ -80,7 +80,7 @@ Créer en-dessous du formulaire un bouton "Supprimer toutes les tâches". Lorsqu
 
 ### Etat des tâches
 
-Faire en sorte que les tâches terminées restent comme tel même après avoir actualisé la page.
+Faire en sorte que les tâches terminées ou non restent comme tel même après avoir actualisé la page.
 
 ### Modification de la priorité
 
@@ -108,4 +108,6 @@ Ce bouton n'est pas cliquable quand le prompt est activé, il faudra lui retirer
 
 ### Texte de todo list vide
 
-Quand toutes les tâches sont terminées (cochée) ou supprimée, afficher : "Vous avez terminé toutes vos tâches, bravo !"
+Quand toutes les tâches sont terminées (cochée) afficher : "Vous avez terminé toutes vos tâches, bravo !"
+
+Quand il n'y a pas de tâches à afficher, afficher le texte suivant : "Pas de tâches à afficher."
