@@ -111,3 +111,7 @@ Ce bouton n'est pas cliquable quand le prompt est activé, il faudra lui retirer
 Quand toutes les tâches sont terminées (cochée) afficher : "Vous avez terminé toutes vos tâches, bravo !"
 
 Quand il n'y a pas de tâches à afficher, afficher le texte suivant : "Pas de tâches à afficher."
+
+### Responsive
+
+La to-do liste doit être responsive, la faire en mobile first.
