@@ -32,49 +32,44 @@ form .form-group {
 
 /* Categories */
 
+span {
+    margin-left: 0.5em;
+}
+
 .work {
     color: silver;
-    margin-left: 0.5em;
 }
 
 .studies {
     color: silver;
-    margin-left: 0.5em;
 }
 
 .food {
     color: silver;
-    margin-left: 0.5em;
 }
 
 .house {
     color: silver;
-    margin-left: 0.5em;
 }
 
 .sport {
     color: silver;
-    margin-left: 0.5em;
 }
 
 .hygiene {
     color: silver;
-    margin-left: 0.5em;
 }
 
 .hobbies {
     color: silver;
-    margin-left: 0.5em;
 }
 
 .other {
     color: silver;
-    margin-left: 0.5em;
 }
 
-.none {
+.noCategory {
     color: silver;
-    margin-left: 0.5em;
 }
 
 
