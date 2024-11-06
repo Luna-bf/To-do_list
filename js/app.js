@@ -55,7 +55,7 @@ let myTasks = [
 //La fonction qui va me permettre de gérer les tâches
 function displayTasks() {
     
-    //Je vide les tâches précédentes du ul
+    //Je vide les tâches précédentes du ul (si je ne fais pas ça le tableau contenant mes tâches se répètera à chaque fois que jajoute une nouvelle tâche)
     elements.allTasks.innerHTML = '';
     
     //Je créé les tâches de manière dynamique avec une BOUCLE
@@ -164,6 +164,11 @@ elements.form.addEventListener('submit', (e) => {
     //Puis je met tout à jour en appelant ma fonction
     displayTasks();
 });
+
+
+function filterTasks() {
+    
+}
 
 
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
