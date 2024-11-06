@@ -179,10 +179,11 @@ elements.deleteBtn.addEventListener('click', () => {
 elements.deleteAllBtn.addEventListener('click', () => {
     
     if(window.confirm("Souhaitez vous vraiment supprimer toutes les tâches ?") === true) {
-        
         myTasks.length = 0; //Je retourne mon tableau myTasks avec une longueur (length) égale à zéro
+    } else {
+        displayTasks(); //Si je n'appuie pas sur 'ok' alors j'affiche ma liste de tâche
     }
 
-    //Puis je met tout à jour
+    //Puis je met tout à jour (je dois quand même appeler ma fonction en dehors du if-else sinon le tableau ne se mettra pas à jour)
     displayTasks();
 });
