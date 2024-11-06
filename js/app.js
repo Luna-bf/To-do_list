@@ -18,7 +18,7 @@ const priorities = {
 
 //J'indique mes catégories et leur valeur
 const categories = {
-    none: '(Sans catégorie)',
+    noCategory: '(Sans catégorie)',
     work: '(Travail)',
     studies: '(Etudes)',
     food: '(Alimentation)',
@@ -122,7 +122,7 @@ function displayTasks() {
                 span.classList.add('other');
                 break;
             default:
-                span.classList.add('none');
+                span.classList.add('noCategory');
                 break;
         }
         
