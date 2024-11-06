@@ -67,8 +67,9 @@ function displayTasks() {
          //Je créé les éléments qui vont me servir pour cette tâche
         const li = document.createElement('li');
         const label = document.createElement('label');
-        const span = document.createElement('span');
         const input = document.createElement('input');
+        const span = document.createElement('span');
+        const icon = document.createElement('i');
         input.type = 'checkbox'; //J'assigne un type à mon input
         
     
@@ -79,10 +80,7 @@ function displayTasks() {
         //Je créé un noeud de texte pour l'élément label
         const labelName = document.createTextNode(myTask.title);
         span.textContent += myTask.category; //J'utilise textContent pour span car je veux que mon texte soit dans la balise span (cela va être utile pour la partie CSS)
-        
-        //J'ajoute une icône à mon élément span
-        //const icon = span => span.value += ' \f304';
-       // document.querySelector('span').forEach(icon);
+        icon.innerHTML = '<i class="fa-solid fa-pen"></i>'; //J'ajoute une icône à mon élément i (à côté de mon élément span)
         
         //Puis, toujours dans ma boucle for of, je gère les priorité avec un switch
         switch(myTask.priority) {
@@ -133,7 +131,7 @@ function displayTasks() {
         
         //Puis j'attache tous les éléments ensemble
         label.append(input, labelName); //Je met l'input et le nom des tâches dans le label
-        li.append(label, span/*, icon*/); //Je met label, span et icon dans l'élément li
+        li.append(label, span, icon); //Je met label, span et icon dans l'élément li
         elements.allTasks.append(li);
         //Et enfin je met mon élément li dans l'élément qui contient l'id all-tasks
         //en allant le chercher dans l'objet elements et en sélectionnant allTasks
