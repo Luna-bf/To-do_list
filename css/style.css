@@ -141,6 +141,10 @@ fieldset {
     margin: 0.5em 0 0 0.1em;
 }
 
+#display-btn {
+    margin: 0.5em 0 0 0.1em;
+}
+
 .button {
     margin: 1em 0 0 0.1em; /*top right bottom left*/
 }
