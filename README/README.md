@@ -70,6 +70,7 @@ Lorsque vous réactulisez, toutes les tâches créées disparaissent. Mettre en 
 
 # Mes consignes
 
+
 ### Ajouter une catégorie (FAIT !)
 
 Permettre à l'utilisateur d'ajouter une catégorie à ses tâches, gérer l'absence de catégorie. (Trouver un autre moyen que celui actuel pour gérer l'absence de catégorie)
@@ -114,4 +115,4 @@ Quand il n'y a pas de tâches à afficher, afficher le texte suivant : "Pas de t
 
 ### Responsive
 
-La to-do liste doit être responsive, la faire en mobile first.
+La to-do list doit être responsive, la faire en mobile first.
