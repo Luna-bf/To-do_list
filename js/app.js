@@ -68,7 +68,7 @@ function displayTasks() {
         const span = document.createElement('span');
         const input = document.createElement('input');
         input.type = 'checkbox'; //J'assigne un type à mon input
-        //const icon = e.appendChild('<i class="fa-solid fa-pen" aria-hidden="false"></i>');
+        
     
         input.addEventListener('change', (e) => { //change permet de changer l'état d'un élément
             myTask.isDone = input.checked; //checked est la valeur qui correspond à l'état coché de checkbox
@@ -77,6 +77,10 @@ function displayTasks() {
         //Je créé un noeud de texte pour l'élément label
         const labelName = document.createTextNode(myTask.title);
         span.textContent += myTask.category; //J'utilise textContent pour span car je veux que mon texte soit dans la balise span (cela va être utile pour la partie CSS)
+        
+        //J'ajoute une icône à mon élément span
+        //const icon = span => span.value += ' \f304';
+       // document.querySelector('span').forEach(icon);
         
         //Puis, toujours dans ma boucle for of, je gère les priorité avec un switch
         switch(myTask.priority) {
@@ -127,7 +131,7 @@ function displayTasks() {
         
         //Puis j'attache tous les éléments ensemble
         label.append(input, labelName); //Je met l'input et le nom des tâches dans le label
-        li.append(label, span); //Je met le label dans l'élément li
+        li.append(label, span/*, icon*/); //Je met label, span et icon dans l'élément li
         elements.allTasks.append(li);
         //Et enfin je met mon élément li dans l'élément qui contient l'id all-tasks
         //en allant le chercher dans l'objet elements et en sélectionnant allTasks
