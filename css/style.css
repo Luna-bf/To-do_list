@@ -96,14 +96,16 @@ form .form-group {
 
 /* Style */
 
-body {
+/*body {
     background-color: #fae976;
-}
+}*/
 
 h1 {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-style: normal;
+    display: flex;
+    justify-content: center;
 }
 
 h2 {
@@ -111,6 +113,11 @@ h2 {
     font-weight: 500;
     font-style: normal;
 }
+
+/* Trouver comment réduire le bg-color sans réduire le form
+.section-form {
+    background-color: #fff;
+}*/
 
 #all-tasks {
     background-color: #fff;
@@ -122,8 +129,7 @@ h2 {
 }
 
 legend {
-    background-color: #efbd25;
-    padding: 2px 4px 2px 4px;
+    padding: 2px 11px 2px 11px;
 }
 
 label {
