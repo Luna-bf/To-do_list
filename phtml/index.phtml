@@ -15,6 +15,14 @@
 </head>
 <body>
     <h1>To-do list - JavaScript</h1>
+    
+    <h2>Sélectionnez une langue :</h2>
+    <select name="choose_language" id="choose-language" class="input">
+        <option value="Sélectionner" disabled>-- Sélectionner une langue --</option>
+        <option>Français</option>
+        <option>English</option>
+    </select>
+    
     <h2>Vos tâches</h2>
     
     <section id="all-tasks">
@@ -30,12 +38,12 @@
                     <article class="form-group">
                         <label for="task-name">Nom de la tâche :</label>
                         <!--name sera le nom de la tâche, c'est important de le déclarer-->
-                        <input type="text" size="45" name="task_name" id="task-name" class="task-input" placeholder="Ex : Faire les courses" required />
+                        <input type="text" size="45" name="task_name" id="task-name" class="input" placeholder="Ex : Faire les courses" required />
                     </article>
                     
                     <article class="form-group">
                         <label for="choose-category">Catégorie :</label>
-                        <select name="choose_category" id="choose-category" class="task-input">
+                        <select name="choose_category" id="choose-category" class="input">
                             <option value="Sélectionner" disabled>-- Sélectionner une catégorie --</option>
                             <option value="(Travail)" class="card category">Travail</option>
                             <option value="(Etudes)" class="card category">Etudes</option>
@@ -51,7 +59,7 @@
                     
                     <article class="form-group">
                         <label for="choose-priority">Priorité :</label>
-                        <select name="choose_priority" id="choose-priority" class="task-input">
+                        <select name="choose_priority" id="choose-priority" class="input">
                             <option value="Sélectionner">-- Sélectionner une priorité --</option>
                             <option value="1" class="card priority">Elevée</option>
                             <option value="2" class="card priority">Normale</option>
@@ -70,7 +78,7 @@
                 <legend><h2>Filtrer par :</h2></legend>
                     <article class="form-group">
                         <label for="filter-priority">Priorité :</label>
-                        <select name="filter_priority" id="filter-priority" onchange="priorityType()" class="task-input">
+                        <select name="filter_priority" id="filter-priority" onchange="priorityType()" class="input">
                             <option value="Sélectionner">-- Sélectionner une priorité --</option>
                             <option value="1">Elevée</option>
                             <option value="2">Normale</option>
