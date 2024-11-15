@@ -16,9 +16,9 @@ const elements = {
 //Boucle for pour la boîte de changement de langue
 for(let i = 0; i < elements.dropdown.length; i++) {
     elements.dropdown[i].addEventListener('click', function(e) {
-        //for(let x = 0; i < dropdowns.length; x++) {
-        //  dropdowns[x].querySelector('.dropdown-content').classList.add('hide');
-        //}
+        for(let h = 0; h < elements.dropdown.length; h++) {
+          elements.dropdown[h].querySelector('.dropdown-content').classList.add('hide');
+        }
         e.currentTarget.querySelector('.dropdown-content').classList.toggle('hide');
     });
 }
@@ -43,6 +43,23 @@ const categories = {
     other: '(Autre)'
 };
 
+//Les catégories eet leur valeurs en anglais
+//Faire un if else qui détecte que lorsque la session est en anglais, les catégories
+//doivent l'être aussi ??????
+//Essayer de faire la todo list avec PHP et MySQL(?) et essayer d'y implémenter le changement de langue
+//que je veux faire
+const categoriesEn = {
+    noCategoryEn: '(Without category)',
+    workEn: '(Work)',
+    studiesEn: '(Studies)',
+    foodEnEn: '(Alimentation)',
+    houseEn: '(House)',
+    sportEn: '(Sport)',
+    hygieneEn: '(Hygiene)',
+    hobbiesEn: '(Hobbies)',
+    otherEn: '(Other)'
+};
+
 
 let myTasks = [
     {
@@ -65,8 +82,29 @@ let myTasks = [
     }
 ];
 
-console.log(myTasks);
+let myTasksEn = [
+    {
+        title: 'Be able to make a to-do list in vanilla js',
+        priority: priorities.priorityHighEn,
+        category: categories.studiesEn,
+        isDone: false
+    },
+    {
+        title: 'Prepare the Christmas gifts',
+        priority: priorities.priorityNormalEn,
+        category: categories.otherEn,
+        isDone: false
+    },
+    {
+        title: 'Complete Hollow Knight to 112%',
+        priority: priorities.priorityLowEn,
+        category: categories.hobbiesEn,
+        isDone: false
+    }
+];
 
+console.log(myTasks);
+console.log(myTasksEn);
 
 //La fonction qui va me permettre de gérer les tâches
 function displayTasks() {
