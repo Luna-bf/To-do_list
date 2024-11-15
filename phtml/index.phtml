@@ -17,11 +17,12 @@
     <h1><?= __('To-do list - JavaScript') ?></h1>
     
     <h2><?= __('Sélectionnez une langue :') ?></h2>
-    <select name="choose_language" id="choose-language" class="input">
-        <option value="Sélectionner" disabled><?= __('-- Sélectionner une langue --') ?></option>
-        <option><a href="index.php?lang=fr">Français</a></option>
-        <option><a href="index.php?lang=en">English</a></option>
-    </select>
+    <div class="dropdown">
+        <a href="#"><?= __('Langue')?></a>
+        <div class="dropdown-content hide">
+        <div><a href="index.php?lang=fr" class="lang-change">Français</a></div>
+        <div><a href="index.php?lang=en" class="lang-change">English</a></div>
+    </div>
     
     <h2><?= __('Vos tâches') ?></h2>
     
@@ -89,7 +90,7 @@
                     
                     <article class="form-group">
                         <label for="filter-category"><?= __('Catégorie :') ?></label>    
-                        <select name="filter_category" id="filter-category" onchange="categoryType()" class="task-input">
+                        <select name="filter_category" id="filter-category" onchange="categoryType()" class="input">
                             <option value="Sélectionner" disabled><?= __('-- Sélectionner une catégorie --') ?></option>
                             <option value="Travail"><?= __('Travail') ?></option>
                             <option value="Etudes"><?= __('Etudes') ?></option>
