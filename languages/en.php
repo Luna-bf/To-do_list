@@ -4,6 +4,7 @@ $lang = [
     'To-do list JavaScript' => 'JavaScript To-do list',
     'Sélectionnez une langue :' => 'Select a language',
     '-- Sélectionner une langue --' => '-- Select a language --',
+    'Changer la langue' => 'Change language',
     'Vos tâches' => 'Your tasks',
     'Créer une nouvelle tâche :' => 'Create a new task :',
     'Nom de la tâche :' => 'Task name',
