@@ -2,14 +2,26 @@
 
 //Je récupère mes éléments HTML
 const elements = {
+    dropdown: document.querySelectorAll('.dropdown'),
     allTasks: document.querySelector('#all-tasks ul'),
     form: document.querySelector('#task-form form'),
     checkbox: document.querySelector('#task-name'),
     filterPriority: document.querySelector('#filter-priority'),
     filterCategory: document.querySelector('#filter-category'),
+    cards: document.getElementsByClassName('card'),
     deleteBtn: document.querySelector('#delete-task-btn'),
-    deleteAllBtn: document.querySelector('#delete-all-btn')
+    deleteAllBtn: document.querySelector('#delete-all-btn'),
 };
+
+//Boucle for pour la boîte de changement de langue
+for(let i = 0; i < elements.dropdown.length; i++) {
+    elements.dropdown[i].addEventListener('click', function(e) {
+        //for(let x = 0; i < dropdowns.length; x++) {
+        //  dropdowns[x].querySelector('.dropdown-content').classList.add('hide');
+        //}
+        e.currentTarget.querySelector('.dropdown-content').classList.toggle('hide');
+    });
+}
 
 //J'indique mes priorités et leur valeur
 const priorities = {
@@ -52,6 +64,8 @@ let myTasks = [
         isDone: false
     }
 ];
+
+console.log(myTasks);
 
 
 //La fonction qui va me permettre de gérer les tâches
@@ -166,27 +180,32 @@ elements.form.addEventListener('submit', (e) => {
 });
 
 
-//Fonction qui va me permettre de filtrer mes tâches (priorités)
-/*
-function filterTasks() {
-    
-    switch(myTasks = myTasks.filter(myTask => myTask.priority)) {
-        case myTasks.priority.priorityHigh:
-            myTasks = myTasks.filter(myTask => myTask.priority.priorityHigh);
-            break;
-        case myTasks.priority.priorityNormal:
-            myTasks = myTasks.filter(myTask => myTask.priority.priorityNormal);
-            break;
-        case myTasks.priority.priorityLow:
-            myTasks = myTasks.filter(myTask => myTask.priority.priorityLow);
-            break;
-        default:
-            displayTasks();
-            break;
-    }
+//Fonction qui va me permettre de filtrer mes priorités
+function priorityType() {
+    display(elements.filterPriority.value, elements.filterCategory.value);
 }
 
-filterTasks();
+priorityType();
+
+function categoryType() {
+    display(elements.filterCategory.value, elements.filterCategory.value);
+}
+
+categoryType();
+
+function display(priority, category) {
+    Array.from(elements.cards).forEach(card => card.classList.remove('hidden'));
+    
+    if(priority) {
+        Array.from(elements.cards).filter(card => !card.classList.contains(priority))
+        .forEach(card => card.classList.add('hidden'));
+    }
+    
+    if(category) {
+        Array.from(elements.cards).filter(card => !card.classList.contains(category))
+        .forEach(card => card.classList.add('hidden'));
+    }
+}
 
 
 elements.filterPriority.addEventListener('submit', (e) => {
@@ -207,7 +226,6 @@ elements.filterPriority.addEventListener('submit', (e) => {
     //Puis je met tout à jour en appelant ma fonction
     displayTasks();
 });
-*/
 
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
 elements.deleteBtn.addEventListener('click', () => {
