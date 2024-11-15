@@ -10,7 +10,6 @@ form .form-group {
     margin: 0.5em 0;
 }
 
-
 /* Priorities */
 
 .high {
@@ -117,7 +116,10 @@ h2 {
 #choose-language {
     display: flex;
     flex-direction: column;
-    margin-bottom: 3em;
+}
+
+#change-lang-btn {
+    margin: 1em 0 2em 0;
 }
 
 /* Trouver comment réduire le bg-color sans réduire le form
@@ -185,4 +187,20 @@ i {
 
 .button {
     margin: 1em 0 0 0.1em; /*top right bottom left*/
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    position: absolute;
+    margin-top: 10px;
+    background-color: #fff;
+    border: solid thin #aaa;
+    padding: 1em;
+}
+
+.hide {
+    display: none;
 }
