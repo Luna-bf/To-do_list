@@ -7,7 +7,7 @@ if(session_status() === PHP_SESSION_NONE) {
   session_start(); #Si aucune session n'est ouverte, on en ouvre une nouvelle et on exécute le reste du code.
 }
 
-require 'getLanguages';
+require getLanguages();
 
 function getLanguages() {
   
