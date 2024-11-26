@@ -204,3 +204,56 @@ i {
 .hide {
     display: none;
 }
+
+.dropdown-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.drop-link {
+    padding: 0 5px;
+    text-decoration: none;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/*Le contenu du dropdown est caché par défaut*/
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    display: block;
+    color: black;
+    padding: 1em 2em;
+    text-decoration: none;
+    min-width: 10em;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.dropdown-content a:hover {
+    background-color: #fbfaf5;
+    border-radius: 5px;
+}
+
+.dropdown-menu:hover .dropdown-content {
+    display: block;
+}
+
+.lang-change:focus {
+    color: firebrick;
+    text-decoration: underline;
+}
+
+.flag {
+    width: 15%;
+    padding-right: 8px;
+}
