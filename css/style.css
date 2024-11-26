@@ -189,22 +189,6 @@ i {
     margin: 1em 0 0 0.1em; /*top right bottom left*/
 }
 
-.dropdown {
-    position: relative;
-}
-
-.dropdown-content {
-    position: absolute;
-    margin-top: 10px;
-    background-color: #fff;
-    border: solid thin #aaa;
-    padding: 1em;
-}
-
-.hide {
-    display: none;
-}
-
 .dropdown-menu {
     position: relative;
     display: inline-block;
