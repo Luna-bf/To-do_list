@@ -206,6 +206,8 @@ elements.filterPriority.addEventListener('submit', (e) => {
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
 elements.deleteBtn.addEventListener('click', () => {
     
+/*Faire une boucle afin de déterminer si le nombre de tâche(s) cochée(s)
+est supérieur ou inférieur à 1 ???*/
     if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone)).length > 0) { //On vérifie que l'élément ayant l'id 'deactivate-msg' ai l'attribut 'disabled' déclaré en false (soit non-existant) pour savoir si on l'affiche ou non et on supprime toutes les tâches qui ont la propriété isDone en true
         window.alert('Félicitations ! Vous avez terminé une tâche !');
         displayTasks(); //Je met à jour l'affichage en appelant ma fonction
