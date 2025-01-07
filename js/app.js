@@ -249,11 +249,11 @@ Utiliser toggleAttribute ???
     
     function myPrompts() {
         
-        if(elements.deactivatePrompt.hasAttribute('disabled')) {
-            elements.activatePrompt.setAttribute('disabled', 'false');
+        if(elements.deactivatePrompt.hasAttribute('disabled', false)) { //Si le btn 'Désactiver' n'a pas l'attribut 'disabled'
+            elements.activatePrompt.setAttribute('disabled', true); //Alors on désactive le btn 'Activer'
         
-        } else if(elements.activatePrompt.hasAttribute('disabled')) {
-             elements.deactivatePrompt.removeAttribute('disabled', 'false');
+        } else {
+             elements.deactivatePrompt.toggleAttribute('disabled', false);
         }
     }
     
