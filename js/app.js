@@ -233,4 +233,4 @@ elements.deleteAllBtn.addEventListener('click', () => {
 elements.deactivatePrompt.addEventListener('click', () => {
     
     elements.deactivatePrompt.setAttribute('disabled', '');
-})
+});
