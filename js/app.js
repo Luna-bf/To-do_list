@@ -43,24 +43,6 @@ const categories = {
     other: '(Autre)'
 };
 
-//Les catégories eet leur valeurs en anglais
-//Faire un if else qui détecte que lorsque la session est en anglais, les catégories
-//doivent l'être aussi ??????
-//Essayer de faire la todo list avec PHP et MySQL(?) et essayer d'y implémenter le changement de langue
-//que je veux faire
-const categoriesEn = {
-    noCategoryEn: '(Without category)',
-    workEn: '(Work)',
-    studiesEn: '(Studies)',
-    foodEnEn: '(Alimentation)',
-    houseEn: '(House)',
-    sportEn: '(Sport)',
-    hygieneEn: '(Hygiene)',
-    hobbiesEn: '(Hobbies)',
-    otherEn: '(Other)'
-};
-
-
 let myTasks = [
     {
         title: 'Savoir faire une todo list en js natif',
@@ -82,29 +64,7 @@ let myTasks = [
     }
 ];
 
-let myTasksEn = [
-    {
-        title: 'Be able to make a to-do list in vanilla js',
-        priority: priorities.priorityHighEn,
-        category: categories.studiesEn,
-        isDone: false
-    },
-    {
-        title: 'Prepare the Christmas gifts',
-        priority: priorities.priorityNormalEn,
-        category: categories.otherEn,
-        isDone: false
-    },
-    {
-        title: 'Complete Hollow Knight to 112%',
-        priority: priorities.priorityLowEn,
-        category: categories.hobbiesEn,
-        isDone: false
-    }
-];
-
 console.log(myTasks);
-console.log(myTasksEn);
 
 //La fonction qui va me permettre de gérer les tâches
 function displayTasks() {
@@ -121,7 +81,9 @@ function displayTasks() {
         const label = document.createElement('label');
         const input = document.createElement('input');
         const span = document.createElement('span');
-        const icon = document.createElement('i');
+        const penIcon = document.createElement('i');
+        const checkIcon = document.createElement('i');
+        const trashIcon = document.createElement('i');
         input.type = 'checkbox'; //J'assigne un type à mon input
         
     
@@ -132,7 +94,9 @@ function displayTasks() {
         //Je créé un noeud de texte pour l'élément label
         const labelName = document.createTextNode(myTask.title);
         span.textContent += myTask.category; //J'utilise textContent pour span car je veux que mon texte soit dans la balise span (cela va être utile pour la partie CSS)
-        icon.innerHTML = '<i class="fa-solid fa-pen"></i>'; //J'ajoute une icône à mon élément i (à côté de mon élément span)
+        penIcon.classList.add('fa-solid', 'fa-pen'); //J'ajoute une icône à mon élément i (à côté de mon élément span)
+        checkIcon.classList.add('fa-solid', 'fa-check');
+        trashIcon.classList.add('fa-solid', 'fa-trash');
         
         //Puis, toujours dans ma boucle for of, je gère les priorité avec un switch
         switch(myTask.priority) {
@@ -183,7 +147,7 @@ function displayTasks() {
         
         //Puis j'attache tous les éléments ensemble
         label.append(input, labelName); //Je met l'input et le nom des tâches dans le label
-        li.append(label, span, icon); //Je met label, span et icon dans l'élément li
+        li.append(label, span, penIcon, checkIcon, trashIcon); //Je met label, span et icon dans l'élément li
         elements.allTasks.append(li);
         //Et enfin je met mon élément li dans l'élément qui contient l'id all-tasks
         //en allant le chercher dans l'objet elements et en sélectionnant allTasks
@@ -192,7 +156,6 @@ function displayTasks() {
 
 //J'affiche la liste au chargement de la page en appelant ma fonction
 displayTasks();
-
 
 elements.form.addEventListener('submit', (e) => {
     
@@ -217,34 +180,18 @@ elements.form.addEventListener('submit', (e) => {
     displayTasks();
 });
 
+// Object.filter = (obj, predicate) =>
+//     Object.keys(obj)
+//           .filter( key => predicate(obj[key]) )
+//           .reduce( (res, key) => (res[key] = obj[key], res), {} );
 
-//Fonction qui va me permettre de filtrer mes priorités
-function priorityType() {
-    display(elements.filterPriority.value, elements.filterCategory.value);
-}
-
-priorityType();
-
-function categoryType() {
-    display(elements.filterCategory.value, elements.filterCategory.value);
-}
-
-categoryType();
-
-function display(priority, category) {
-    Array.from(elements.cards).forEach(card => card.classList.remove('hidden'));
-    
-    if(priority) {
-        Array.from(elements.cards).filter(card => !card.classList.contains(priority))
-        .forEach(card => card.classList.add('hidden'));
-    }
-    
-    if(category) {
-        Array.from(elements.cards).filter(card => !card.classList.contains(category))
-        .forEach(card => card.classList.add('hidden'));
-    }
-}
-
+// const scores = {
+//     John: 2,
+//     Sarah: 3,
+//     Janet: 0
+// };
+// const filtered = Object.filter(scores, score => score < 1); 
+// console.log(filtered);
 
 elements.filterPriority.addEventListener('submit', (e) => {
     
@@ -264,6 +211,7 @@ elements.filterPriority.addEventListener('submit', (e) => {
     //Puis je met tout à jour en appelant ma fonction
     displayTasks();
 });
+
 
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
 elements.deleteBtn.addEventListener('click', () => {
