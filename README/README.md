@@ -91,19 +91,21 @@ Permettre à l'utilisateur de modifier la priorité, la catégorie et le nom d'u
 
 Filtrer les tâches pour les afficher en fonction de leur priorité et/ou catégorie.
 
-### Window prompt 1 : Suppression (non désactivable) (FAIT !)
+### Window prompt 1 : Suppression totale (non désactivable) (FAIT !)
 
-Si on supprime toutes les tâches, afficher un prompt avertissant que les tâches sont sur le point d'être supprimées.
+Si on supprime toutes les tâches, afficher un prompt avertissant que TOUTES les tâches sont sur le point d'être supprimées.
 
 ### Window prompt 2 : Félicitation
 
-Mettre une fenêtre (window prompt ?) félicitant l'utilisateur d'avoir terminé une tâche : "Félicitation ! Vous avez terminé la tâche : ${myTask.title}".
+Mettre une fenêtre (window.alert()) félicitant l'utilisateur d'avoir terminé une tâche : "Félicitation ! Vous avez terminé une tâche !". Faire en sorte que ce prompt ne s'affiche que quand au moins une tâche cochée est sur le point d'être supprimée.
 
-### Cacher le window prompt (félicitation) FAIT !
+Faire pareil quand l'utilisateur termine plus d'une tâche.
+
+### Désactiver le window prompt (félicitation) FAIT !
 
 Rendre possible le fait de désactiver ce message en cliquant sur un input checkbox ou un bouton.
 
-### Bouton "Réactiver le prompt" (félicitation)
+### Bouton "Réactiver le prompt" (félicitation) IGNORER ???
 
 Ce bouton n'est pas cliquable quand le prompt est activé, il faudra lui retirer l'attribut disabled quand le prompt félicitation est désactivé.
 
