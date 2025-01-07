@@ -164,6 +164,7 @@ i {
     background-color: midnightblue;
     padding: 0.4em;
     border-radius: 0.3em;
+    cursor: pointer;
 }
 
 .fa-trash:hover {
@@ -171,6 +172,7 @@ i {
     background-color: firebrick;
     padding: 0.4em;
     border-radius: 0.3em;
+    cursor: pointer;
 }
 
 .fa-check:hover {
@@ -178,6 +180,7 @@ i {
     background-color: forestgreen;
     padding: 0.4em;
     border-radius: 0.3em;
+    cursor: pointer;
 }
 
 #create-task-form {
@@ -289,12 +292,29 @@ button:hover {
     font-size: 13px;
 }
 
-button:disabled,
-button[disabled] {
+#deactivate-msg:enabled::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f4b3";
+    padding-left: 5px;
+    font-weight: 900;
+    color: #323330;
+    font-size: 13px;
+}
+
+button:disabled {
     margin: 1em 0 0 0.1em; /*top right bottom left*/
     color: #737373;
     background-color: #faf0af;
     border-radius: 0.3em;
     border: 1px solid #737373;
     padding: 0.5em;
+}
+
+button:disabled::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f4b3";
+    padding-left: 5px;
+    font-weight: 900;
+    color: #737373;
+    font-size: 13px;
 }
