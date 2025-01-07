@@ -133,7 +133,7 @@ h2 {
 }
 
 li {
-    margin-bottom: 1em;
+    margin-bottom: 0.2em;
 }
 
 label {
@@ -152,11 +152,24 @@ i {
 }
 
 .fa-pen {
-    margin: 0 0.5em 0 0.5em;
+    color: black;
+    background-color: #fff;
+    margin: 0 0.2em 0 0.5em;
+    padding: 0.4em;
 }
 
 .fa-check {
+    color: black;
+    background-color: #fff;
+    margin: 0 0.8em 0 0;
+    padding: 0.4em;
+}
+
+.fa-trash {
+    color: black;
+    background-color: #fff;
     margin: 0 0.5em 0 0;
+    padding: 0.4em;
 }
 
 .fa-pen:hover {
@@ -228,14 +241,22 @@ button {
     padding: 0.5em;
 }
 
-button:hover {
+button:disabled {
     margin: 1em 0 0 0.1em; /*top right bottom left*/
-    color: #323330;
-    background-color: #f0db4f;
+    color: #737373;
+    background-color: #faf0af;
     border-radius: 0.3em;
-    border: 1px solid #323330;
+    border: 1px solid #737373;
     padding: 0.5em;
-    cursor: pointer;
+}
+
+button:disabled::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f4b3";
+    padding-left: 5px;
+    font-weight: 900;
+    color: #737373;
+    font-size: 13px;
 }
 
 #add-btn {
@@ -301,20 +322,34 @@ button:hover {
     font-size: 13px;
 }
 
-button:disabled {
-    margin: 1em 0 0 0.1em; /*top right bottom left*/
-    color: #737373;
-    background-color: #faf0af;
-    border-radius: 0.3em;
-    border: 1px solid #737373;
-    padding: 0.5em;
+#delete-task-btn:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+    color: #fff;
+    cursor: pointer;
 }
 
-button:disabled::after {
-    font-family: "Font Awesome 5 Free";
-    content: "\f4b3";
-    padding-left: 5px;
-    font-weight: 900;
-    color: #737373;
-    font-size: 13px;
+#delete-all-btn:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+    color: #fff;
+    cursor: pointer;
+}
+
+#deactivate-msg:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+    color: #fff;
+    cursor: pointer;
+}
+
+#add-btn:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+    border: 1px solid #737373;
+    color: #fff;
+    cursor: pointer;
+}
+
+#display-btn:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+    border: 1px solid #737373;
+    color: #fff;
+    cursor: pointer;
 }
