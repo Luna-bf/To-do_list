@@ -105,7 +105,7 @@ Faire pareil quand l'utilisateur termine plus d'une tâche.
 
 Rendre possible le fait de désactiver ce message en cliquant sur un input checkbox ou un bouton.
 
-### Bouton "Réactiver le prompt" (félicitation) IGNORER ???
+### Bouton "Réactiver le prompt" (félicitation)
 
 Ce bouton n'est pas cliquable quand le prompt est activé, il faudra lui retirer l'attribut disabled quand le prompt félicitation est désactivé.
 
