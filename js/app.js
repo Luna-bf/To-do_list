@@ -207,11 +207,16 @@ elements.filterPriority.addEventListener('submit', (e) => {
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
 elements.deleteBtn.addEventListener('click', () => {
     
-    //On supprime toutes les tâches qui ont la propriété isDone en true
-    //Si la tâche n'est pas complétée, on récupère un nouveau tableau uniquement avec les tâches non complétées
-    //On met pas prevent default car le bouton "Supprimer les tâches" a l'attribut 'click' et non 'submit' car le btn ne fait pas parti d'un formulaire
-    myTasks = myTasks.filter(myTask => !myTask.isDone);
+    if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone))) { //On vérifie que l'élément ayant l'id 'activate-msg' ai l'attribut 'disabled' déclaré en false (soit non-existant) pour savoir si on l'affiche ou non et on supprime toutes les tâches qui ont la propriété isDone en true
+        window.alert('Félicitation ! Vous avez terminé une ou plusieurs tâche(s) !');
+        displayTasks();
+    } else {
+        myTasks = myTasks.filter(myTask => !myTask.isDone); //Si l'élément ayant l'id 'activate-msg' a l'attribut 'disabled' déclaré en 'true' alors on affiche juste les tâches non cochées
+        displayTasks();
+    }
     
+    //S'il reste des tâches non complétées, on récupère un nouveau tableau uniquement avec les tâches non complétées
+    //On met pas prevent default car le bouton "Supprimer les tâches" a l'attribut 'click' et non 'submit' car le btn ne fait pas parti d'un formulaire
     //Je met à jour l'affichage en appelant ma fonction
     displayTasks();
 });
