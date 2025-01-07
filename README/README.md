@@ -99,7 +99,7 @@ Si on supprime toutes les tâches, afficher un prompt avertissant que les tâche
 
 Mettre une fenêtre (window prompt ?) félicitant l'utilisateur d'avoir terminé une tâche : "Félicitation ! Vous avez terminé la tâche : ${myTask.title}".
 
-### Cacher le window prompt (félicitation)
+### Cacher le window prompt (félicitation) FAIT !
 
 Rendre possible le fait de désactiver ce message en cliquant sur un input checkbox ou un bouton.
 
