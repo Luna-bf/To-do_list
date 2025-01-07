@@ -132,6 +132,54 @@ h2 {
     width: 50%;
 }
 
+li {
+    margin-bottom: 1em;
+}
+
+label {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #fff;
+}
+
+i {
+    padding: 0 0 5px 3.5px; /*top right bottom left*/
+    vertical-align: middle;
+    font-weight: 600;
+    font-size: 16px;
+    color: #303030;
+}
+
+.fa-pen {
+    margin: 0 0.5em 0 0.5em;
+}
+
+.fa-check {
+    margin: 0 0.5em 0 0;
+}
+
+.fa-pen:hover {
+    color: white;
+    background-color: midnightblue;
+    padding: 0.4em;
+    border-radius: 0.3em;
+}
+
+.fa-trash:hover {
+    color: white;
+    background-color: firebrick;
+    padding: 0.4em;
+    border-radius: 0.3em;
+}
+
+.fa-check:hover {
+    color: white;
+    background-color: forestgreen;
+    padding: 0.4em;
+    border-radius: 0.3em;
+}
+
 #create-task-form {
     background-color: #fff;
 }
@@ -151,11 +199,10 @@ fieldset {
     flex-wrap: nowrap;
 }
 
-label {
+p {
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-style: normal;
-    background-color: #fff;
 }
 
 span {
@@ -165,16 +212,17 @@ span {
     margin-left: 0.5em;
 }
 
-i {
-    padding: 0 0 5px 3.5px; /*top right bottom left*/
-    vertical-align: middle;
-    font-weight: 600;
-    font-size: 16px;
-    color: #303030;
-}
-
 .input {
     padding: 0.3em;
+}
+
+button {
+    margin: 1em 0 0 0.1em; /*top right bottom left*/
+    color: #323330;
+    background-color: #f0db4f;
+    border-radius: 0.3em;
+    border: 1px solid #323330;
+    padding: 0.5em;
 }
 
 #add-btn {
@@ -185,59 +233,58 @@ i {
     margin: 0.5em 0 0 0.1em;
 }
 
-.button {
+#delete-all-btn {
+    color: #fff;
+    background-color: firebrick;
+}
+
+#add-btn:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\2b";
+    padding-left: 5px;
+    font-weight: 900;
+    color: #323330;
+    font-size: 13px;
+}
+
+#display-btn:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f002";
+    padding-left: 5px;
+    font-weight: 900;
+    color: #323330;
+    font-size: 13px;
+}
+
+#delete-task-btn {
+    color: #fff;
+    background-color: forestgreen;
+}
+
+#delete-task-btn:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f14a";
+    padding-left: 5px;
+    font-weight: 900;
+    color: #fff;
+    font-size: 13px;
+}
+
+#delete-all-btn:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f071";
+    padding-left: 5px;
+    font-weight: 900;
+    color: #fff;
+    font-size: 13px;
+}
+
+button:disabled,
+button[disabled] {
     margin: 1em 0 0 0.1em; /*top right bottom left*/
-}
-
-.dropdown-menu {
-    position: relative;
-    display: inline-block;
-}
-
-.drop-link {
-    padding: 0 5px;
-    text-decoration: none;
-    color: black;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-/*Le contenu du dropdown est caché par défaut*/
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-}
-
-.dropdown-content a {
-    display: block;
-    color: black;
-    padding: 1em 2em;
-    text-decoration: none;
-    min-width: 10em;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.dropdown-content a:hover {
-    background-color: #fbfaf5;
-    border-radius: 5px;
-}
-
-.dropdown-menu:hover .dropdown-content {
-    display: block;
-}
-
-.lang-change:focus {
-    color: firebrick;
-    text-decoration: underline;
-}
-
-.flag {
-    width: 15%;
-    padding-right: 8px;
+    color: #737373;
+    background-color: #faf0af;
+    border-radius: 0.3em;
+    border: 1px solid #737373;
+    padding: 0.5em;
 }
