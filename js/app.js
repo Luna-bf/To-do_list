@@ -11,17 +11,8 @@ const elements = {
     cards: document.getElementsByClassName('card'),
     deleteBtn: document.querySelector('#delete-task-btn'),
     deleteAllBtn: document.querySelector('#delete-all-btn'),
+    deactivatePrompt: document.querySelector('#deactivate-msg'),
 };
-
-//Boucle for pour la boîte de changement de langue
-for(let i = 0; i < elements.dropdown.length; i++) {
-    elements.dropdown[i].addEventListener('click', function(e) {
-        for(let h = 0; h < elements.dropdown.length; h++) {
-          elements.dropdown[h].querySelector('.dropdown-content').classList.add('hide');
-        }
-        e.currentTarget.querySelector('.dropdown-content').classList.toggle('hide');
-    });
-}
 
 //J'indique mes priorités et leur valeur
 const priorities = {
@@ -238,3 +229,8 @@ elements.deleteAllBtn.addEventListener('click', () => {
     //Puis je met tout à jour (je dois quand même appeler ma fonction en dehors du if-else sinon le tableau ne se mettra pas à jour)
     displayTasks();
 });
+
+elements.deactivatePrompt.addEventListener('click', () => {
+    
+    elements.deactivatePrompt.setAttribute('disabled', '');
+})
