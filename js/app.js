@@ -67,7 +67,7 @@ function displayTasks() {
     //car je veux que ce qui va être déclaré se REPETE POUR CHAQUE tâche
     for(let myTask of myTasks) { //for of soit forEach
         
-         //Je créé les éléments qui vont me servir pour cette tâche
+        //Je créé les éléments qui vont me servir pour cette tâche
         const li = document.createElement('li');
         const label = document.createElement('label');
         const input = document.createElement('input');
