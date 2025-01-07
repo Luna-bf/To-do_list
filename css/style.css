@@ -225,6 +225,16 @@ button {
     padding: 0.5em;
 }
 
+button:hover {
+    margin: 1em 0 0 0.1em; /*top right bottom left*/
+    color: #323330;
+    background-color: #f0db4f;
+    border-radius: 0.3em;
+    border: 1px solid #323330;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
 #add-btn {
     margin: 0.5em 0 0 0.1em;
 }
