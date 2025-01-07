@@ -335,8 +335,6 @@ button:disabled::after {
 }
 
 #deactivate-msg:hover {
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
-    color: #fff;
     cursor: pointer;
 }
 
