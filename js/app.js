@@ -206,14 +206,14 @@ elements.filterPriority.addEventListener('submit', (e) => {
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
 elements.deleteBtn.addEventListener('click', () => {
     
-    if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone))) { //On vérifie que l'élément ayant l'id 'activate-msg' ai l'attribut 'disabled' déclaré en false (soit non-existant) pour savoir si on l'affiche ou non et on supprime toutes les tâches qui ont la propriété isDone en true
+    if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone)).length > 0) { //On vérifie que l'élément ayant l'id 'deactivate-msg' ai l'attribut 'disabled' déclaré en false (soit non-existant) pour savoir si on l'affiche ou non et on supprime toutes les tâches qui ont la propriété isDone en true
         window.alert('Félicitations ! Vous avez terminé une tâche !');
         displayTasks(); //Je met à jour l'affichage en appelant ma fonction
-    } else if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone))) { //Pareil qu'au dessus mais on vérifie également si le nombre de tâches est supérieur à 1, si oui alors le message change en conséquences
+    } else if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone)).length > 1) { //Pareil qu'au dessus mais on vérifie également si le nombre de tâches est supérieur à 1, si oui alors le message change en conséquences
         window.alert('Félicitations ! Vous avez terminé plusieurs tâches !');
         displayTasks();
     } else {
-        myTasks = myTasks.filter(myTask => !myTask.isDone); //Si l'élément ayant l'id 'activate-msg' a l'attribut 'disabled' déclaré en 'true' alors on affiche juste les tâches non cochées
+        myTasks = myTasks.filter(myTask => !myTask.isDone); //Si l'élément ayant l'id 'deactivate-msg' a l'attribut 'disabled' déclaré en 'true' alors on affiche juste les tâches non cochées
         displayTasks();
     }
     
