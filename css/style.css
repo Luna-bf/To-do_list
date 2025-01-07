@@ -306,13 +306,11 @@ button:disabled::after {
 
 #delete-task-btn:hover {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
-    color: #fff;
     cursor: pointer;
 }
 
 #delete-all-btn:hover {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
-    color: #fff;
     cursor: pointer;
 }
 
@@ -323,13 +321,11 @@ button:disabled::after {
 #add-btn:hover {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
     border: 1px solid #737373;
-    color: #fff;
     cursor: pointer;
 }
 
 #display-btn:hover {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
     border: 1px solid #737373;
-    color: #fff;
     cursor: pointer;
 }
