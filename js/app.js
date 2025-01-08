@@ -8,6 +8,7 @@ const elements = {
     filterPriority: document.querySelector('#filter-priority'),
     filterCategory: document.querySelector('#filter-category'),
     cards: document.getElementsByClassName('card'),
+    displayBtn: document.querySelector('#display-btn'),
     deleteBtn: document.querySelector('#delete-task-btn'),
     deleteAllBtn: document.querySelector('#delete-all-btn'),
     activatePrompt: document.querySelector('#activate-msg'),
@@ -178,41 +179,52 @@ elements.form.addEventListener('submit', (e) => {
     displayTasks();
 });
 
-// Object.filter = (obj, predicate) =>
-//     Object.keys(obj)
-//           .filter( key => predicate(obj[key]) )
-//           .reduce( (res, key) => (res[key] = obj[key], res), {} );
+elements.displayBtn.addEventListener('submit', () => {
+    
+       //J'empêche le rechargement de la page
+       e.preventDefault();
+       
+    function categoryType() {
+        display(elements.filterPriority.value, elements.filterCategory.value);
+    }
+    
+    function priorityType() {
+        display(elements.filterPriority.value, elements.filterCategory.value);
+    }
+    
+    function display(category, priority) {
+     Array.from(elements.cards).forEach(card => card.classList.remove('hidden'));
+    }
+      
+        if(category) {
+          Array.from(elements.cards).filter(card => !card.classList.contains(category)).forEach(card => card.classList.add('hidden'))
+        }
+        
+        if(priority) {
+            Array.from(elements.cards).filter(card => !card.classList.contains(priority)).forEach(card => card.classList.add('hidden'))
+        } 
 
-// const scores = {
-//     John: 2,
-//     Sarah: 3,
-//     Janet: 0
-// };
-// const filtered = Object.filter(scores, score => score < 1); 
-// console.log(filtered);
-
-elements.filterPriority.addEventListener('submit', (e) => {
     
-    //J'empêche le rechargement de la page
-    e.preventDefault();
     
-    //Je récupère les données de mon formulaire
-    const formData = new FormData(elements.filterPriority);
+//     //Je récupère les données de mon formulaire
+      // const formData = new FormData(elements.filterPriority);
     
-    //Puis je créé une nouvelle tâche
-    const filterTasks = {
-        title: formData.get('task_name'), //Je récupère la donnée name (task_title) de l'input se trouvant dans le form
-        priority: Number(formData.get('choose_priority')), //J'utilise l'attribut Number pour bien récupérer un nombre et non une string
-        isDone: false //Par défaut, la tâche n'est pas finie
-    };
+//     //Puis je créé une nouvelle tâche
+       //const filterTasks = {
+       //title: formData.get('task_name'), //Je récupère la donnée name (task_title) de l'input se trouvant dans le form
+       //priority: Number(formData.get('choose_priority')), //J'utilise l'attribut Number pour bien récupérer un nombre et non une string
+       //isDone: false //Par défaut, la tâche n'est pas finie
+       //};
     
-    //Puis je met tout à jour en appelant ma fonction
-    displayTasks();
+//     //Puis je met tout à jour en appelant ma fonction
+       displayTasks();
 });
 
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
-elements.deleteBtn.addEventListener('click', () => {
+elements.deleteBtn.addEventListener('click', (e) => {
     
+    e.preventDefault()
+
     /*Faire une boucle afin de déterminer si le nombre de tâche(s) cochée(s)
     est supérieur ou inférieur à 1 ???*/
     if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone > 0))) { //On vérifie que l'élément ayant l'id 'deactivate-msg' ai l'attribut 'disabled' déclaré en false (soit non-existant) pour savoir si on l'affiche ou non et on supprime toutes les tâches qui ont la propriété isDone en true
@@ -242,6 +254,11 @@ elements.deleteAllBtn.addEventListener('click', () => {
     }
 });
 
+elements.deactivatePrompt.addEventListener('click', () => {
+
+    elements.deactivatePrompt.setAttribute('disabled', '');
+});
+
 /*Quand le btn 'désactiver le prompt' est cliqué cela le désactive et donc active
 celui où il est écrit 'activer le prompt' et inversement
 
@@ -252,16 +269,16 @@ Utiliser toggleAttribute ???
     
     //elements.deactivatePrompt.setAttribute('disabled', '');
     
-    function myPrompts() {
+    // function myPrompts() {
         
-        if(elements.deactivatePrompt.hasAttribute('disabled', false)) { //Si le btn 'Désactiver' n'a pas l'attribut 'disabled'
-            elements.activatePrompt.setAttribute('disabled', true); //Alors on désactive le btn 'Activer'
+    //     if(elements.deactivatePrompt.hasAttribute('disabled', true)) { //Si le btn 'Désactiver' n'a pas l'attribut 'disabled'
+    //         elements.activatePrompt.setAttribute('disabled'); //Alors on désactive le btn 'Activer'
         
-        } else {
-             elements.deactivatePrompt.toggleAttribute('disabled', false);
-        }
-    }
+    //     } else {
+    //          elements.deactivatePrompt.setAttribute('disabled');
+    //     }
+    // }
     
-    myPrompts();
+    // myPrompts();
     
 //});
