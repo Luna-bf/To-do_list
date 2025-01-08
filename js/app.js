@@ -2,7 +2,6 @@
 
 //Je récupère mes éléments HTML
 const elements = {
-    dropdown: document.querySelectorAll('.dropdown'),
     allTasks: document.querySelector('#all-tasks ul'),
     form: document.querySelector('#task-form form'),
     checkbox: document.querySelector('#task-name'),
@@ -142,6 +141,10 @@ function displayTasks() {
         elements.allTasks.append(li);
         //Et enfin je met mon élément li dans l'élément qui contient l'id all-tasks
         //en allant le chercher dans l'objet elements et en sélectionnant allTasks
+
+        penIcon.addEventListener('change', () => {
+            
+        });
 
         trashIcon.addEventListener('click', () => {
             li.remove();
