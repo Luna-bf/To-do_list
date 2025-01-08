@@ -22,8 +22,10 @@
         <p id="empty-list-text"></p>
     </section>
     
-    <section id="task-form" class="section-form">
-        <form class="d-flex">
+    <hr>
+    
+    <section id="parent-create-task-form" class="d-flex section-form">
+        <form class="d-flex" id="task-form">
             <fieldset id="create-task-form">
                 <legend>
                     <h2>Créer une nouvelle tâche :</h2>
@@ -31,7 +33,7 @@
                     <article class="form-group">
                         <label for="task-name">Nom de la tâche :</label>
                         <!--name sera le nom de la tâche, c'est important de le déclarer-->
-                        <input type="text" size="45" name="task_name" id="task-name" class="input" placeholder="Ex : Faire les courses" required />
+                        <input type="text" size="45" name="task_name" id="task-name" placeholder="Ex : Faire les courses" required />
                     </article>
                     
                     <article class="form-group">
@@ -63,11 +65,9 @@
                     <button id="add-btn">Ajouter la tâche</button>
             </fieldset>
         </form>
-    </section>
         
-    <section id="filter-form" class="section-form">
-        <form class="d-flex">
-            <fieldset>
+        <form class="d-flex" id="filter-form">
+            <fieldset id="create-filter-form">
                 <legend><h2>Filtrer par :</h2></legend>
                     <article class="form-group">
                         <label for="filter-priority">Priorité :</label>
@@ -101,10 +101,14 @@
         </form>
     </section>
     
-    <button id="delete-task-btn">Supprimer les tâches terminées</button>
-    <button id="delete-all-btn">Supprimer toutes les tâches</button>
-    <!--<button id="activate-msg" disabled>Activer le prompt</button>-->
-    <button id="deactivate-msg">Désactiver le prompt</button>
+    <div id="all-buttons" class="d-flex">
+        <ul id="btn-list">
+            <li><button id="delete-task-btn">Supprimer les tâches terminées</button></li>
+            <li><button id="delete-all-btn">Supprimer toutes les tâches</button></li>
+            <!--<li><button id="activate-msg" disabled>Activer le prompt</button></li>-->
+            <li><button id="deactivate-msg">Désactiver le prompt</button></li>
+        </ul>
+    </div>
 
     <script type="text/javascript" src="js/app.js" defer></script>
 </body>
