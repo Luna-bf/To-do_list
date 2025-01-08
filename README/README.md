@@ -122,3 +122,5 @@ La to-do list doit être responsive, la faire en mobile first.
 ### Corbeille
 
 Mettre en place une corbeille où sont stockées les tâches supprimées. Il est possible de les restaurer ou de les supprimer définitivement
+
+Mettre un prompt indiquant que les tâches ont étées restaurées ou supprimées avec succès
