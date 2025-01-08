@@ -55,7 +55,7 @@ Si aucune priorité n'est sélectionnée, afficher la tâche en noir.
 
 Créer en-dessous du formulaire un bouton "Supprimer une tâche". Lorsque l'on clique sur ce bouton cela supprime toutes les tâches qui ont été cochées.
 
-### Afficher un message de notification
+### Afficher un message de notification (FAIT !)
 
 Lorsqu'une ou plusieurs tâches ont été supprimées, afficher un message de notification à l'utilisateur du type "x tâches supprimées avec succès".
 
@@ -97,11 +97,11 @@ Si on supprime toutes les tâches, afficher un prompt avertissant que TOUTES les
 
 ### Window prompt 2 : Félicitation
 
-Mettre une fenêtre (window.alert()) félicitant l'utilisateur d'avoir terminé une tâche : "Félicitation ! Vous avez terminé une tâche !". Faire en sorte que ce prompt ne s'affiche que quand au moins une tâche cochée est sur le point d'être supprimée.
+Mettre une fenêtre (window.alert()) félicitant l'utilisateur d'avoir terminé une tâche : "Félicitation ! Vous avez terminé une tâche !". Faire en sorte que ce prompt ne s'affiche que quand au moins une tâche cochée est sur le point d'être supprimée. (FAIT !)
 
 Faire pareil quand l'utilisateur termine plus d'une tâche.
 
-### Désactiver le window prompt (félicitation) FAIT !
+### Désactiver le window prompt (félicitation) (FAIT !)
 
 Rendre possible le fait de désactiver ce message en cliquant sur un input checkbox ou un bouton.
 
@@ -118,3 +118,7 @@ Quand il n'y a pas de tâches à afficher, afficher le texte suivant : "Pas de t
 ### Responsive
 
 La to-do list doit être responsive, la faire en mobile first.
+
+### Corbeille
+
+Mettre en place une corbeille où sont stockées les tâches supprimées. Il est possible de les restaurer ou de les supprimer définitivement
