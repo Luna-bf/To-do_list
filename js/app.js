@@ -11,7 +11,6 @@ const elements = {
     cards: document.getElementsByClassName('card'),
     deleteBtn: document.querySelector('#delete-task-btn'),
     deleteAllBtn: document.querySelector('#delete-all-btn'),
-    promptBtns: document.querySelector('#prompt-btns'),
     activatePrompt: document.querySelector('#activate-msg'),
     deactivatePrompt: document.querySelector('#deactivate-msg'),
 };
@@ -78,7 +77,6 @@ function displayTasks() {
         const checkIcon = document.createElement('i');
         const trashIcon = document.createElement('i');
         input.type = 'checkbox'; //J'assigne un type à mon input
-        
     
         input.addEventListener('change', (e) => { //change permet de changer l'état d'un élément
             myTask.isDone = input.checked; //checked est la valeur qui correspond à l'état coché de checkbox
@@ -144,6 +142,10 @@ function displayTasks() {
         elements.allTasks.append(li);
         //Et enfin je met mon élément li dans l'élément qui contient l'id all-tasks
         //en allant le chercher dans l'objet elements et en sélectionnant allTasks
+
+        trashIcon.addEventListener('click', () => {
+            li.remove();
+        });
     }
 }
 
@@ -210,10 +212,10 @@ elements.deleteBtn.addEventListener('click', () => {
     
     /*Faire une boucle afin de déterminer si le nombre de tâche(s) cochée(s)
     est supérieur ou inférieur à 1 ???*/
-    if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone)).length > 0) { //On vérifie que l'élément ayant l'id 'deactivate-msg' ai l'attribut 'disabled' déclaré en false (soit non-existant) pour savoir si on l'affiche ou non et on supprime toutes les tâches qui ont la propriété isDone en true
+    if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone > 0))) { //On vérifie que l'élément ayant l'id 'deactivate-msg' ai l'attribut 'disabled' déclaré en false (soit non-existant) pour savoir si on l'affiche ou non et on supprime toutes les tâches qui ont la propriété isDone en true
         window.alert('Félicitations ! Vous avez terminé une tâche !');
         displayTasks(); //Je met à jour l'affichage en appelant ma fonction
-    } else if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone)).length > 1) { //Pareil qu'au dessus mais on vérifie également si le nombre de tâches est supérieur à 1, si oui alors le message change en conséquences
+    } else if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone > 1))) { //Pareil qu'au dessus mais on vérifie également si le nombre de tâches est supérieur à 1, si oui alors le message change en conséquences
         window.alert('Félicitations ! Vous avez terminé plusieurs tâches !');
         displayTasks();
     } else {
