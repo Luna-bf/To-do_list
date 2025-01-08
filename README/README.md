@@ -65,7 +65,7 @@ La liste des tâches s'affichent de la priorité la plus élevée à la moins é
 
 ### Persistence des tâches
 
-Lorsque vous réactulisez, toutes les tâches créées disparaissent. Mettre en place un système pour les conserver (localstorage).
+Lorsque vous réactualisez, toutes les tâches créées disparaissent. Mettre en place un système pour les conserver (localstorage).
 
 
 # Mes consignes
@@ -83,7 +83,7 @@ Créer en-dessous du formulaire un bouton "Supprimer toutes les tâches". Lorsqu
 
 Faire en sorte que les tâches terminées ou non restent comme tel même après avoir actualisé la page.
 
-### Modification de la priorité
+### Modification d'une tâche
 
 Permettre à l'utilisateur de modifier la priorité, la catégorie et le nom d'une tâche.
 
