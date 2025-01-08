@@ -3,7 +3,7 @@
 //Je récupère mes éléments HTML
 const elements = {
     allTasks: document.querySelector('#all-tasks ul'),
-    form: document.querySelector('#task-form form'),
+    form: document.querySelector('#task-form'),
     checkbox: document.querySelector('#task-name'),
     filterPriority: document.querySelector('#filter-priority'),
     filterCategory: document.querySelector('#filter-category'),
@@ -177,32 +177,32 @@ elements.form.addEventListener('submit', (e) => {
     
     //Puis je met tout à jour en appelant ma fonction
     displayTasks();
-});
+// });
 
-elements.displayBtn.addEventListener('submit', () => {
+// elements.displayBtn.addEventListener('submit', () => {
     
-       //J'empêche le rechargement de la page
-       e.preventDefault();
+//        //J'empêche le rechargement de la page
+//        e.preventDefault();
        
-    function categoryType() {
-        display(elements.filterPriority.value, elements.filterCategory.value);
-    }
+//     function categoryType() {
+//         display(elements.filterPriority.value, elements.filterCategory.value);
+//     }
     
-    function priorityType() {
-        display(elements.filterPriority.value, elements.filterCategory.value);
-    }
+//     function priorityType() {
+//         display(elements.filterPriority.value, elements.filterCategory.value);
+//     }
     
-    function display(category, priority) {
-     Array.from(elements.cards).forEach(card => card.classList.remove('hidden'));
-    }
+//     function display(category, priority) {
+//      Array.from(elements.cards).forEach(card => card.classList.remove('hidden'));
+//     }
       
-        if(category) {
-          Array.from(elements.cards).filter(card => !card.classList.contains(category)).forEach(card => card.classList.add('hidden'))
-        }
+//         if(category) {
+//           Array.from(elements.cards).filter(card => !card.classList.contains(category)).forEach(card => card.classList.add('hidden'))
+//         }
         
-        if(priority) {
-            Array.from(elements.cards).filter(card => !card.classList.contains(priority)).forEach(card => card.classList.add('hidden'))
-        } 
+//         if(priority) {
+//             Array.from(elements.cards).filter(card => !card.classList.contains(priority)).forEach(card => card.classList.add('hidden'))
+//         } 
 
     
     
