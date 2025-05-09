@@ -36,24 +36,24 @@ const categories = {
 };
 
 let myTasks = [
-    {
-        title: 'Savoir faire une todo list en js natif',
-        priority: priorities.priorityHigh,
-        category: categories.studies,
-        isDone: false
-    },
-    {
-        title: 'Préparer les cadeaux de Noël',
-        priority: priorities.priorityNormal,
-        category: categories.other,
-        isDone: false
-    },
-    {
-        title: 'Finir Hollow Knight à 112%',
-        priority: priorities.priorityLow,
-        category: categories.hobbies,
-        isDone: false
-    }
+    // {
+    //     title: 'Savoir faire une todo list en js natif',
+    //     priority: priorities.priorityHigh,
+    //     category: categories.studies,
+    //     isDone: false
+    // },
+    // {
+    //     title: 'Préparer les cadeaux de Noël',
+    //     priority: priorities.priorityNormal,
+    //     category: categories.other,
+    //     isDone: false
+    // },
+    // {
+    //     title: 'Finir Hollow Knight à 112%',
+    //     priority: priorities.priorityLow,
+    //     category: categories.hobbies,
+    //     isDone: false
+    // }
 ];
 
 console.log(myTasks);
@@ -74,7 +74,6 @@ function displayTasks() {
         const input = document.createElement('input');
         const span = document.createElement('span');
         const penIcon = document.createElement('i');
-        const checkIcon = document.createElement('i');
         const trashIcon = document.createElement('i');
         input.type = 'checkbox'; //J'assigne un type à mon input
     
@@ -86,7 +85,6 @@ function displayTasks() {
         const labelName = document.createTextNode(myTask.title);
         span.textContent += myTask.category; //J'utilise textContent pour span car je veux que mon texte soit dans la balise span (cela va être utile pour la partie CSS)
         penIcon.classList.add('fa-solid', 'fa-pen'); //J'ajoute une icône à mon élément i (à côté de mon élément span)
-        checkIcon.classList.add('fa-solid', 'fa-check');
         trashIcon.classList.add('fa-solid', 'fa-trash');
         
         //Puis, toujours dans ma boucle for of, je gère les priorité avec un switch
@@ -138,7 +136,7 @@ function displayTasks() {
         
         //Puis j'attache tous les éléments ensemble
         label.append(input, labelName); //Je met l'input et le nom des tâches dans le label
-        li.append(label, span, penIcon, checkIcon, trashIcon); //Je met label, span et icon dans l'élément li
+        li.append(label, span, penIcon, trashIcon); //Je met label, span et icon dans l'élément li
         elements.allTasks.append(li);
         //Et enfin je met mon élément li dans l'élément qui contient l'id all-tasks
         //en allant le chercher dans l'objet elements et en sélectionnant allTasks
@@ -217,7 +215,7 @@ elements.form.addEventListener('submit', (e) => {
        //};
     
 //     //Puis je met tout à jour en appelant ma fonction
-       displayTasks();
+       //displayTasks();
 });
 
 //La fonction qui va me permettre de supprimer uniquement les tâches terminées
@@ -225,8 +223,7 @@ elements.deleteBtn.addEventListener('click', (e) => {
     
     e.preventDefault()
 
-    /*Faire une boucle afin de déterminer si le nombre de tâche(s) cochée(s)
-    est supérieur ou inférieur à 1 ???*/
+    //Faire une boucle afin de déterminer si le nombre de tâche(s) cochée(s) est supérieur ou inférieur à 1 ???
     if(elements.deactivatePrompt.hasAttribute('disabled') === false && (myTasks = myTasks.filter(myTask => !myTask.isDone > 0))) { //On vérifie que l'élément ayant l'id 'deactivate-msg' ai l'attribut 'disabled' déclaré en false (soit non-existant) pour savoir si on l'affiche ou non et on supprime toutes les tâches qui ont la propriété isDone en true
         window.alert('Félicitations ! Vous avez terminé une tâche !');
         displayTasks(); //Je met à jour l'affichage en appelant ma fonction
