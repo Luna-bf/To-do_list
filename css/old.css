@@ -1,0 +1,367 @@
+#list-unstyled {
+    list-style: none;
+}
+
+#all-tasks label:has(input:checked) { /*si label a son input coché alors {...} */
+    text-decoration: line-through;
+}
+
+form .form-group {
+    margin: 0.5em 0;
+}
+
+/* Priorities */
+
+.high {
+    color: red;
+}
+
+.normal {
+    color: forestgreen;
+}
+
+.low {
+    color: blue;
+}
+
+.none {
+    color: black;
+}
+
+
+/* Categories */
+
+.work {
+    color: silver;
+}
+
+.studies {
+    color: silver;
+}
+
+.food {
+    color: silver;
+}
+
+.house {
+    color: silver;
+}
+
+.sport {
+    color: silver;
+}
+
+.hygiene {
+    color: silver;
+}
+
+.hobbies {
+    color: silver;
+}
+
+.other {
+    color: silver;
+}
+
+.noCategory {
+    color: silver;
+}
+
+
+/* Fonts */
+
+/* Roboto regular - pour les titres */
+
+@font-face {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+/*Poppins regular - pour les labels */
+@font-face {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/*Lato regular - pour les spans*/
+@font-face {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+/* Style */
+
+h1 {
+    display: flex;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+h2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+#all-tasks {
+    background-color: #fff;
+    width: 50%;
+}
+
+li {
+    margin-bottom: 0.2em;
+}
+
+#parent-create-task-form {
+    width: 80%;
+}
+
+#parent-create-filter-form {
+    width: 100%;
+}
+
+hr {
+    margin-top: 3em;
+}
+
+.section-form {
+    padding: 1.5em 0 1.5em 0;
+    margin: auto;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+
+#filter-form {
+    width: 38%;
+}
+
+label {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #fff;
+}
+
+i {
+    padding: 0 0 5px 3.5px; /*top right bottom left*/
+    vertical-align: middle;
+    font-weight: 600;
+    font-size: 16px;
+    color: #303030;
+}
+
+.fa-pen {
+    color: black;
+    background-color: #fff;
+    margin: 0 0.2em 0 0.5em;
+    padding: 0.4em;
+}
+
+.fa-check {
+    color: black;
+    background-color: #fff;
+    margin: 0 0.8em 0 0;
+    padding: 0.4em;
+}
+
+.fa-trash {
+    color: black;
+    background-color: #fff;
+    margin: 0 2em 0 0;
+    padding: 0.4em;
+}
+
+.fa-pen:hover {
+    color: white;
+    background-color: midnightblue;
+    padding: 0.4em;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+.fa-trash:hover {
+    color: white;
+    background-color: firebrick;
+    padding: 0.4em;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+.fa-check:hover {
+    color: white;
+    background-color: forestgreen;
+    padding: 0.4em;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+.d-flex {
+    display: flex;
+}
+
+legend {
+    padding: 2px 11px 2px 11px;
+}
+
+#create-task-form {
+    width: 75%;
+    padding-bottom: 35px;
+    background-color: #fff;
+    flex-wrap: nowrap;
+}
+
+p {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+span {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    margin-left: 0.5em;
+}
+
+.input {
+    padding: 0.3em;
+}
+
+#task-name {
+    width: 37%;
+    padding: 0.3em;
+}
+
+button {
+    margin: 1em 0 0 0.1em; /*top right bottom left*/
+    color: #323330;
+    background-color: #f0db4f;
+    border-radius: 0.3em;
+    border: 1px solid #323330;
+    padding: 0.5em;
+}
+
+button:disabled {
+    margin: 1em 0 0 0.1em; /*top right bottom left*/
+    color: #737373;
+    background-color: #faf0af;
+    border-radius: 0.3em;
+    border: 1px solid #737373;
+    padding: 0.5em;
+}
+
+#add-btn {
+    margin: 0.5em 0 0 0.1em;
+}
+
+#display-btn {
+    margin: 0.5em 0 0 0.1em;
+}
+
+#delete-all-btn {
+    color: #fff;
+    background-color: firebrick;
+}
+
+#add-btn:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\2b";
+    padding-left: 5px;
+    font-weight: 900;
+    color: #323330;
+    font-size: 13px;
+}
+
+#add-btn:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+    border: 1px solid #737373;
+    cursor: pointer;
+}
+
+#display-btn:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f002";
+    padding-left: 5px;
+    font-weight: 900;
+    color: #323330;
+    font-size: 13px;
+}
+
+#display-btn:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+    border: 1px solid #737373;
+    cursor: pointer;
+}
+
+#all-buttons {
+    margin: auto;
+    justify-content: center;
+}
+
+#btn-list {
+    display: flex;
+    list-style: none;
+}
+
+#btn-list li button {
+    margin: 0 10px;
+}
+
+#delete-task-btn {
+    color: #fff;
+    background-color: forestgreen;
+}
+
+#delete-task-btn:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f14a";
+    padding-left: 5px;
+    font-weight: 900;
+    color: #fff;
+    font-size: 13px;
+}
+
+#delete-task-btn:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+#delete-all-btn:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f071";
+    padding-left: 5px;
+    font-weight: 900;
+    color: #fff;
+    font-size: 13px;
+}
+
+#delete-all-btn:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+#deactivate-msg:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f4b3";
+    padding-left: 5px;
+    font-weight: 900;
+    font-size: 13px;
+}
+
+#deactivate-msg:hover {
+    cursor: pointer;
+}
+
+#activate-msg:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f075";
+    padding-left: 5px;
+    font-weight: 900;
+    font-size: 13px;
+}
