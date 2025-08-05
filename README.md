@@ -1,5 +1,3 @@
-## Utiliser Tailwind pour le style !
-
 ## Objectifs
 
 Réaliser une todolist en JavaScript natif (sans framework).
