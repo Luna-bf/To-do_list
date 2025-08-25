@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section id="all-tasks">
+        <ul class="text-dark list-unstyled"></ul>
+        <p id="empty-list-text"></p>
+    </section>
+
+    <form id="task-form">
+        <legend>
+            <h2 class="fw-normal text-dark">Créer une nouvelle tâche :</h2>
+        </legend>
+
+        <!-- Nom de la tâche -->
+        <div class="mb-3 form-group">
+            <label for="task-name" class="form-label">Nom de la tâche :</label>
+            <input type="text" class="form-control" name="task_name" id="task-name" placeholder="Ex : Faire les courses"
+                required />
+        </div>
+
+        <!-- Bouton de validation -->
+        <button type="submit" class="btn btn-primary" id="add-task-btn">Ajouter la tâche</button>
+    </form>
+
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>
