@@ -73,6 +73,10 @@ elements.form.addEventListener('submit', function (e) {
     // J'ajoute cette nouvelle tâche (objet) au tableau tasks
     tasks.push(newTask);
 
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    console.log(storedTasks);
+
     //Puis je met le contenu à jour en appelant la fonction createNewTask
     createNewTask();
     elements.form.reset();
@@ -84,9 +88,11 @@ function deleteAllTasks() {
     elements.deleteAllTasksButton.addEventListener('click', function(e) {
         e.preventDefault();
 
-        tasks.length = 0; // Supprime les éléments du tableau
+        localStorage.clear(tasks); // Supprime les éléments de localStorage
         elements.allTasksOl.innerHTML = ''; // Supprime les éléments de la page HTML
 
         console.log(tasks);
     })
 };
+
+console.log(localStorage);
