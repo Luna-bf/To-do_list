@@ -7,5 +7,9 @@
 
 /* GENERAL */
 .bg-color {
-    background-color: #242424;
+    background-color: #dfdfdf;
+}
+
+#all-tasks {
+    display: none;
 }
