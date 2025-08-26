@@ -48,11 +48,12 @@ function updateTask(e) {
         // Doc pour dataset = https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/dataset
         // console.log(li.dataset.id);
         task.isComplete = !task.isComplete; // Lorsque je clique sur span, j'inverse la propriété isComplete, si je re-clique dessus, la propriété de isComplete sera 'false'
-        e.target.classList.toggle('done');
     }
 
     // Mise à jour du localStorage
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    
+    render(); // Appel de la fonction render() à chaque fois qu'une tâche est mise à jour
 }
 
 // RENDER (affichage en HTML)
@@ -61,11 +62,15 @@ function render() {
     tasksList.innerHTML = '';
 
     tasks.forEach((task) => {
+    
+        // Opération ternaire pour vérifier la valeur de la propriété isComplete
+        const done = task.isComplete ? 'done' : '';
+
         // Chaque tâche ajoutée aura cette structure. Cette méthode est beaucoup plus rapide, je dois l'utiliser pour mon projet de to-do list
-        // Doc pour data-* = https://developer.mozilla.org/fr/docs/Web/HTML/Reference/Global_attributes/data-*
+        // Doc pour data-* = https://developer.mozilla.org/fr/docs/Web/HTML/Reference/Global_attributes/data-*    
         tasksList.innerHTML += `
             <li data-id=${task.id}>
-                <span>${task.name}</span>
+                <span class="${done}">${task.name}</span>
                 <button>Supprimer</button>
             </li>
         `;
