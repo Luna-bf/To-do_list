@@ -6,9 +6,7 @@ const elements = {
     deleteAllTasksButton: document.getElementById("delete-all-tasks-btn"),
 }
 
-
 let tasks = [];
-
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -18,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
     deleteAllTasks();
 });
 
-
 function createNewTask() {
 
     elements.allTasksOl.innerHTML = '';
@@ -26,20 +23,14 @@ function createNewTask() {
     // Pour chaque task du tableau tasks:
     tasks.forEach(task => {
 
-        // Je créé un élément "li" et "label"
-        const li = document.createElement('li');
-        const label = document.createElement('label');
-
-        const inputCheckbox = document.createElement('input'); // Je créé aussi un élément inputCheckbox
-        inputCheckbox.type = "checkbox"; // J'assigne un type à l'élément inputCheckbox
-
-        label.textContent += task.title; // J'accède aux propriétés de l'objet newTask pour obtenir le texte de la tâche (title) et je l'ajoute à l'élément label avec la propriété textContent
-
-        label.prepend(inputCheckbox); // J'ajoute l'élément input au début du label (avant task.title)
-        li.append(label); // Puis j'ajoute l'élément label au li 
-
-        elements.allTasksOl.append(li); // Enfin, j'ajoute l'élément li à la liste ol
-
+        elements.allTasksOl.innerHTML = `
+            <li>
+                <label>
+                    <input type="checkbox">
+                    ${task.title}
+                </label>
+            </li>
+        `;
 
         // Evènement pour gérer l'état d'une tâche (complétée ou non) avec la propriété "change"
         inputCheckbox.addEventListener("change", function () {
@@ -85,7 +76,7 @@ elements.form.addEventListener('submit', function (e) {
 
 function deleteAllTasks() {
 
-    elements.deleteAllTasksButton.addEventListener('click', function(e) {
+    elements.deleteAllTasksButton.addEventListener('click', function (e) {
         e.preventDefault();
 
         localStorage.clear(tasks); // Supprime les éléments de localStorage
