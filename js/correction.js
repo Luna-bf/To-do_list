@@ -6,7 +6,7 @@ const tasksList = document.querySelector("#tasks ul");
 // CONSTS/VARS
 /* Je lis (lire) ce qu'il y a en mémoire et je converti la string tasks ("[{name: 'salut', isComplete: false}]") en tableau
 ([{name: 'salut', isComplete: false}]) puis je le récupère, si il n'y a rien, je renvoie un tableau vide */
-const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 // EVENTS
 // Lorsque le btn est cliqué, on appelle la function addTask()
@@ -36,7 +36,7 @@ function addTask() {
 
 function updateTask(e) {
     // Je récupère le parent de l'élément visé (ici, la balise li)
-    const li = e.target.parentElement; // Va assigner le code ci-dessous à tout les parent de l'élément button (ici, la balise li)
+    const li = e.target.parentElement; // Va assigner le code ci-dessous à tout les parent des éléments span et button (ici, la balise li)
 
     const taskId = li.dataset.id;
     const task = tasks.find(task => task.id == taskId); // Vérifie si l'id de la tâche cliquée (task) est identique à celui d'une des tâches du tableau (taskId)
@@ -48,6 +48,11 @@ function updateTask(e) {
         // Doc pour dataset = https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/dataset
         // console.log(li.dataset.id);
         task.isComplete = !task.isComplete; // Lorsque je clique sur span, j'inverse la propriété isComplete, si je re-clique dessus, la propriété de isComplete sera 'false'
+    }
+
+    if(e.target.tagName === 'BUTTON') {
+
+        tasks = tasks.filter(task => task.id != taskId);
     }
 
     // Mise à jour du localStorage
