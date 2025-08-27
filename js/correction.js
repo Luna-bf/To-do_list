@@ -36,7 +36,7 @@ function addTask() {
 
 function updateTask(e) {
     // Je récupère le parent de l'élément visé (ici, la balise li)
-    const li = e.target.parentElement; // Va assigner le code ci-dessous à tout les parent des éléments span et button (ici, la balise li)
+    const li = e.target.parentElement; // Va assigner le code ci-dessous au parent des éléments span et button (ici, la balise li)
 
     const taskId = li.dataset.id;
     const task = tasks.find(task => task.id == taskId); // Vérifie si l'id de la tâche cliquée (task) est identique à celui d'une des tâches du tableau (taskId)
