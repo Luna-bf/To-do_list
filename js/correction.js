@@ -20,7 +20,9 @@ function addTask() {
 
     // Structure d'une tâche
     const task = {
-        id: Date.now(), // Génère une date en millisecondes, c'est mieux que la méthode utilisée avant car le chiffre de Date.now() sera toujours unique
+        /* Date.now() génère le nombre de millisecondes écoulées depuis le 1er Janvier 1970, c'est mieux que la méthode 
+        utilisée avant car le chiffre de Date.now() sera toujours unique. */
+        id: Date.now(),
         name: addTaskInput.value.trim(),
         isComplete: false,
     }
