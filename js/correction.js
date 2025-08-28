@@ -20,7 +20,7 @@ function addTask() {
 
     // Structure d'une tâche
     const task = {
-        id: tasks.length + 1, // Pour que l'id s'incrémente à chaque ajout d'une nouvelle tâche
+        id: Date.now(), // Génère une date en millisecondes, c'est mieux que la méthode utilisée avant car le chiffre de Date.now() sera toujours unique
         name: addTaskInput.value.trim(),
         isComplete: false,
     }
