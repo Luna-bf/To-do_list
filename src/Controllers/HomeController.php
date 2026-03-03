@@ -15,5 +15,3 @@ class HomeController extends BaseController {
         $this->render('home/index.html.twig', ['sentence' => 'Hello World !']);
     }
 }
-
-// php -S localhost:8000
