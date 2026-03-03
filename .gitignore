@@ -1,2 +1,4 @@
 settings.json
-old-code
+vendor/
+old/
+tests/
