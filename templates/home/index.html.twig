@@ -1,8 +1,114 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Todo List - PHP{% endblock %}
+{% block title %}Todo List - PHP
+{% endblock %}
 
 {% block main %}
-    {# <p>{{ sentence }}</p> #}
-    <p>Salut</p>
+	<div class="card bg-color">
+		<div class="card-header">
+			<h1 class="text-dark fw-normal text-center my-2">Todo list</h1>
+		</div>
+
+		<section id="all-tasks">
+			<ul class="text-dark list-unstyled">
+				{% for task in tasks %}
+					<li class="d-flex task">
+						<input type="checkbox" name="{{ task.task_id }}" id="{{ task.task_id }}"/>
+						<label for="{{ task.task_id }}" class="priority-{{ task.priority_id }}">{{ task.task_name }}</label>
+						<span class="category" id="{{ task.category_id }}">({{ task.category_name }})</span>
+						<div>
+							<form action="php/update-task.php" method="post">
+								<input type="submit" name="modifier[{{ task.task_id }}]" class="update" id="update" value="Renommer" onclick="return confirm('Voulez-vous renommer cette tâche ?')"/>
+							</form>
+						</div>
+						<div>
+							<form action="src/php/delete-task.php" method="get">
+								<input type="submit" name="delete[{{ task.task_id }}]" class="delete" id="delete" value="Supprimer"/>
+							</form>
+						</div>
+					</li>
+				{% endfor %}
+
+				{% if tasks === 0 %}
+					<p>Vous n'avez aucune tâche.</p>
+				{% endif %}
+			</ul>
+		</section>
+
+		<div class="create-task-div">
+			<form action="index.php" method="post" id="task-form" class="d-flex text-dark">
+				<fieldset id="create-task-form">
+					<legend>
+						<h2 class="fw-normal text-dark">Créer une nouvelle tâche :</h2>
+					</legend>
+
+					<!-- Nom de la tâche -->
+					<div class="mb-3 form-group">
+						<label for="name" class="form-label">Nom de la tâche :</label>
+						<input type="text" class="form-control" id="name" name="name" placeholder="Ex : Faire les courses" required/>
+					</div>
+
+					<!-- Catégories -->
+					<div class="mb-3 form-group">
+						<label for="category" class="form-label">Catégorie :</label>
+						<select id="category" name="category" class="form-select">
+							{% for category in categories %}
+								<option value="{{ category.category_name }}" id="{{ category.category_id }}">{{ category.category_name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+
+					<!-- Priorité -->
+					<div class="mb-3 form-group">
+						<label for="priority" class="form-label">Priorité :</label>
+						<select id="priority" name="priority" class="form-select" aria-label="Default select example">
+							{% for priority in priorities %}
+								<option value="{{ priority.priority_name }}" id="{{ priority.priority_id }}">{{ priority.priority_name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+
+					<!-- Bouton de validation -->
+					<input type="submit" id="add" name="add" value="Ajouter la tâche" class="btn btn-primary"/>
+				</fieldset>
+			</form>
+		</div>
+
+		<!-- <hr class=""> -->
+
+		<div class="filter-tasks-div">
+			<form action="index.php" method="post" class="d-flex text-light" id="filter-form">
+				<fieldset id="create-filter-form">
+					<legend>
+						<h2 class="text-dark fw-normal">Filtrer par :</h2>
+					</legend>
+
+					<div class="mb-3 form-group">
+						<label for="filter-category" class="form-label text-dark">Catégorie :</label>
+						<select name="filter-category" id="filter-category" class="form-select" aria-label="Default select example">
+							{% for category in categories %}
+								<option value="{{ category.category_name }}" id="{{ category.category_id }}">{{ category.category_name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+
+					<input type="submit" name="display" id="display" value="Afficher les tâches" class="btn btn-primary"/>
+				</fieldset>
+			</form>
+		</div>
+
+		<div class="card-footer" style="border-color: #aaaaaa;">
+			<div id="all-buttons" class="d-flex">
+				<ul class="list-unstyled">
+					<li>
+						<button type="submit" id="delete-task-btn" class="btn btn-success">Supprimer les tâches terminées</button>
+					</li>
+					<li>
+						<button type="submit" id="delete-all-btn" class="btn btn-danger">Supprimer toutes les tâches</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
 {% endblock %}
