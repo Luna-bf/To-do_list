@@ -1,5 +1,5 @@
 <?php
-
+/*
 require_once "src/config/connection.php";
 
 if(isset($_POST['add'])) {
@@ -19,4 +19,4 @@ if(isset($_POST['add'])) {
             echo "Une erreur est survenue : l'ajout de la tâche n'a pas pu être effectuée.";
         }
     }
-}
+}*/
