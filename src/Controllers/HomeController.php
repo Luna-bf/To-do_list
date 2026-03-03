@@ -12,6 +12,16 @@ class HomeController extends BaseController {
         renvoie le fichier "index.html.twig" et $data renvoie une variable $sentence qui contient une chaîne de caractères que je
         vais pouvoir afficher dans la page.
         */
-        $this->render('home/index.html.twig', ['sentence' => 'Hello World !']);
+        $tasks = $this->db->findAllTasks('tasks'); // Je récupère toutes les données de la table tasks grâce à la méthode findAllTasks
+        $categories = $this->db->getCategories('categories');
+        $priorities = $this->db->getPriorities('priorities');
+
+        $this->render('home/index.html.twig', ['tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities]);
+    }
+
+    public function createTask() {
+        $data = $this->db->createTask('data');
+    
+        $this->render('home/index.html.twig', ['data' => $data]);
     }
 }
