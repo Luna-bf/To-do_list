@@ -91,6 +91,8 @@ class Database
     {
         if (isset($_POST['add'])) {
 
+            echo 'ok';
+
             if (!empty(!empty($_POST['category']) && !empty($_POST['priority']) && $_POST['task_name'])) {
 
                 $category = $_POST['category'];
@@ -102,6 +104,9 @@ class Database
 
                 if (!$task) {
                     echo "Une erreur est survenue : l'ajout de la tâche n'a pas pu être effectuée.";
+                } else {
+                    echo 'ok';
+                    // exit;
                 }
             }
         }

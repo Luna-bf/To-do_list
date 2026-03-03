@@ -17,6 +17,10 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
         (new HomeController())->index(); // Je créé un objet HomeController() qui appelle la méthode index() afin d'appeler le fichier index.html.twig
         break;
 
+    case '/form':
+        (new HomeController())->createTask();
+        break;
+
     default:
         echo "Page introuvable.";
         break;

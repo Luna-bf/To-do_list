@@ -20,8 +20,11 @@ class HomeController extends BaseController {
     }
 
     public function createTask() {
-        $data = $this->db->createTask('data');
+        // $data = $this->db->createTask('data');
     
-        $this->render('home/index.html.twig', ['data' => $data]);
+        $categories = $this->db->getCategories('categories');
+        $priorities = $this->db->getPriorities('priorities');
+
+        $this->render('form/index.html.twig', ['categories' => $categories, 'priorities' => $priorities]);
     }
 }
