@@ -42,6 +42,11 @@ class HomeController extends BaseController
         // Je récupère les valeurs saisies dans le formulaires
         $task = $this->db->createTask('category', 'priority', 'task_name');
 
+        if($task) {
+            header('Location: /'); // Je redirige vers la page d'accueil (la racine, soit : '/')
+            exit;
+        }
+
         // Je passe les catégories, les priorités et la tâche que je créé en tant que valeurs à la page
         $this->render('form/createTask.html.twig', ['categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
     }
@@ -61,7 +66,7 @@ class HomeController extends BaseController
             if (!$statement) {
                 echo "<h1>Une erreur est survenue : La suppression n'a pas pu être effectuée.<h1>";
             } else {
-                header('Location: home/index.html.twig');
+                header('Location: /'); // Je redirige vers la page d'accueil (la racine, soit : '/')
                 exit;
             }
         }
