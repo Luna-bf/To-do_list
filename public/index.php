@@ -17,10 +17,15 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
         (new HomeController())->index(); // Je créé un objet HomeController() qui appelle la méthode index() afin d'appeler le fichier index.html.twig
         break;
 
-    case '/form':
+    case '/form/createTask':
         (new HomeController())->createTask();
         break;
 
+    // J'ajoute la page de suppression (sinon la supression me renverra une erreur et ne supprimera pas la tâche)
+    case '/tasks/delete':
+        (new HomeController())->deleteTask();
+        break;
+        
     default:
         echo "Page introuvable.";
         break;

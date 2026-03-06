@@ -10,7 +10,7 @@
 		</div>
 
 		<section id="all-tasks">
-            <a href="/form">Créer une nouvelle tâche</a>
+            <a href="/form/createTask">Créer une nouvelle tâche</a>
 			<ul class="text-dark list-unstyled">
 				{% for task in tasks %}
 					<li class="d-flex task">
@@ -23,8 +23,10 @@
 							</form>
 						</div>
 						<div>
-							<form action="src/php/delete-task.php" method="get">
-								<input type="submit" name="delete[{{ task.task_id }}]" class="delete" id="delete" value="Supprimer"/>
+							<form action="/tasks/delete" method="post">
+								<input type="hidden" name="task_id" value="{{ task.task_id }}">
+								<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+								<input type="submit" class="delete" id="delete" value="Supprimer"/>
 							</form>
 						</div>
 					</li>

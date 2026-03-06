@@ -33,27 +33,25 @@ class Database
             $this->password
         );
     }
-
+    
     // Raccourci pour avoir ce type de commentaire : / + ** + Entrée
     /**
      * Renvoie toutes les lignes (enregistrements) de la table
      *
-     * @param string $table : Le nom de la table
      * @return array : Cette méthode retourne un tableau
      */
-    public function findAllTasks($table)
+    public function findAllTasks()
     {
-        return $this->pdo->query("SELECT t.*, c.category_name, p.priority_id FROM $table as t JOIN categories as c on t.category_id = c.category_id JOIN priorities as p on t.priority_id = p.priority_id ORDER BY p.priority_id ASC");
+        return $this->pdo->query("SELECT t.*, c.category_name, p.priority_id FROM tasks as t JOIN categories as c on t.category_id = c.category_id JOIN priorities as p on t.priority_id = p.priority_id ORDER BY p.priority_id ASC");
     }
 
     /**
      * Récupère une ligne (enregistrement) de la table
      *
      * @param int $id : l'identifiant de la ligne que je veux récupérer
-     * @param string $table : Le nom de la table
      * @return : Cette méthode retourne un tableau associatif si la donnée existe, ou false si elle n'existe pas
      */
-    public function findTask($id, $table)
+    public function findTask($id)
     {
         /*
         - Je prépare une requête qui va récupérer une seule ligne de la table grâce à un identifiant donné,
@@ -69,7 +67,7 @@ class Database
             "is_complete" => 0,
         ];
         */
-        $statement = $this->pdo->prepare("SELECT * FROM $table WHERE id = :id"); // $this fait référence à l'objet actuel (ici, Database)
+        $statement = $this->pdo->prepare("SELECT * FROM tasks WHERE id = :id"); // $this fait référence à l'objet actuel (ici, Database)
         $statement->execute(["id" => $id]);
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
@@ -87,32 +85,28 @@ class Database
     }
 
     // Les autres méthodes qui vont me permettre de manipuler les données de la BDD
-    public function createTask($task)
+    // Cette méthode doit exécuter le code nécessaire à la suppression des données
+    public function createTask($category, $priority, $task_name)
     {
         if (isset($_POST['add'])) {
 
-            echo 'ok';
-
-            if (!empty(!empty($_POST['category']) && !empty($_POST['priority']) && $_POST['task_name'])) {
+            if (!empty($_POST['category']) && !empty($_POST['priority']) && !empty($_POST['task_name'])) {
 
                 $category = $_POST['category'];
                 $priority = $_POST['priority'];
-                $task_name = $_POST['name'];
+                $task_name = $_POST['task_name'];
 
                 $task = $this->pdo->prepare("INSERT INTO tasks(category_id, priority_id, task_name) VALUES(:category_id, :priority_id, :task_name)");
-                $task->execute(['category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name]);
-
-                if (!$task) {
-                    echo "Une erreur est survenue : l'ajout de la tâche n'a pas pu être effectuée.";
-                } else {
-                    echo 'ok';
-                    // exit;
-                }
+                return $task->execute(['category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name]);
             }
         }
     }
 
-    public function updateTask($id, $data, $table) {}
+    public function updateTask($id, $data) {}
 
-    public function deleteTask($id, $data, $table) {}
+    public function deleteTask($task_id)
+    {
+        $task = $this->pdo->prepare("DELETE FROM tasks WHERE task_id = :task_id"); // $this fait référence à l'objet actuel (ici, Database)
+        return $task->execute(["task_id" => $task_id]);
+    }
 }
