@@ -23,7 +23,7 @@
 							</form>
 						</div>
 						<div>
-							<form action="/tasks/delete" method="post">
+							<form action="/delete" method="post">
 								<input type="hidden" name="task_id" value="{{ task.task_id }}">
 								<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 								<input type="submit" class="delete" id="delete" value="Supprimer"/>
