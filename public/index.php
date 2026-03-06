@@ -21,8 +21,8 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
         (new HomeController())->createTask();
         break;
 
-    // J'ajoute la page de suppression (sinon la supression me renverra une erreur et ne supprimera pas la tâche)
-    case '/tasks/delete':
+    // J'ajoute la route pour la suppression (sinon la supression me renverra une erreur et ne supprimera pas la tâche)
+    case '/delete':
         (new HomeController())->deleteTask();
         break;
         
