@@ -8,10 +8,11 @@
 			{% endblock %}
 		</title>
 		<link rel="icon" type="image/x-icon" href="assets/imgs/favicon-48x48.png">
-		<link rel="stylesheet" href="/style/style.css">
+		<link rel="stylesheet" href="/style/main.css">
 	</head>
 
 	<body>
+		{% include "inc/_header.html.twig" %}
 		{% block main %}{% endblock %}
 	</body>
 </html>
