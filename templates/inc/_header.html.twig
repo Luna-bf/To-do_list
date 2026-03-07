@@ -1,0 +1,26 @@
+{% block header %}
+	<header>
+		<nav class="d-flex">
+			<h2>Todo List</h2>
+			<ul class="d-flex actions">
+				<li class="d-flex nav-links">
+					<a href="#">Connexion</a>
+                    <p>|</p>
+					<a href="#">Inscription</a>
+				</li>
+				{# {% if not is_granted("ROLE_USER") %}
+									<li class="get-margin">
+										<a href="{{ path('app_login') }}">{% trans %}Connexion{% endtrans %} |</a>
+									</li>
+									<li>
+										<a href="{{ path('app_register') }}">{% trans %}Inscription{% endtrans %}</a>
+									</li>
+								{% else %}
+									<li class="get-margin">
+										<a href="{{ path('app_logout') }}">{% trans %}Déconnexion{% endtrans %}</a>
+									</li>
+								{% endif %} #}
+			</ul>
+		</nav>
+	</header>
+{% endblock %}
