@@ -11,7 +11,6 @@ j'ai besoin d'accéder à la classe : ici j'indique que la classe se trouve dans
 
 namespace src\model;
 
-use Exception;
 use PDO; // Importation de la classe "PDO", qui va me permettre de communiquer avec la BDD
 
 // Cette classe va superviser toutes les opérations liées à la base de données
