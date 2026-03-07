@@ -2,3 +2,4 @@ settings.json
 vendor/
 old/
 tests/
+node_modules
