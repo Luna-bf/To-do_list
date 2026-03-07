@@ -1,0 +1,29 @@
+/*** FOOTER ***/
+footer {
+    flex-direction: row;
+    justify-content: center;
+    padding: 1.3em;
+    background-color: #333D65;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/* socials-icons */
+.socials-icons {
+    justify-content: center;
+}
+
+.socials-icons a>i {
+    font-size: 38px;
+    margin-left: 30px;
+}
+
+.fa-github {
+    color: #000000;
+}
+
+.fa-linkedin {
+    color: #0077B5;
+}
