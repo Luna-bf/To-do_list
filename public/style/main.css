@@ -134,38 +134,39 @@ FONT - Poppins
   font-weight: 900;
   font-style: italic;
 }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.d-flex {
+  display: flex;
+}
+
 nav {
   font-family: "Poppins-Light", sans-serif;
-  font-weight: 300;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   background-color: #333D65;
   color: #fff;
+  padding: 1.3em;
 }
 
 nav > h2 {
-  margin-left: 20px;
+  font-family: "Poppins-Light", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 nav > ul {
   list-style-type: none;
-  align-items: center;
-  margin: 0px;
   font-size: 17px;
 }
 
-nav > .actions {
-  margin-right: 20px;
-}
-
-.last-child-margin {
-  margin-left: 10px;
-}
-
 .nav-links {
-  /* margin: 0 10px 0 20px; */
   flex-direction: row;
-  align-items: center;
+  align-content: center;
 }
 
 .nav-links > p {
@@ -177,8 +178,34 @@ li > a {
   color: #fff;
 }
 
-.d-flex {
-  display: flex;
+/*** FOOTER ***/
+footer {
+  flex-direction: row;
+  justify-content: center;
+  padding: 1.3em;
+  background-color: #333D65;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* socials-icons */
+.socials-icons {
+  justify-content: center;
+}
+
+.socials-icons a > i {
+  font-size: 38px;
+  margin-left: 30px;
+}
+
+.fa-github {
+  color: #000000;
+}
+
+.fa-linkedin {
+  color: #0077B5;
 }
 
 .list-unstyled {
