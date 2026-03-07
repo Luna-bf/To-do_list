@@ -1,0 +1,38 @@
+nav {
+    font-family: "Poppins-Light", sans-serif;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333D65;
+    color: #fff;
+}
+
+nav>h2 {
+    font-family: "Poppins-Light", sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-left: 20px;
+}
+
+nav>ul {
+    list-style-type: none;
+    align-items: center;
+    font-size: 17px;
+}
+
+nav>.actions {
+    margin-right: 20px;
+}
+
+.nav-links {
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav-links>p {
+    margin: 0 10px 0 10px;
+}
+
+li>a {
+    text-decoration: none;
+    color: #fff;
+}
