@@ -1,18 +1,18 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Création d'une nouvelle tâche - Todo list PHP
+{% block title %}Modification de la tâche - Todo List PHP
 {% endblock %}
 
 {% block main %}
 	<main class="d-flex create-task-form">
-		<form action="/form/createTask" method="post">
+		<form action="/form/updateTask" method="post">
 			<div class="form-container">
-				<h1>Créez une nouvelle tâche</h1>
+				<h1>Modifiez la tâche</h1>
 
 				<!-- Nom de la tâche -->
 				<div class="d-flex form-input">
 					<label for="name" class="form-label">Nom de la tâche :</label>
-					<input type="text" name="task_name" placeholder="Ex : Faire les courses" required/>
+					<input type="text" name="task_name" placeholder="{{ task.task_name }}" required/>
 				</div>
 
 				<!-- Catégories -->
@@ -37,7 +37,7 @@
 
 				<!-- Bouton de validation -->
 				<div class="d-flex submit-input">
-					<input type="submit" name="add" class="d-flex" value="Ajouter la tâche"/>
+					<input type="submit" name="update" class="d-flex" value="Modifier la tâche"/>
 				</div>
 			</div>
 		</form>
