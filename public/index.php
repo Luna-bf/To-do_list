@@ -1,7 +1,7 @@
 <?php
 
 // J'importe les contrôleurs à l'aide de leur namespace
-use src\controllers\HomeController;
+use src\controllers\TaskController;
 
 // Je défini le chemin d'accès de chaque dossier ici :
 define('ROOT', dirname(__DIR__)); // dirname(__DIR__) va récupérer le nom du dossier parent (ici "Trouver-Ma-Traduction") et le stocker dans la constante nommée "ROOT"
@@ -12,22 +12,22 @@ require_once ROOT . "/vendor/autoload.php"; // Va charger toutes les librairies 
 /* PATH_INFO correspond à (à développer) */
 switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les différents appels de fichiers
 
-    // HomeController
+    // TaskController
     case '/': // Ce chemin défini index.html.twig comme page d'accueil, j'arriverais sur cette page lorsque je lancerais le serveur
-        (new HomeController())->index(); // Je créé un objet HomeController() qui appelle la méthode index() afin d'appeler le fichier index.html.twig
+        (new TaskController())->index(); // Je créé un objet TaskController() qui appelle la méthode index() afin d'appeler le fichier index.html.twig
         break;
 
     case '/task/createTask':
-        (new HomeController())->createTask();
+        (new TaskController())->createTask();
         break;
 
     case '/task/updateTask':
-        (new HomeController())->updateTask();
+        (new TaskController())->updateTask();
         break;
 
     // J'ajoute la route pour la suppression (sinon la supression me renverra une erreur et ne supprimera pas la tâche)
     case '/delete':
-        (new HomeController())->deleteTask();
+        (new TaskController())->deleteTask();
         break;
         
     default:
