@@ -7,7 +7,7 @@
 	<main>
 		<div class="d-flex action">
 			<h1>Vos tâches</h1>
-			<a href="/form/createTask">
+			<a href="/task/createTask">
 				<i class="fa-solid fa-plus"></i>Créer une nouvelle tâche</a>
 		</div>
 
@@ -18,12 +18,23 @@
 						<input type="checkbox" name="{{ task.task_id }}" id="{{ task.task_id }}"/>
 						<label for="{{ task.task_id }}" class="priority-{{ task.priority_id }}">{{ task.task_name }}</label>
 						<span class="category" id="{{ task.category_id }}">({{ task.category_name }})</span>
-						<a href="#" class="edit-button"><i class="fa-solid fa-pen"></i>Modifier</a>
+						{#
+						- Je crée un lien vers la route (/form/updateTask) que je complète passant l'identifiant de la tâche à
+						modifier (?id={{ task.task_id }}) dans l'URL afin de rediriger l'utilisateur vers une page permettant de
+						modifier la tâche correspondante.
+
+						Note : "?id=" correspond au paramètre GET dans l'url (c'est comme si je faisais $_GET['task_id'])
+						#}
+						<a href="/task/updateTask?id={{ task.task_id }}" class="edit-button"><i class="fa-solid fa-pen"></i>Modifier</a>
 						<div class="delete-button">
 							<form action="/delete" method="post">
+								{#
+								Cet input récupère l'id de la tâche à supprimer, qui permet de trouver la tâche à supprimer grâce
+								à son identifiant.
+								#}
 								<input type="hidden" name="task_id" value="{{ task.task_id }}">
+								{# J'ajoute aussi un jeton CSRF pour contrer les failles CSRF #}
 								<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-								{# <input type="submit" class="delete" id="delete" value="Supprimer"/> #}
 								<button class="delete" id="delete"><i class="fa-solid fa-ban"></i>Supprimer</button>
 							</form>
 						</div>
