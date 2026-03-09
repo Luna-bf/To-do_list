@@ -2,6 +2,7 @@
 
 // J'importe les contrôleurs à l'aide de leur namespace
 use src\controllers\TaskController;
+use src\controllers\UserController;
 
 // Je défini le chemin d'accès de chaque dossier ici :
 define('ROOT', dirname(__DIR__)); // dirname(__DIR__) va récupérer le nom du dossier parent (ici "Trouver-Ma-Traduction") et le stocker dans la constante nommée "ROOT"
@@ -15,6 +16,14 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
     // TaskController
     case '/': // Ce chemin défini index.html.twig comme page d'accueil, j'arriverais sur cette page lorsque je lancerais le serveur
         (new TaskController())->index(); // Je créé un objet TaskController() qui appelle la méthode index() afin d'appeler le fichier index.html.twig
+        break;
+
+    case '/form/register':
+        (new UserController())->register();
+        break;
+
+    case '/form/login':
+        (new UserController())->login();
         break;
 
     case '/task/createTask':
