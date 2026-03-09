@@ -1,26 +1,24 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Création d'une nouvelle tâche - Todo list PHP 
+{% block title %}Création d'une nouvelle tâche - Todo list PHP
 {% endblock %}
 
 {% block main %}
-	<div class="create-task-div">
-		<form action="/form/createTask" method="post" id="task-form" class="d-flex text-dark">
-			<fieldset id="create-task-form">
-				<legend>
-					<h2 class="fw-normal text-dark">Créer une nouvelle tâche :</h2>
-				</legend>
+	<main class="d-flex create-task-form">
+		<form action="/form/createTask" method="post" class="d-flex">
+			<div class="form-container">
+				<h1>Créez une nouvelle tâche</h1>
 
 				<!-- Nom de la tâche -->
-				<div class="mb-3 form-group">
+				<div class="d-flex form-input">
 					<label for="name" class="form-label">Nom de la tâche :</label>
-					<input type="text" class="form-control" id="task_name" name="task_name" placeholder="Ex : Faire les courses" required/>
+					<input type="text" name="task_name" placeholder="Ex : Faire les courses" required/>
 				</div>
 
 				<!-- Catégories -->
-				<div class="mb-3 form-group">
-					<label for="category" class="form-label">Catégorie :</label>
-					<select id="category" name="category" class="form-select">
+				<div class="d-flex form-input">
+					<label for="category">Catégorie :</label>
+					<select name="category">
 						{% for category in categories %}
 							<option value="{{ category.category_id }}" id="{{ category.category_id }}">{{ category.category_name }}</option>
 						{% endfor %}
@@ -28,9 +26,9 @@
 				</div>
 
 				<!-- Priorité -->
-				<div class="mb-3 form-group">
-					<label for="priority" class="form-label">Priorité :</label>
-					<select id="priority" name="priority" class="form-select" aria-label="Default select example">
+				<div class="d-flex form-input">
+					<label for="priority">Priorité :</label>
+					<select name="priority">
 						{% for priority in priorities %}
 							<option value="{{ priority.priority_id }}" id="{{ priority.priority_id }}">{{ priority.priority_name }}</option>
 						{% endfor %}
@@ -38,8 +36,10 @@
 				</div>
 
 				<!-- Bouton de validation -->
-				<input type="submit" id="add" name="add" value="Ajouter la tâche" class="btn btn-primary"/>
-			</fieldset>
+				<div class="d-flex submit-input">
+					<input type="submit" name="add" class="d-flex" value="Ajouter la tâche"/>
+				</div>
+			</div>
 		</form>
-	</div>
+	</main>
 {% endblock %}
