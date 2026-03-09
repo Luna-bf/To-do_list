@@ -50,7 +50,7 @@ class Database
      * @param int $id : l'identifiant de la ligne que je veux récupérer
      * @return : Cette méthode retourne un tableau associatif si la donnée existe, ou false si elle n'existe pas
      */
-    public function findTask($id)
+    public function findTask($task_id)
     {
         /*
         - Je prépare une requête qui va récupérer une seule ligne de la table grâce à un identifiant donné,
@@ -66,9 +66,9 @@ class Database
             "is_complete" => 0,
         ];
         */
-        $statement = $this->pdo->prepare("SELECT * FROM tasks WHERE id = :id"); // $this fait référence à l'objet actuel (ici, Database)
-        $statement->execute(["id" => $id]);
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        $statement = $this->pdo->prepare("SELECT * FROM tasks WHERE task_id = :task_id"); // $this fait référence à l'objet actuel (ici, Database)
+        return $statement->execute(["task_id" => $task_id]);
+        // return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getCategories()
