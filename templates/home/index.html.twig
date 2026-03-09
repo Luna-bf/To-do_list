@@ -18,11 +18,6 @@
 						<input type="checkbox" name="{{ task.task_id }}" id="{{ task.task_id }}"/>
 						<label for="{{ task.task_id }}" class="priority-{{ task.priority_id }}">{{ task.task_name }}</label>
 						<span class="category" id="{{ task.category_id }}">({{ task.category_name }})</span>
-						{# <div class="edit-button">
-							<form action="php/update-task.php" method="post">
-								<input type="submit" name="modifier[{{ task.task_id }}]" class="update" value="Modifier" onclick="return confirm('Voulez-vous modifier cette tâche ?')"/>
-							</form>
-						</div> #}
 						<a href="#" class="edit-button"><i class="fa-solid fa-pen"></i>Modifier</a>
 						<div class="delete-button">
 							<form action="/delete" method="post">
