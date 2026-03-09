@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Connexion - Todo list PHP
+{% endblock %}
+
+{% block main %}
+	<main class="d-flex form-main">
+		<form action="/form/login" method="post">
+			<div class="form-container">
+				<h1>Connexion</h1>
+
+				<div class="d-flex form-input">
+					<label for="username" class="form-label">Nom d'utilisateur</label>
+					<input type="text" name="username" id="username" required/>
+				</div>
+
+				<div class="d-flex form-input">
+					<label for="password" class="form-label">Mot de passe</label>
+					<input type="text" name="password" id="password" required/>
+				</div>
+
+				<div class="d-flex submit-input">
+					<input type="submit" name="login" class="d-flex" value="Se connecter"/>
+				</div>
+			</div>
+		</form>
+	</main>
+{% endblock %}
