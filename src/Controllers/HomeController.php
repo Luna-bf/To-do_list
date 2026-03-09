@@ -48,7 +48,7 @@ class HomeController extends BaseController
         }
 
         // Je passe les catégories, les priorités et la tâche que je créé en tant que valeurs à la page
-        $this->render('form/createTask.html.twig', ['categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
+        $this->render('home/task/createTask.html.twig', ['categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
     }
 
     public function updateTask()
@@ -68,7 +68,7 @@ class HomeController extends BaseController
         }
 
         // Je passe les catégories, les priorités et la tâche que je créé en tant que valeurs à la page
-        $this->render('form/updateTask.html.twig', ['categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
+        $this->render('home/task/updateTask.html.twig', ['categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
     }
 
     public function deleteTask()

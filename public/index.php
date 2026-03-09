@@ -17,11 +17,11 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
         (new HomeController())->index(); // Je créé un objet HomeController() qui appelle la méthode index() afin d'appeler le fichier index.html.twig
         break;
 
-    case '/form/createTask':
+    case '/task/createTask':
         (new HomeController())->createTask();
         break;
 
-    case '/form/updateTask':
+    case '/task/updateTask':
         (new HomeController())->updateTask();
         break;
 
