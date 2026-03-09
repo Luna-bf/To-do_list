@@ -2,8 +2,6 @@
 
 namespace src\controllers;
 
-session_start();
-
 use Exception;
 
 // La classe TaskController hérite de la classe BaseController : elle récupère ses propriétés et méthodes
@@ -32,10 +30,12 @@ class TaskController extends BaseController
         $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities]);
     }
 
-    // Cette méthode va appeler la méthode de la classe Database nécessaire à la création d'une tâche
     public function createTask()
     {
-        // Je récupère les catégories et les priorités pour les afficher en tant qu'option dans le formulaire
+        /*
+        Je récupère les catégories et les priorités pour les afficher en tant qu'option dans le formulaire grâce aux méthodes
+        définies dans le modèle (Database.php)
+        */
         $categories = $this->db->getCategories('categories');
         $priorities = $this->db->getPriorities('priorities');
 
