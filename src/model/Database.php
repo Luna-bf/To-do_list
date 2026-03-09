@@ -32,6 +32,17 @@ class Database
             $this->password
         );
     }
+
+    /**
+     * Création d'un utilisateur (inscription)
+     *
+     * @return void
+     */
+    public function createUser($email, $username, $password)
+    {
+        $statement = $this->pdo->prepare('INSERT INTO users(email, username, password) VALUES(:email, :username, :password)');
+        return $statement->execute([':email' => $email, ':username' => $username, ':password' =>  $password]);
+    }
     
     // Raccourci pour avoir ce type de commentaire : / + ** + Entrée
     /**
@@ -101,7 +112,34 @@ class Database
         }
     }
 
-    public function updateTask($id, $data) {}
+    public function updateTask($category, $priority, $task_name/*, $task_id*/)
+    {
+        if (isset($_POST['update'])) {
+
+            if (!empty($_POST['category']) && !empty($_POST['priority']) && !empty($_POST['task_name'])) {
+
+                $category = $_POST['category'];
+                $priority = $_POST['priority'];
+                $task_name = $_POST['task_name'];
+
+                $task = $this->pdo->prepare("UPDATE tasks SET category_id = :category_id, priority_id = :priority_id, task_name = :task_name WHERE task_id = :task_id");
+                return $task->execute(['category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name/*, 'task_name' => $task_id*/]);
+            }
+        }
+        // if (isset($_POST['update'])) {
+
+        //     $task_id = array_search("Modifier", $_POST['update']);
+
+        //     $query = $connection->prepare("UPDATE tasks SET task_name = :task_name WHERE task_id = :task_id");
+        //     $result = $query->execute(['task_name' => $task_name, 'task_id' => $task_id]);
+
+        //     if (!$result) {
+        //         echo "<h1>Une erreur est survenue : La suppression n'a pas pu être effectuée.<h1>";
+        //     } else {
+        //         header('Location: ../index.php');
+        //     }
+        // }
+    }
 
     public function deleteTask($task_id)
     {
