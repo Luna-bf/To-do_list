@@ -11,14 +11,14 @@
 
 				<!-- Nom de la tâche -->
 				<div class="d-flex form-input">
-					<label for="name" class="form-label">Nom de la tâche :</label>
-					<input type="text" name="task_name" placeholder="Ex : Faire les courses" required/>
+					<label for="task_name" class="form-label">Nom de la tâche :</label>
+					<input type="text" name="task_name" id="task_name" placeholder="Ex : Faire les courses" required/>
 				</div>
 
 				<!-- Catégories -->
 				<div class="d-flex form-input">
 					<label for="category">Catégorie :</label>
-					<select name="category">
+					<select name="category" id="category">
 						{% for category in categories %}
 							<option value="{{ category.category_id }}" id="{{ category.category_id }}">{{ category.category_name }}</option>
 						{% endfor %}
@@ -28,7 +28,7 @@
 				<!-- Priorité -->
 				<div class="d-flex form-input">
 					<label for="priority">Priorité :</label>
-					<select name="priority">
+					<select name="priority" id="priority">
 						{% for priority in priorities %}
 							<option value="{{ priority.priority_id }}" id="{{ priority.priority_id }}">{{ priority.priority_name }}</option>
 						{% endfor %}
