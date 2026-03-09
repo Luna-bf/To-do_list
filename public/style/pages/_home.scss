@@ -66,18 +66,22 @@ main .action>a:hover {
     margin-right: 10px;
 }
 
-.task .edit-button form>.update {
+.task>.edit-button {
     font-family: "Poppins-Regular";
     align-items: center;
     border: 1px solid #198754;
     background-color: #fff;
     color: #198754;
-    padding: 4px 12px 4px 12px;
+    padding: 5px 12px 5px 12px;
     border-radius: 5px;
     font-size: 13px;
 }
 
-.task .edit-button form>.update:hover {
+.task .edit-button>i {
+    margin-right: 7px;
+}
+
+.task>.edit-button:hover {
     border: 1px solid #198754;
     background-color: #198754;
     color: #fff;
@@ -90,16 +94,15 @@ main .action>a:hover {
     border: 1px solid #b22222;
     background-color: #fff;
     color: #b22222;
-    padding: 4px 12px 4px 12px;
+    padding: 5px 12px 5px 12px;
     border-radius: 5px;
     font-size: 13px;
-    margin-left: 10px;
+    margin-left: 8px;
 }
 
-.task .delete-button form>.delete:before {
-    font-family: "Font Awesome 7 Free";
-    content: "\f05e";
- }
+.task .delete-button form .delete>i {
+    margin-right: 7px;
+}
 
 .task .delete-button form>.delete:hover {
     border: 1px solid #b22222;
