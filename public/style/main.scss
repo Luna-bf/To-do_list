@@ -1,6 +1,5 @@
-// @forward "../../node_modules/bootstrap/dist/css/bootstrap.css";
+@forward "../../node_modules/bootstrap/dist/css/bootstrap-utilities.css";
 @forward "fonts";
-@forward "params";
 @forward "components/header";
 @forward "components/footer";
 @forward "pages/home";
