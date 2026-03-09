@@ -6,7 +6,7 @@ session_start();
 
 use Exception;
 
-// La classe HomeController hérite de la classe BaseController : elle récupère ses propriétés et méthodes
+// La classe TaskController hérite de la classe BaseController : elle récupère ses propriétés et méthodes
 class TaskController extends BaseController
 {
 
@@ -67,7 +67,7 @@ class TaskController extends BaseController
             exit;
         }
 
-        // Je passe les catégories, les priorités et la tâche que je créé en tant que valeurs à la page
+        // Je passe les catégories, les priorités et la tâche modifiée en tant que valeurs à la page
         $this->render('home/task/updateTask.html.twig', ['categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
     }
 
