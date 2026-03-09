@@ -38,12 +38,36 @@ class Database
      *
      * @return void
      */
-    public function createUser($email, $username, $password)
+    public function registration($email, $username, $password)
     {
         $statement = $this->pdo->prepare('INSERT INTO users(email, username, password) VALUES(:email, :username, :password)');
         return $statement->execute([':email' => $email, ':username' => $username, ':password' =>  $password]);
     }
-    
+
+    public function checkIfEmailExists($email) {
+        $statement = $this->pdo->prepare('SELECT * FROM users WHERE email = :email');
+        $statement->execute([':email' => $email]);
+        return $statement->rowCount();
+    }
+
+    public function login($email)
+    {
+        /*Ma requête SQL : je vais récupérer toutes les données de l'utilisateur dont le nom d'utilisateur correspondent à la
+        valeur saisie dans le formulaire */
+        $statement = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
+
+        /*
+        Ici l'erreur "SQLSTATE[HY093]: Invalid parameter number: parameter was not defined" survenait car je donnais des
+        paramètres nommés dans ma requête SQL mais que je les passais à execute() sous forme de tableau non associatif :
+        $statement->execute([$email, $password]);
+
+        Lorsque j'utilise des paramètres nommés, il est obligatoire de fournir un tableau associatif afin d'associer chaque
+        paramètre nommé à sa valeur (code ci-dessous).
+        */
+        $statement->execute([":email" => $email]);
+        return $statement;
+    }
+
     // Raccourci pour avoir ce type de commentaire : / + ** + Entrée
     /**
      * Renvoie toutes les lignes (enregistrements) de la table
@@ -52,7 +76,24 @@ class Database
      */
     public function findAllTasks()
     {
-        return $this->pdo->query("SELECT t.*, c.category_name, p.priority_id FROM tasks as t JOIN categories as c on t.category_id = c.category_id JOIN priorities as p on t.priority_id = p.priority_id ORDER BY p.priority_id ASC");
+        return $this->pdo->query(
+            "SELECT t.*, c.category_name, p.priority_id
+            FROM tasks as t
+                JOIN categories as c on t.category_id = c.category_id
+                JOIN priorities as p on t.priority_id = p.priority_id
+            ORDER BY p.priority_id ASC");
+    }
+
+    public function findUserTasks($user_id) {
+        $statement = $this->pdo->prepare(
+            "SELECT t.*, c.category_name, p.priority_id
+            FROM tasks as t
+                JOIN categories as c on t.category_id = c.category_id
+                JOIN priorities as p on t.priority_id = p.priority_id
+            WHERE user_id = :user_id
+            ORDER BY p.priority_id ASC");
+
+        return $statement->execute(['user_id' => $user_id]);
     }
 
     /**
