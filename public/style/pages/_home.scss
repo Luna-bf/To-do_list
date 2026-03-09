@@ -1,22 +1,51 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+main>.action {
+    margin-top: 80px;
+    justify-content: center;
+    flex-direction: column;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
+main .action>h1 {
+    margin-bottom: 50px;
+}
+
+main .action>a {
+    font-family: "Poppins-Regular";
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #1B9675;
+    border: 1px solid #1B9675;
+    text-decoration: none;
+    padding: 8px 15px 8px 15px;
+    align-self: center;
+    align-items: center;
+}
+
+main .action a>i {
+    margin-right: 8px;
+    font-size: 13px;
+}
+
+main .action>a:hover {
+    background-color: #1B9675;
+    color: #fff;
+}
+
+.all-tasks {
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.all-tasks ul>li {
+    font-family: "Poppins-Light";
+    margin-bottom: 20px;
+    align-items: center;
 }
 
 .task>input:checked+label {
     /*si label a son input coché alors {...} */
     color: #777;
     text-decoration: line-through;
-}
-
-form .form-group {
-    margin: 0.5em 0;
 }
 
 /* Priorités et catégories */
@@ -37,39 +66,53 @@ form .form-group {
     margin-right: 10px;
 }
 
-#all-tasks {
+.task .edit-button form>.update {
+    font-family: "Poppins-Regular";
+    align-items: center;
+    border: 1px solid #198754;
     background-color: #fff;
-    width: 50%;
+    color: #198754;
+    padding: 4px 12px 4px 12px;
+    border-radius: 5px;
+    font-size: 13px;
 }
 
-li {
-    margin-bottom: 0.2em;
+.task .edit-button form>.update:hover {
+    border: 1px solid #198754;
+    background-color: #198754;
+    color: #fff;
+    cursor: pointer;
 }
 
-hr {
-    margin-top: 3em;
-    width: 85%;
-}
-
-.section-form {
-    padding: 1.5em 0 1.5em 0;
-    margin: auto;
-    justify-content: center;
-    justify-content: space-evenly;
-}
-
-legend {
-    padding: 2px 11px 2px 11px;
-}
-
-#create-task-form,
-#create-filter-form {
-    width: 75%;
-    padding-bottom: 35px;
+.task .delete-button form>.delete {
+    font-family: "Poppins-Regular";
+    align-items: center;
+    border: 1px solid #b22222;
     background-color: #fff;
-    flex-wrap: nowrap;
+    color: #b22222;
+    padding: 4px 12px 4px 12px;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-left: 10px;
 }
 
-span {
+.task .delete-button form>.delete:before {
+    font-family: "Font Awesome 7 Free";
+    content: "\f05e";
+ }
+
+.task .delete-button form>.delete:hover {
+    border: 1px solid #b22222;
+    background-color: #b22222;
+    color: #fff;
+    cursor: pointer;
+}
+
+.task>label,
+.task>span {
     margin-left: 5px;
+}
+
+.action-buttons {
+    margin-top: 30px;
 }
