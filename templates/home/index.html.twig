@@ -4,25 +4,28 @@
 {% endblock %}
 
 {% block main %}
-	<div class="card bg-color">
-		<div class="card-header">
-			<h1 class="text-dark fw-normal text-center my-2">Todo list</h1>
+	<main>
+		<div class="d-flex action">
+			<h1>Vos tâches</h1>
+			<a href="/form/createTask">
+				<i class="fa-solid fa-plus"></i>Créer une nouvelle tâche</a>
 		</div>
 
-		<section id="all-tasks">
-            <a href="/form/createTask">Créer une nouvelle tâche</a>
-			<ul class="text-dark list-unstyled">
+		<section class="d-flex all-tasks">
+			<ul>
 				{% for task in tasks %}
 					<li class="d-flex task">
 						<input type="checkbox" name="{{ task.task_id }}" id="{{ task.task_id }}"/>
 						<label for="{{ task.task_id }}" class="priority-{{ task.priority_id }}">{{ task.task_name }}</label>
 						<span class="category" id="{{ task.category_id }}">({{ task.category_name }})</span>
-						<div>
+						<div
+							class="edit-button">
+							{# Faire en sorte que cela redirige vers une page avec les infos de la tâche à modifier (comme pour TMT) #}
 							<form action="php/update-task.php" method="post">
-								<input type="submit" name="modifier[{{ task.task_id }}]" class="update" id="update" value="Renommer" onclick="return confirm('Voulez-vous renommer cette tâche ?')"/>
+								<input type="submit" name="modifier[{{ task.task_id }}]" class="update" value="Modifier" onclick="return confirm('Voulez-vous modifier cette tâche ?')"/>
 							</form>
 						</div>
-						<div>
+						<div class="delete-button">
 							<form action="/delete" method="post">
 								<input type="hidden" name="task_id" value="{{ task.task_id }}">
 								<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
@@ -38,41 +41,37 @@
 			</ul>
 		</section>
 
-		<!-- <hr class=""> -->
+		{# <div class="filter-tasks-div">
+							<form action="index.php" method="post" class="d-flex" id="filter-form">
+								<fieldset id="create-filter-form">
+									<legend>
+										<h2>Filtrer par :</h2>
+									</legend>
+				
+									<div>
+										<label for="filter-category">Catégorie :</label>
+										<select name="filter-category" class="filter-category">
+											{% for category in categories %}
+												<option value="{{ category.category_name }}" id="{{ category.category_id }}">{{ category.category_name }}</option>
+											{% endfor %}
+										</select>
+									</div>
+				
+									<input type="submit" name="display" value="Afficher les tâches"/>
+								</fieldset>
+							</form>
+						</div> #}
 
-		<div class="filter-tasks-div">
-			<form action="index.php" method="post" class="d-flex text-light" id="filter-form">
-				<fieldset id="create-filter-form">
-					<legend>
-						<h2 class="text-dark fw-normal">Filtrer par :</h2>
-					</legend>
-
-					<div class="mb-3 form-group">
-						<label for="filter-category" class="form-label text-dark">Catégorie :</label>
-						<select name="filter-category" id="filter-category" class="form-select" aria-label="Default select example">
-							{% for category in categories %}
-								<option value="{{ category.category_name }}" id="{{ category.category_id }}">{{ category.category_name }}</option>
-							{% endfor %}
-						</select>
-					</div>
-
-					<input type="submit" name="display" id="display" value="Afficher les tâches" class="btn btn-primary"/>
-				</fieldset>
-			</form>
+		<div class="d-flex action-buttons">
+			<ul class="list-unstyled">
+				<li>
+					<button type="submit" class="delete-task-btn">Supprimer les tâches terminées</button>
+				</li>
+				<li>
+					<button type="submit" class="delete-all-btn">Supprimer toutes les tâches</button>
+				</li>
+			</ul>
 		</div>
-
-		<div class="card-footer" style="border-color: #aaaaaa;">
-			<div id="all-buttons" class="d-flex">
-				<ul class="list-unstyled">
-					<li>
-						<button type="submit" id="delete-task-btn" class="btn btn-success">Supprimer les tâches terminées</button>
-					</li>
-					<li>
-						<button type="submit" id="delete-all-btn" class="btn btn-danger">Supprimer toutes les tâches</button>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	</main>
 
 {% endblock %}
