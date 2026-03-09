@@ -18,18 +18,18 @@
 						<input type="checkbox" name="{{ task.task_id }}" id="{{ task.task_id }}"/>
 						<label for="{{ task.task_id }}" class="priority-{{ task.priority_id }}">{{ task.task_name }}</label>
 						<span class="category" id="{{ task.category_id }}">({{ task.category_name }})</span>
-						<div
-							class="edit-button">
-							{# Faire en sorte que cela redirige vers une page avec les infos de la tâche à modifier (comme pour TMT) #}
+						{# <div class="edit-button">
 							<form action="php/update-task.php" method="post">
 								<input type="submit" name="modifier[{{ task.task_id }}]" class="update" value="Modifier" onclick="return confirm('Voulez-vous modifier cette tâche ?')"/>
 							</form>
-						</div>
+						</div> #}
+						<a href="#" class="edit-button"><i class="fa-solid fa-pen"></i>Modifier</a>
 						<div class="delete-button">
 							<form action="/delete" method="post">
 								<input type="hidden" name="task_id" value="{{ task.task_id }}">
 								<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-								<input type="submit" class="delete" id="delete" value="Supprimer"/>
+								{# <input type="submit" class="delete" id="delete" value="Supprimer"/> #}
+								<button class="delete" id="delete"><i class="fa-solid fa-ban"></i>Supprimer</button>
 							</form>
 						</div>
 					</li>
