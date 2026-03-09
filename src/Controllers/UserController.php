@@ -6,9 +6,11 @@ namespace src\controllers;
 
 use Exception;
 
-class UserController extends BaseController {
+class UserController extends BaseController
+{
 
-    public function register() {
+    public function register()
+    {
         if (isset($_POST['register'])) { // Lorsque l'élément nommé "inscription" est cliqué...
 
             // Je récupère les valeurs des différents champs de saisie du formulaire
@@ -22,17 +24,23 @@ class UserController extends BaseController {
             */
             if (!empty($email) && !empty($username) && !empty($password)) { // Si tous les champs du formulaire ne sont pas vide, alors...
 
-                // Je hache (hash) le mot de passe
-                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                $result = $this->db->checkIfEmailExists($email);
 
-                // Puis je créé l'utilisateur
-                $user = $this->db->createUser($email, $username, $hashed_password);
-
-                if (!$user) { // Si le contenu de la variable $resultat retourne false, alors...
-                    $message = "Une erreur est survenue, l'inscription n'a pas pu être effectuée.";
+                if ($result > 0) {
+                    $message = "Cette adresse mail est déjà associée à un compte.";
                 } else {
-                    header('Location: /form/login');
-                    exit;
+                    // Je hache (hash) le mot de passe
+                    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+                    // Puis je créé l'utilisateur
+                    $user = $this->db->registration($email, $username, $hashed_password);
+
+                    if (!$user) { // Si le contenu de la variable $resultat retourne false, alors...
+                        $message = "Une erreur est survenue, l'inscription n'a pas pu être effectuée.";
+                    } else {
+                        header('Location: login');
+                        exit;
+                    }
                 }
             } else {
                 $message = "Tous les champs de saisie doivent être remplis.";
@@ -42,9 +50,41 @@ class UserController extends BaseController {
         $this->render('form/register.html.twig', ['email' => $email, 'username' => $username, 'password' => $hashed_password, 'message' => $message]);
     }
 
-    public function login() {
-        // session_start();
+    public function login()
+    {
+        if (isset($_POST['login'])) { // Lorsque l'élément nommé "login" est cliqué...
 
-        $this->render('form/login.html.twig', ["str" => "Re bonjour le monde !"]);
+            // Je récupère les différents champs de saisie du formulaire et les stockent dans des variables dédiées :
+            $email = htmlspecialchars(trim($_POST['email'])); // Champ de saisie nommé "email"
+            $password = htmlspecialchars(trim($_POST['password'])); // Champ de saisie nommé "password"
+
+            if (!empty($email) && !empty($password)) {
+
+                $user_row = $this->db->login($email, $password);
+                $table_row = $user_row->fetch();
+
+                /* La méthode fetch() permet de récupérer une ligne associée à une ou plusieurs valeurs, ici, je veux qu'elle
+                récupère une ligne associée à la requête SQL déclarée dans la variable $table_row. */
+                    if ($table_row && password_verify($password, $table_row['password'])) { // Si la requête de la variable $table_row récupère une ligne associée à l'email et au mot de passe...
+                        /* Je stocke l'id de l'utilisateur dans la session en assignant le paramètre nommé "user_id" à la colonne
+                        "user_id" que l'appel fetch() contenu dans la variable $ligne_table aura récupéré. Cela me permet d'avoir
+                        un identifiant parfaitement unique pour les sessions au cas où deux personnes obtiennent la même adresse
+                        mail par erreur. */
+                        $_SESSION['user_id'] = $table_row['user_id'];
+                        $_SESSION['username'] = $_POST['username']; // Je stocke aussi le nom de l'utilisateur trouvé par fetch() dans la session
+                        header('Location: /'); // Puis je redirige l'utilisateur vers une autre page.
+                        exit; // Cette fonction permet de fermer le script qui exécute le formulaire, cela empêche le formulaire d'être envoyé de nouveau lorsque je rafraichi la page
+
+                    } else { // Sinon j'affiche un message d'erreur
+                        $message = "Ces informations ne correspondent à aucun profil.";
+                    }
+                } else {
+                    $message = "Tous les champs de saisie doivent être remplis.";
+                }
+            }
+            
+            /* La méthode render() doit toujours se trouver à la fin de la méthode et en dehors d'une condition (if...else)
+            ou d'une boucle (for...) */
+            $this->render('form/login.html.twig', ['email' => $email, 'password' => $password, 'message' => $message]);
+        }
     }
-}
