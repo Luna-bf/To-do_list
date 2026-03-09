@@ -1,0 +1,58 @@
+.form-main {
+    justify-content: center;
+}
+
+main>form {
+    width: 32%;
+}
+
+form .form-container>h1 {
+    margin: 70px 0 65px 0;
+}
+
+form .form-container>.form-input {
+    flex-direction: column;
+    margin-top: 35px;
+}
+
+form .form-container .form-input>label {
+    font-family: "Poppins-Light";
+    margin-bottom: 10px;
+}
+
+form .form-container .form-input>input, select {
+    font-family: "Poppins-Light";
+    background-color: #F6F6F6;
+    border: 1px solid #B8B8B8;
+    border-radius: 5px;
+    padding: 6.5px;
+    font-size: 14.2px;
+}
+
+.form-container>.submit-input {
+    margin-top: 50px;
+}
+
+.form-container .submit-input>input[type="submit"] {
+    font-family: "Poppins-Light";
+    background-color: #333D65;
+    color: #fff;
+    border: 1px solid #333D65;
+    border-radius: 5px;
+    padding: 9px 45px;
+    font-size: 15px;
+    margin: 0 auto;
+}
+
+.form-container .submit-input>input[type="submit"]:hover {
+    background-color: #455491;
+    border: 1px solid #455491;
+    cursor: pointer;
+}
+
+.error-message {
+    font-family: "Poppins-Regular";
+    color: firebrick;
+    text-align: center;
+    margin-top: 35px;
+}
