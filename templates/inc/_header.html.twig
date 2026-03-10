@@ -3,23 +3,22 @@
 		<nav class="d-flex">
 			<h2>Todo List</h2>
 			<ul class="d-flex actions">
-				<li class="d-flex nav-links">
-					<a href="/form/register">Inscription</a>
-                    <p>|</p>
-					<a href="/form/login">Connexion</a>
-				</li>
-				{# {% if not is_granted("ROLE_USER") %}
-									<li class="get-margin">
-										<a href="{{ path('app_login') }}">{% trans %}Connexion{% endtrans %} |</a>
-									</li>
-									<li>
-										<a href="{{ path('app_register') }}">{% trans %}Inscription{% endtrans %}</a>
-									</li>
-								{% else %}
-									<li class="get-margin">
-										<a href="{{ path('app_logout') }}">{% trans %}Déconnexion{% endtrans %}</a>
-									</li>
-								{% endif %} #}
+				{% if user_id %}
+					<li class="d-flex nav-links">
+						<a href="/logout">Déconnexion</a>
+						{# <form action="/logout" method="post">
+							<input type="submit" name="logout" value="Déconnexion"/>
+						</form> #}
+						<p>|</p>
+						<a href="#">{{ username }}</a>
+					</li>
+				{% else %}
+					<li class="d-flex nav-links">
+						<a href="/form/register">Inscription</a>
+						<p>|</p>
+						<a href="/form/login">Connexion</a>
+					</li>
+				{% endif %}
 			</ul>
 		</nav>
 	</header>
