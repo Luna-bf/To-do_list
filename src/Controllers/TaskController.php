@@ -2,7 +2,10 @@
 
 namespace src\controllers;
 
+session_start();
+
 use Exception;
+use src\controllers\UserController;
 
 // La classe TaskController hérite de la classe BaseController : elle récupère ses propriétés et méthodes
 class TaskController extends BaseController
@@ -17,17 +20,30 @@ class TaskController extends BaseController
             $_SESSION['csrf_token'] = bin2hex(random_bytes(128));
         }
 
-        /*
-        J'assigne le chemin d'accès au fichier à la variable $path et lui transmet des données grâce à la variable $data : $path
-        renvoie le fichier "index.html.twig" et $data renvoie une variable $sentence qui contient une chaîne de caractères que je
-        vais pouvoir afficher dans la page.
-        */
+        // Initialisation des variables (comme ça elles restent accessible en dehors de la condition if)
+        $username = null; // Par défaut, username est égal à null (aucune valeur)
         $csrf_token = $_SESSION['csrf_token'];
-        $tasks = $this->db->findAllTasks('tasks'); // Je récupère toutes les données de la table tasks grâce à la méthode findAllTasks et les stockes dans un tableau "tasks"
-        $categories = $this->db->getCategories('categories');
-        $priorities = $this->db->getPriorities('priorities');
+        $tasks = []; // tasks sera un tableau associatif, pareil pour $categories et $priorities
+        $categories = [];
+        $priorities = [];
+        $message = "";
+        
+        if (isset($_SESSION['user_id'])) {
+            
+            $username = $_SESSION['username']; // Récupère le nom de l'utilisateur pour l'afficher dans la page
+            $user_id = $_SESSION['user_id']; // Récupère l'identifiant de l'utilisateur pour l'afficher dans la page
 
-        $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities]);
+            $csrf_token = $_SESSION['csrf_token'];
+            $tasks = $this->db->findUserTasks('tasks'); // Je récupère toutes les données de la table tasks grâce à la méthode findAllTasks et les stockes dans un tableau "tasks"
+            $categories = $this->db->getCategories('categories');
+            $priorities = $this->db->getPriorities('priorities');
+
+            if(!$tasks) {
+                $message = "Vous n'avez aucune tâches.";               
+            }
+        }
+
+        $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities, 'message' => $message, 'username' => $username, 'user_id' => $user_id]);
     }
 
     public function createTask()
@@ -36,11 +52,12 @@ class TaskController extends BaseController
         Je récupère les catégories et les priorités pour les afficher en tant qu'option dans le formulaire grâce aux méthodes
         définies dans le modèle (Database.php)
         */
+        $user_id = $_SESSION['user_id'];
         $categories = $this->db->getCategories('categories');
         $priorities = $this->db->getPriorities('priorities');
 
         // Je récupère les valeurs saisies dans le formulaire
-        $task = $this->db->createTask('category', 'priority', 'task_name');
+        $task = $this->db->createTask('user_id', 'category', 'priority', 'task_name');
 
         if ($task) {
             header('Location: /'); // Je redirige vers la page d'accueil (la racine, soit : '/')
@@ -48,7 +65,7 @@ class TaskController extends BaseController
         }
 
         // Je passe les catégories, les priorités et la tâche que je créé en tant que valeurs à la page
-        $this->render('home/task/createTask.html.twig', ['categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
+        $this->render('home/task/createTask.html.twig', ['user_id' => $user_id,'categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
     }
 
     public function updateTask()
