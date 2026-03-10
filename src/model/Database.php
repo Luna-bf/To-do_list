@@ -124,17 +124,14 @@ class Database
 
     public function getCategories()
     {
-        // Revoir à quoi sert cette requête et pourquoi je la déclare comme ça
         return $this->pdo->query("SELECT * FROM categories ORDER BY category_id ASC");
     }
 
     public function getPriorities()
     {
-        // Revoir à quoi sert cette requête et pourquoi je la déclare comme ça
         return $this->pdo->query("SELECT * FROM priorities ORDER BY priority_id ASC");
     }
 
-    // Les autres méthodes qui vont me permettre de manipuler les données de la BDD
     public function createTask($user_id, $category, $priority, $task_name)
     {
         $task = $this->pdo->prepare("INSERT INTO tasks(user_id, category_id, priority_id, task_name) VALUES(:user_id, :category_id, :priority_id, :task_name)");
