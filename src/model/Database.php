@@ -136,19 +136,19 @@ class Database
     }
 
     // Les autres méthodes qui vont me permettre de manipuler les données de la BDD
-    // Cette méthode doit exécuter le code nécessaire à la suppression des données
     public function createTask($category, $priority, $task_name)
     {
         if (isset($_POST['add'])) {
 
             if (!empty($_POST['category']) && !empty($_POST['priority']) && !empty($_POST['task_name'])) {
 
+                $user_id = $_SESSION['user_id'];
                 $category = $_POST['category'];
                 $priority = $_POST['priority'];
                 $task_name = $_POST['task_name'];
 
-                $task = $this->pdo->prepare("INSERT INTO tasks(category_id, priority_id, task_name) VALUES(:category_id, :priority_id, :task_name)");
-                return $task->execute(['category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name]);
+                $task = $this->pdo->prepare("INSERT INTO tasks(user_id, category_id, priority_id, task_name) VALUES(:user_id, :category_id, :priority_id, :task_name)");
+                return $task->execute(['user_id' => $user_id, 'category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name]);
             }
         }
     }
