@@ -120,7 +120,6 @@ class Database
         */
         $statement = $this->pdo->prepare("SELECT * FROM tasks WHERE task_id = :task_id"); // $this fait référence à l'objet actuel (ici, Database)
         return $statement->execute(["task_id" => $task_id]);
-        // return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getCategories()
@@ -136,50 +135,18 @@ class Database
     }
 
     // Les autres méthodes qui vont me permettre de manipuler les données de la BDD
-    public function createTask($category, $priority, $task_name)
+    public function createTask($user_id, $category, $priority, $task_name)
     {
-        if (isset($_POST['add'])) {
-
-            if (!empty($_POST['category']) && !empty($_POST['priority']) && !empty($_POST['task_name'])) {
-
-                $user_id = $_SESSION['user_id'];
-                $category = $_POST['category'];
-                $priority = $_POST['priority'];
-                $task_name = $_POST['task_name'];
-
-                $task = $this->pdo->prepare("INSERT INTO tasks(user_id, category_id, priority_id, task_name) VALUES(:user_id, :category_id, :priority_id, :task_name)");
-                return $task->execute(['user_id' => $user_id, 'category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name]);
-            }
-        }
+        $task = $this->pdo->prepare("INSERT INTO tasks(user_id, category_id, priority_id, task_name) VALUES(:user_id, :category_id, :priority_id, :task_name)");
+        return $task->execute(['user_id' => $user_id, 'category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name]);
     }
 
-    public function updateTask($category, $priority, $task_name/*, $task_id*/)
+    public function updateTask($category, $priority, $task_name, $task_id)
     {
-        if (isset($_POST['update'])) {
-
-            if (!empty($_POST['category']) && !empty($_POST['priority']) && !empty($_POST['task_name'])) {
-
-                $category = $_POST['category'];
-                $priority = $_POST['priority'];
-                $task_name = $_POST['task_name'];
-
-                $task = $this->pdo->prepare("UPDATE tasks SET category_id = :category_id, priority_id = :priority_id, task_name = :task_name WHERE task_id = :task_id");
-                return $task->execute(['category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name/*, 'task_name' => $task_id*/]);
-            }
-        }
-        // if (isset($_POST['update'])) {
-
-        //     $task_id = array_search("Modifier", $_POST['update']);
-
-        //     $query = $connection->prepare("UPDATE tasks SET task_name = :task_name WHERE task_id = :task_id");
-        //     $result = $query->execute(['task_name' => $task_name, 'task_id' => $task_id]);
-
-        //     if (!$result) {
-        //         echo "<h1>Une erreur est survenue : La suppression n'a pas pu être effectuée.<h1>";
-        //     } else {
-        //         header('Location: ../index.php');
-        //     }
-        // }
+        $task = $this->pdo->prepare("UPDATE tasks SET category_id = :category_id, priority_id = :priority_id, task_name = :task_name WHERE task_id = :task_id");
+        $task->execute(['category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name, 'task_id' => $task_id]);
+        
+        return $task->fetch(PDO::FETCH_ASSOC);
     }
 
     public function deleteTask($task_id)
