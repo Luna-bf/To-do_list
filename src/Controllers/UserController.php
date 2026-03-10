@@ -60,41 +60,43 @@ class UserController extends BaseController
             $message = "";
 
             if (!empty($email) && !empty($password)) {
-                
+
                 $user_row = $this->db->login($email, $password); // $user_row contient le résultat de la requête SQL, encore les données en elles-mêmes
                 $table_row = $user_row->fetch(); // Récupère une du résultat de la requête (ici, je récupère les données d'un utilisateur possédant un email et mot de passe précis)
 
                 /* La méthode fetch() permet de récupérer une ligne associée à une ou plusieurs valeurs, ici, je veux qu'elle
                 récupère une ligne associée à la requête SQL déclarée dans la variable $table_row. */
-                    if ($table_row && password_verify($password, $table_row['password'])) { // Si la requête de la variable $table_row récupère une ligne associée à l'email et au mot de passe...
-                        /* Je stocke l'id de l'utilisateur dans la session en assignant le paramètre nommé "user_id" à la colonne
+                if ($table_row && password_verify($password, $table_row['password'])) { // Si la requête de la variable $table_row récupère une ligne associée à l'email et au mot de passe...
+                    /* Je stocke l'id de l'utilisateur dans la session en assignant le paramètre nommé "user_id" à la colonne
                         "user_id" que l'appel fetch() contenu dans la variable $ligne_table aura récupéré. Cela me permet d'avoir
                         un identifiant parfaitement unique pour les sessions au cas où deux personnes obtiennent la même adresse
                         mail par erreur. */
-                        $_SESSION['user_id'] = $table_row['user_id'];
-                        $_SESSION['username'] = $table_row['username']; // Je stocke aussi le nom de l'utilisateur trouvé par fetch() dans la session
-                        
-                        header('Location: /'); // Puis je redirige l'utilisateur vers une autre page.
-                        exit; // Cette fonction permet de fermer le script qui exécute le formulaire, cela empêche le formulaire d'être envoyé de nouveau lorsque je rafraichi la page
+                    $_SESSION['user_id'] = $table_row['user_id'];
+                    $_SESSION['username'] = $table_row['username']; // Je stocke aussi le nom de l'utilisateur trouvé par fetch() dans la session
 
-                    } else { // Sinon j'affiche un message d'erreur
-                        $message = "Ces informations ne correspondent à aucun profil.";
-                    }
-                } else {
-                    $message = "Tous les champs de saisie doivent être remplis.";
+                    header('Location: /'); // Puis je redirige l'utilisateur vers une autre page.
+                    exit; // Cette fonction permet de fermer le script qui exécute le formulaire, cela empêche le formulaire d'être envoyé de nouveau lorsque je rafraichi la page
+
+                } else { // Sinon j'affiche un message d'erreur
+                    $message = "Ces informations ne correspondent à aucun profil.";
                 }
+            } else {
+                $message = "Tous les champs de saisie doivent être remplis.";
             }
-            
-            /* La méthode render() doit toujours se trouver à la fin de la méthode et en dehors d'une condition (if...else)
-            ou d'une boucle (for...) */
-            $this->render('form/login.html.twig', ['email' => $email, 'password' => $password, 'message' => $message]);
         }
 
-        public function logout() {
-            if (isset($_POST['logout'])) {
-                session_unset();
-				session_destroy(); // Cette méthode permet d'arrêter une session
-				header('Location : login'); // Une fois que la session est arrêtée, je redirige l'utilisateur vers le formulaire de connexion
-            }
+        /* La méthode render() doit toujours se trouver à la fin de la méthode et en dehors d'une condition (if...else)
+            ou d'une boucle (for...) */
+        $this->render('form/login.html.twig', ['email' => $email, 'password' => $password, 'message' => $message]);
+    }
+
+    public function logout()
+    {
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            session_unset(); // Vide les variables associées à une session
+            session_destroy(); // Cette méthode permet d'arrêter une session
+            header('Location: ../form/login'); // Une fois que la session est arrêtée, je redirige l'utilisateur vers le formulaire de connexion
+            exit;
         }
     }
+}
