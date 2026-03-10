@@ -34,7 +34,7 @@ class TaskController extends BaseController
 
             $username = $_SESSION['username']; // Récupère le nom de l'utilisateur pour l'afficher dans la page
             $user_id = $_SESSION['user_id']; // Récupère l'identifiant de l'utilisateur pour l'afficher dans la page
-            
+
             $csrf_token = $_SESSION['csrf_token'];
             $tasks = $this->db->findUserTasks($user_id, 'tasks'); // Je récupère toutes les données de la table tasks grâce à la méthode findUserTasks et les stocke dans un tableau "tasks"
             $categories = $this->db->getCategories('categories');
@@ -48,48 +48,94 @@ class TaskController extends BaseController
         $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities, 'message' => $message, 'username' => $username, 'user_id' => $user_id]);
     }
 
+
+    /*
+        if (isset($_POST['update'])) {
+
+            if (!empty($_POST['category']) && !empty($_POST['priority']) && !empty($_POST['task_name'])) {
+
+                $category = $_POST['category'];
+                $priority = $_POST['priority'];
+                $task_name = $_POST['task_name'];
+
+                $task = $this->pdo->prepare("UPDATE tasks SET category_id = :category_id, priority_id = :priority_id, task_name = :task_name WHERE task_id = :task_id");
+                return $task->execute(['category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name, 'task_id' => $task_id]);
+            }
+        }
+        // if (isset($_POST['update'])) {
+
+        //     $task_id = array_search("Modifier", $_POST['update']);
+
+        //     $query = $connection->prepare("UPDATE tasks SET task_name = :task_name WHERE task_id = :task_id");
+        //     $result = $query->execute(['task_name' => $task_name, 'task_id' => $task_id]);
+
+        //     if (!$result) {
+        //         echo "<h1>Une erreur est survenue : La suppression n'a pas pu être effectuée.<h1>";
+        //     } else {
+        //         header('Location: ../index.php');
+        //     }
+        // }
+    */
+
     public function createTask()
     {
         /*
-        Je récupère les catégories et les priorités pour les afficher en tant qu'option dans le formulaire grâce aux méthodes
-        définies dans le modèle (Database.php)
+        Je récupère :
+        - Le nom de l'utilisateur et son identifiant unique dans la session
+        - Toutes les catégories et priorités depuis la base de données grâce aux méthodes définies dans le modèle
         */
-        $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'];
-        $categories = $this->db->getCategories('categories');
-        $priorities = $this->db->getPriorities('priorities');
+        $user_id = $_SESSION['user_id'];
+        $allCategories = $this->db->getCategories('categories');
+        $allPriorities = $this->db->getPriorities('priorities');
+        $message = "";
 
-        // Je récupère les valeurs saisies dans le formulaire
-        $task = $this->db->createTask('user_id', 'category', 'priority', 'task_name');
+        if (isset($_POST['add'])) {
 
-        if ($task) {
-            header('Location: /'); // Je redirige vers la page d'accueil (la racine, soit : '/')
-            exit;
+            // Je récupère les valeurs du formulaire
+            $task_name = $_POST['task_name'];
+            $category = $_POST['category'];
+            $priority = $_POST['priority'];
+
+            // Je vérifie que tous les champs du formulaire sont remplis
+            if (!empty($category) && !empty($priority) && !empty($task_name)) {
+                
+                // Je crée la tâche grâce aux valeurs saisies dans le formulaire
+                $task = $this->db->createTask($user_id, $category, $priority, $task_name);
+
+                // Si la tâche a bien été créée, je redirige vers la page d'accueil
+                if ($task) {
+                    header('Location: /'); // Redirection vers la page d'accueil (la racine, soit : '/')
+                    exit;
+                }
+            } else {
+                $message = "Tous les champs doivent être remplis.";
+            }
         }
 
         // Je passe les catégories, les priorités et la tâche que je créé en tant que valeurs à la page
-        $this->render('home/task/createTask.html.twig', ['user_id' => $user_id, 'username' => $username, 'categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
+        $this->render('home/task/createTask.html.twig', ['user_id' => $user_id, 'username' => $username, 'allCategories' => $allCategories, 'allPriorities' => $allPriorities, 'category' => $category, 'priority' => $priority, 'task' => $task, 'message' => $message]);
     }
 
-    public function updateTask()
-    {
-        // Je récupère les catégories et les priorités pour les afficher en tant qu'option dans le formulaire
-        $task = $this->db->findTask('task_id');
-        $categories = $this->db->getCategories('categories');
-        $priorities = $this->db->getPriorities('priorities');
+    // public function updateTask()
+    // {
+    //     // Je récupère les catégories et les priorités pour les afficher en tant qu'option dans le formulaire
+    //     $task = $this->db->findTask('task_id');
+    //     $categories = $this->db->getCategories('categories');
+    //     $priorities = $this->db->getPriorities('priorities');
 
-        // Je récupère les valeurs saisies dans le formulaire
-        $task = $this->db->updateTask('category', 'priority', 'task_name');
-        // $updated_task = $this->db->updateTask('category', 'priority', 'task_name');
+    //     // Je récupère les valeurs saisies dans le formulaire
+    //     $task = $this->db->updateTask('category', 'priority', 'task_name');
+    //     // $updated_task = $this->db->updateTask('category', 'priority', 'task_name');
 
-        if ($task) {
-            header('Location: /'); // Je redirige vers la page d'accueil (la racine, soit : '/')
-            exit;
-        }
+    //     if ($task) {
+    //         header('Location: /'); // Je redirige vers la page d'accueil (la racine, soit : '/')
+    //         exit;
+    //     }
 
-        // Je passe les catégories, les priorités et la tâche modifiée en tant que valeurs à la page
-        $this->render('home/task/updateTask.html.twig', ['categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
-    }
+    //     // Je passe les catégories, les priorités et la tâche modifiée en tant que valeurs à la page
+    //     $this->render('home/task/updateTask.html.twig', ['categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
+    // }
 
     public function deleteTask()
     {
