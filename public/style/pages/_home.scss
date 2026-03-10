@@ -66,19 +66,18 @@ main .action>a:hover {
     margin-right: 10px;
 }
 
-.task>.edit-button {
+.task>.edit-button, .task .delete-button form>.delete {
     font-family: "Poppins-Regular";
     align-items: center;
-    border: 1px solid #198754;
-    background-color: #fff;
-    color: #198754;
     padding: 5px 12px 5px 12px;
     border-radius: 5px;
     font-size: 13px;
 }
 
-.task .edit-button>i {
-    margin-right: 7px;
+.task>.edit-button {
+    border: 1px solid #198754;
+    background-color: #fff;
+    color: #198754;
 }
 
 .task>.edit-button:hover {
@@ -89,19 +88,11 @@ main .action>a:hover {
 }
 
 .task .delete-button form>.delete {
-    font-family: "Poppins-Regular";
-    align-items: center;
     border: 1px solid #b22222;
     background-color: #fff;
     color: #b22222;
-    padding: 5px 12px 5px 12px;
-    border-radius: 5px;
     font-size: 13px;
     margin-left: 8px;
-}
-
-.task .delete-button form .delete>i {
-    margin-right: 7px;
 }
 
 .task .delete-button form>.delete:hover {
@@ -120,6 +111,52 @@ main .action>a:hover {
     margin-left: 5px;
 }
 
+.task .edit-button>i, .task .delete-button form .delete>i {
+    margin-right: 7px;
+}
+
 .action-buttons {
-    margin-top: 30px;
+    justify-content: center;
+}
+
+.action-buttons>ul {
+    flex-direction: row;
+    margin-top: 60px;
+}
+
+.action-buttons ul li>button {
+    font-family: "Poppins-Regular";
+    padding: 8px 15px 8px 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.action-buttons ul li button>i {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.action-buttons ul li>button:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+.action-buttons ul li>.delete-task-btn {
+    border: 1px solid #1C1E7B;
+    color: #1C1E7B;
+    margin-right: 30px;
+}
+
+.action-buttons ul li>.delete-task-btn:hover {
+    background-color: #1C1E7B;
+}
+
+.action-buttons ul li>.delete-all-btn {
+    border: 1px solid #b22222;
+    color: #b22222;
+}
+
+.action-buttons ul li>.delete-all-btn:hover {
+    background-color: #b22222;
 }
