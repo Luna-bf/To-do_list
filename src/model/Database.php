@@ -47,7 +47,7 @@ class Database
     public function checkIfEmailExists($email) {
         $statement = $this->pdo->prepare('SELECT * FROM users WHERE email = :email');
         $statement->execute([':email' => $email]);
-        return $statement->rowCount();
+        return $statement->rowCount(); // Va compter le nombre de ligne où l'email donné apparait
     }
 
     public function login($email)
@@ -70,30 +70,21 @@ class Database
 
     // Raccourci pour avoir ce type de commentaire : / + ** + Entrée
     /**
-     * Renvoie toutes les lignes (enregistrements) de la table
+     * Récupère toutes les lignes (enregistrements) de la table en fonction de l'id d'un utilisateur précis
      *
      * @return array : Cette méthode retourne un tableau
      */
-    public function findAllTasks()
-    {
-        return $this->pdo->query(
-            "SELECT t.*, c.category_name, p.priority_id
-            FROM tasks as t
-                JOIN categories as c on t.category_id = c.category_id
-                JOIN priorities as p on t.priority_id = p.priority_id
-            ORDER BY p.priority_id ASC");
-    }
-
     public function findUserTasks($user_id) {
         $statement = $this->pdo->prepare(
             "SELECT t.*, c.category_name, p.priority_id
             FROM tasks as t
                 JOIN categories as c on t.category_id = c.category_id
                 JOIN priorities as p on t.priority_id = p.priority_id
-            WHERE user_id = :user_id
+            WHERE t.user_id = :user_id
             ORDER BY p.priority_id ASC");
 
-        return $statement->execute(['user_id' => $user_id]);
+        $statement->execute(['user_id' => $user_id]); // Exécute la requête préparée puis renvoie un résultat true ou false
+        return $statement->fetchAll(PDO::FETCH_ASSOC); // Récupère les données de la requête
     }
 
     /**
