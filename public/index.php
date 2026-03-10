@@ -26,6 +26,10 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
         (new UserController())->login();
         break;
 
+    case '/logout':
+        (new UserController())->logout();
+        break;
+
     case '/task/createTask':
         (new TaskController())->createTask();
         break;
