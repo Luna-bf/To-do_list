@@ -22,24 +22,25 @@ class TaskController extends BaseController
 
         // Initialisation des variables (comme ça elles restent accessible en dehors de la condition if)
         $username = null; // Par défaut, username est égal à null (aucune valeur)
+        $user_id = null; // Par défaut, user_id est égal à null (aucune valeur)
         $csrf_token = $_SESSION['csrf_token'];
         $tasks = []; // tasks sera un tableau associatif, pareil pour $categories et $priorities
         $categories = [];
         $priorities = [];
         $message = "";
-        
+
         if (isset($_SESSION['user_id'])) {
-            
+
             $username = $_SESSION['username']; // Récupère le nom de l'utilisateur pour l'afficher dans la page
             $user_id = $_SESSION['user_id']; // Récupère l'identifiant de l'utilisateur pour l'afficher dans la page
-
+            
             $csrf_token = $_SESSION['csrf_token'];
-            $tasks = $this->db->findUserTasks('tasks'); // Je récupère toutes les données de la table tasks grâce à la méthode findAllTasks et les stockes dans un tableau "tasks"
+            $tasks = $this->db->findUserTasks($user_id, 'tasks'); // Je récupère toutes les données de la table tasks grâce à la méthode findUserTasks et les stocke dans un tableau "tasks"
             $categories = $this->db->getCategories('categories');
             $priorities = $this->db->getPriorities('priorities');
 
-            if(!$tasks) {
-                $message = "Vous n'avez aucune tâches.";               
+            if (empty($tasks)) {
+                $message = "Vous n'avez aucune tâche.";
             }
         }
 
@@ -53,6 +54,7 @@ class TaskController extends BaseController
         définies dans le modèle (Database.php)
         */
         $user_id = $_SESSION['user_id'];
+        $username = $_SESSION['username'];
         $categories = $this->db->getCategories('categories');
         $priorities = $this->db->getPriorities('priorities');
 
@@ -65,7 +67,7 @@ class TaskController extends BaseController
         }
 
         // Je passe les catégories, les priorités et la tâche que je créé en tant que valeurs à la page
-        $this->render('home/task/createTask.html.twig', ['user_id' => $user_id,'categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
+        $this->render('home/task/createTask.html.twig', ['user_id' => $user_id, 'username' => $username, 'categories' => $categories, 'priorities' => $priorities, 'task' => $task]);
     }
 
     public function updateTask()
@@ -101,7 +103,7 @@ class TaskController extends BaseController
             $statement = $this->db->deleteTask($task_id, 'tasks');
 
             if (!$statement) {
-                echo "<h1>Une erreur est survenue : La suppression n'a pas pu être effectuée.<h1>";
+                $message = "Une erreur est survenue : La suppression n'a pas pu être effectuée.";
             } else {
                 header('Location: /'); // Je redirige vers la page d'accueil (la racine, soit : '/')
                 exit;
