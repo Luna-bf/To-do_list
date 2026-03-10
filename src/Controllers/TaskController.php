@@ -23,6 +23,7 @@ class TaskController extends BaseController
         // Initialisation des variables (comme ça elles restent accessible en dehors de la condition if)
         $username = null; // Par défaut, username est égal à null (aucune valeur)
         $user_id = null; // Par défaut, user_id est égal à null (aucune valeur)
+        $table = "";
         $csrf_token = $_SESSION['csrf_token'];
         $tasks = []; // tasks sera un tableau associatif, pareil pour $categories et $priorities
         $categories = [];

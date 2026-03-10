@@ -11,6 +11,7 @@ j'ai besoin d'accéder à la classe : ici j'indique que la classe se trouve dans
 
 namespace src\model;
 
+use InvalidArgumentException;
 use PDO; // Importation de la classe "PDO", qui va me permettre de communiquer avec la BDD
 
 // Cette classe va superviser toutes les opérations liées à la base de données
@@ -44,7 +45,8 @@ class Database
         return $statement->execute([':email' => $email, ':username' => $username, ':password' =>  $password]);
     }
 
-    public function checkIfEmailExists($email) {
+    public function checkIfEmailExists($email)
+    {
         $statement = $this->pdo->prepare('SELECT * FROM users WHERE email = :email');
         $statement->execute([':email' => $email]);
         return $statement->rowCount(); // Va compter le nombre de ligne où l'email donné apparait
@@ -74,14 +76,21 @@ class Database
      *
      * @return array : Cette méthode retourne un tableau
      */
-    public function findUserTasks($user_id) {
+    public function findUserTasks($user_id, $table)
+    {
+        $allowedTables = ['tasks'];
+        if (!in_array($table, $allowedTables, true)) {
+            throw new InvalidArgumentException("Nom de table non autorisé : $table");
+        }
+
         $statement = $this->pdo->prepare(
             "SELECT t.*, c.category_name, p.priority_id
-            FROM tasks as t
+            FROM $table as t
                 JOIN categories as c on t.category_id = c.category_id
                 JOIN priorities as p on t.priority_id = p.priority_id
             WHERE t.user_id = :user_id
-            ORDER BY p.priority_id ASC");
+            ORDER BY p.priority_id ASC"
+        );
 
         $statement->execute(['user_id' => $user_id]); // Exécute la requête préparée puis renvoie un résultat true ou false
         return $statement->fetchAll(PDO::FETCH_ASSOC); // Récupère les données de la requête
