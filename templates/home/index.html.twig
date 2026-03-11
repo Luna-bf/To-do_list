@@ -14,7 +14,7 @@
 		<section class="d-flex all-tasks">
 			<ul>
 				{% for task in tasks %}
-					<li class="d-flex task">
+					<li class="d-flex task" id="{{ task.task_id }}">
 						<input type="checkbox" name="{{ task.task_id }}" id="{{ task.task_id }}"/>
 						<label for="{{ task.task_id }}" class="priority-{{ task.priority_id }}">{{ task.task_name }}</label>
 						<span class="category" id="{{ task.category_id }}">({{ task.category_name }})</span>
