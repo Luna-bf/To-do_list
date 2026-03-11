@@ -42,6 +42,10 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
     case '/delete':
         (new TaskController())->deleteTask();
         break;
+
+    case '/deleteAllTasks':
+        (new TaskController())->deleteAllTasks();
+        break;
         
     default:
         echo "Page introuvable.";
