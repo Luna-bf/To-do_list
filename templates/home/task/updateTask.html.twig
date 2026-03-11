@@ -5,15 +5,21 @@
 
 {% block main %}
 	<main class="d-flex form-main">
-		<form action="/task/updateTask" method="post">
+		{% for taskInfo in task %}
+			{#
+			L'action du formulaire doit bien contenir l'identifiant de la tâche, sinon l'identifiant ne pourra pas être récupéré
+			par le formulaire, ce qui me renverra vers une page d'erreur.
+			#}
+		<form action="/task/updateTask?id={{ taskInfo.task_id }}" method="post">
 			<div class="form-container">
 				<h1>Modifiez la tâche</h1>
 
 				<!-- Nom de la tâche -->
 				<div class="d-flex form-input">
 					<label for="task_name" class="form-label">Nom de la tâche :</label>
-					<input type="text" name="task_name" id="task_name" placeholder="{{ task.task_name }}" required/>
+						<input type="text" name="task_name" id="{{ taskInfo.task_id }}" value="{{ taskInfo.task_name }}" required/>
 				</div>
+		{% endfor %}
 
 				<!-- Catégories -->
 				<div class="d-flex form-input">
@@ -33,6 +39,10 @@
 							<option value="{{ priority.priority_id }}" id="{{ priority.priority_id }}">{{ priority.priority_name }}</option>
 						{% endfor %}
 					</select>
+				</div>
+
+				<div class="error-message">
+					<p>{{ message }}</p>
 				</div>
 
 				<!-- Bouton de validation -->
