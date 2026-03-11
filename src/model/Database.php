@@ -102,7 +102,7 @@ class Database
      * @param int $id : l'identifiant de la ligne que je veux récupérer
      * @return : Cette méthode retourne un tableau associatif si la donnée existe, ou false si elle n'existe pas
      */
-    public function findTask($task_id)
+    public function findTask($task_id, $table)
     {
         /*
         - Je prépare une requête qui va récupérer une seule ligne de la table grâce à un identifiant donné,
@@ -118,18 +118,36 @@ class Database
             "is_complete" => 0,
         ];
         */
-        $statement = $this->pdo->prepare("SELECT * FROM tasks WHERE task_id = :task_id"); // $this fait référence à l'objet actuel (ici, Database)
-        return $statement->execute(["task_id" => $task_id]);
+        $allowedTables = ['tasks'];
+
+        if (!in_array($table, $allowedTables, true)) {
+            throw new InvalidArgumentException("Nom de table non autorisé : $table");
+        }
+
+        // $this fait référence à l'objet actuel (ici, Database)
+        $statement = $this->pdo->prepare(
+            "SELECT t.*, c.category_name, p.priority_id
+            FROM $table as t
+                JOIN categories as c on t.category_id = c.category_id
+                JOIN priorities as p on t.priority_id = p.priority_id
+            WHERE t.task_id = :task_id
+            ORDER BY p.priority_id ASC"
+        );
+
+        $statement->execute(['task_id' => $task_id]); // Exécute la requête préparée puis renvoie un résultat true ou false
+        return $statement->fetchAll(PDO::FETCH_ASSOC); // Récupère les données de la requête
     }
 
     public function getCategories()
     {
-        return $this->pdo->query("SELECT * FROM categories ORDER BY category_id ASC");
+        $statement = $this->pdo->query("SELECT * FROM categories ORDER BY category_id ASC");
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getPriorities()
     {
-        return $this->pdo->query("SELECT * FROM priorities ORDER BY priority_id ASC");
+        $statement = $this->pdo->query("SELECT * FROM priorities ORDER BY priority_id ASC");
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function createTask($user_id, $category, $priority, $task_name)
@@ -141,9 +159,7 @@ class Database
     public function updateTask($category, $priority, $task_name, $task_id)
     {
         $task = $this->pdo->prepare("UPDATE tasks SET category_id = :category_id, priority_id = :priority_id, task_name = :task_name WHERE task_id = :task_id");
-        $task->execute(['category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name, 'task_id' => $task_id]);
-        
-        return $task->fetch(PDO::FETCH_ASSOC);
+        return $task->execute(['category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name, 'task_id' => $task_id]);
     }
 
     public function deleteTask($task_id)
