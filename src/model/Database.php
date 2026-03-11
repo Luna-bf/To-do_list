@@ -79,6 +79,7 @@ class Database
     public function findUserTasks($user_id, $table)
     {
         $allowedTables = ['tasks'];
+        
         if (!in_array($table, $allowedTables, true)) {
             throw new InvalidArgumentException("Nom de table non autorisé : $table");
         }
@@ -104,6 +105,12 @@ class Database
      */
     public function findTask($task_id, $table)
     {
+        $allowedTables = ['tasks'];
+
+        if (!in_array($table, $allowedTables, true)) {
+            throw new InvalidArgumentException("Nom de table non autorisé : $table");
+        }
+
         /*
         - Je prépare une requête qui va récupérer une seule ligne de la table grâce à un identifiant donné,
         - J'exécute la requête en passant l'identifiant récupéré en tant que paramètre dans la requête,
@@ -118,12 +125,6 @@ class Database
             "is_complete" => 0,
         ];
         */
-        $allowedTables = ['tasks'];
-
-        if (!in_array($table, $allowedTables, true)) {
-            throw new InvalidArgumentException("Nom de table non autorisé : $table");
-        }
-
         // $this fait référence à l'objet actuel (ici, Database)
         $statement = $this->pdo->prepare(
             "SELECT t.*, c.category_name, p.priority_id
@@ -166,5 +167,16 @@ class Database
     {
         $task = $this->pdo->prepare("DELETE FROM tasks WHERE task_id = :task_id"); // $this fait référence à l'objet actuel (ici, Database)
         return $task->execute(["task_id" => $task_id]);
+    }
+
+    public function deleteAllTasks($user_id, $table) {
+        $allowedTables = ['tasks'];
+
+        if (!in_array($table, $allowedTables, true)) {
+            throw new InvalidArgumentException("Nom de table non autorisé : $table");
+        }
+
+        $tasks = $this->pdo->prepare("DELETE FROM tasks WHERE user_id = :user_id");
+        return $tasks->execute(["user_id" => $user_id]);
     }
 }

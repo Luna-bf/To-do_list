@@ -72,7 +72,10 @@
 					<button type="submit" class="delete-task-btn"><i class="fa-solid fa-square-check"></i>Supprimer les tâches terminées</button>
 				</li>
 				<li>
-					<button type="submit" class="delete-all-btn"><i class="fa-solid fa-trash"></i>Supprimer toutes les tâches</button>
+					<form action="/deleteAllTasks" method="post">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+						<button type="submit" class="delete-all-btn"><i class="fa-solid fa-trash"></i>Supprimer toutes les tâches</button>
+					</form>
 				</li>
 			</ul>
 		</div>
