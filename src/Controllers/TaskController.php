@@ -5,11 +5,25 @@ namespace src\controllers;
 session_start();
 
 use Exception;
-use src\controllers\UserController;
 
 // La classe TaskController hérite de la classe BaseController : elle récupère ses propriétés et méthodes
 class TaskController extends BaseController
 {
+    public function footerClass()
+    {
+        $tasks = []; // tasks sera un tableau associatif, pareil pour $categories et $priorities
+        $class = "";
+
+        if (count($tasks) >= 5) {
+            $class = "footer-dynamic";
+        } else {
+            $class = "footer-absolute";
+        }
+
+        // var_dump($class);
+
+        // $this->render('inc/_footer.html.twig', ['class' => $class]);
+    }
 
     // La méthode render() permet d'appeler un fichier spécifique grâce à son chemin d'accès et de lui transmettre des données (voir BaseController.php)
     // Cette méthode va appeler les méthodes de la classe Database nécessaires à l'affichage des tâches
@@ -28,23 +42,29 @@ class TaskController extends BaseController
         $categories = [];
         $priorities = [];
         $message = "";
+        $class = "";
 
         if (isset($_SESSION['user_id'])) {
 
             $username = $_SESSION['username']; // Récupère le nom de l'utilisateur pour l'afficher dans la page
             $user_id = $_SESSION['user_id']; // Récupère l'identifiant de l'utilisateur pour l'afficher dans la page
-
             $csrf_token = $_SESSION['csrf_token'];
             $tasks = $this->db->findUserTasks($user_id, 'tasks'); // Je récupère toutes les données de la table tasks grâce à la méthode findUserTasks et les stocke dans un tableau "tasks"
             $categories = $this->db->getCategories('categories');
             $priorities = $this->db->getPriorities('priorities');
+
+            if (count($tasks) >= 5) {
+                $class = "footer-dynamic";
+            } else {
+                $class = "footer-absolute";
+            }
 
             if (empty($tasks)) {
                 $message = "Vous n'avez aucune tâche.";
             }
         }
 
-        $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities, 'message' => $message, 'username' => $username, 'user_id' => $user_id]);
+        $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities, 'message' => $message, 'username' => $username, 'user_id' => $user_id, 'class' => $class]);
     }
 
     public function createTask()
@@ -141,11 +161,68 @@ class TaskController extends BaseController
             $statement = $this->db->deleteTask($task_id, 'tasks');
 
             if (!$statement) {
-                $message = "Une erreur est survenue : La suppression n'a pas pu être effectuée.";
+                throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
             } else {
                 header('Location: /'); // Je redirige vers la page d'accueil (la racine, soit : '/')
                 exit;
             }
         }
+    }
+
+    public function deleteAllTasks()
+    {
+        $user_id = $_SESSION['user_id'];
+
+        // Je récupère de l'id de l'utilisateur associé à la tâche afin de comparer avec celui présent dans la session actuelle
+        $tasks = $this->db->findUserTasks($user_id, 'tasks');
+        echo "<pre>";
+
+        foreach ($tasks as $array) {
+            foreach ($array as $key => $value) {
+                print "$key : $value<br>"; // Récupère le contenu des tableaux de la variable $tasks
+
+                // if ($key->$user_id !== 4) {
+                //     echo "Faux";
+                // } else {
+                //     echo "Ok, l'id correspond";
+                // }
+            }
+
+            print "<br>----<br><br>";
+        }
+
+        // foreach ($tasks as $array => $values) {
+        //     print "$array [\n"; // Parcours la variable $tasks afin de récupérer chaque tâche, représentées sous forme de tableaux associatifs (0 et 1)
+
+        //     foreach ($values as $key => $value) {
+        //         print "$key => $value\n"; // Récupère le contenu des tableaux de la variable $tasks
+
+        //         if ($key->$user_id !== 4) {
+        //             echo "Faux";
+        //         } else {
+        //             echo "Ok, l'id correspond";
+        //         }
+        //     }
+        //     print "]\n";
+        // }
+
+        // if ($user_id === $tasks['user_id']) {
+
+        //     if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+        //         throw new Exception("Le token CSRF est invalide.");
+        //     } else {
+        //         // J'apelle la méthode deleteTask pour qu'elle supprime cette tâche du tableau "tasks"
+        //         $statement = $this->db->deleteAllTasks($user_id, 'tasks');
+
+        //         if (!$statement) {
+        //             throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
+        //         } else {
+        //             header('Location: /'); // Je redirige vers la page d'accueil (la racine, soit : '/')
+        //             exit;
+        //         }
+        //     }
+        // } else {
+        //     throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
+        // }
     }
 }
