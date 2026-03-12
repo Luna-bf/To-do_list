@@ -5563,9 +5563,14 @@ li > a {
 }
 
 /*** FOOTER ***/
-footer {
+.footer-dynamic {
   flex-direction: row;
   justify-content: center;
+  padding: 1.3em;
+  background-color: #333D65;
+}
+
+.footer-absolute {
   padding: 1.3em;
   background-color: #333D65;
   position: absolute;
@@ -5716,9 +5721,10 @@ main .action > a:hover {
 .action-buttons > ul {
   flex-direction: row;
   margin-top: 60px;
+  margin-bottom: 80px;
 }
 
-.action-buttons ul li > button {
+.action-buttons ul li > button, .action-buttons ul li form > button {
   font-family: "Poppins-Regular";
   padding: 8px 15px 8px 15px;
   background-color: #fff;
@@ -5731,7 +5737,7 @@ main .action > a:hover {
   font-size: 14px;
 }
 
-.action-buttons ul li > button:hover {
+.action-buttons ul li > button:hover, .action-buttons ul li form > button:hover {
   color: #fff;
   cursor: pointer;
 }
@@ -5746,12 +5752,12 @@ main .action > a:hover {
   background-color: #1C1E7B;
 }
 
-.action-buttons ul li > .delete-all-btn {
+.action-buttons ul li form > .delete-all-btn {
   border: 1px solid #b22222;
   color: #b22222;
 }
 
-.action-buttons ul li > .delete-all-btn:hover {
+.action-buttons ul li form > .delete-all-btn:hover {
   background-color: #b22222;
 }
 
