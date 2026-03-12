@@ -150,7 +150,7 @@ class TaskController extends BaseController
             if (!$statement) {
                 throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
             } else {
-                header('Location: /'); // Je redirige vers la page d'accueil (la racine, soit : '/')
+                header('Location: /home'); // Je redirige vers la page d'accueil (la racine, soit : '/')
                 exit;
             }
         }
@@ -184,23 +184,5 @@ class TaskController extends BaseController
                 throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
             }
         }
-        // if ($user_id === $tasks['user_id']) {
-
-        //     if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
-        //         throw new Exception("Le token CSRF est invalide.");
-        //     } else {
-        //         // J'apelle la méthode deleteTask pour qu'elle supprime cette tâche du tableau "tasks"
-        //         $statement = $this->db->deleteAllTasks($user_id, 'tasks');
-
-        //         if (!$statement) {
-        //             throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
-        //         } else {
-        //             header('Location: /'); // Je redirige vers la page d'accueil (la racine, soit : '/')
-        //             exit;
-        //         }
-        //     }
-        // } else {
-        //     throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
-        // }
     }
 }
