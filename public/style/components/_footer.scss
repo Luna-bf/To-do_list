@@ -1,3 +1,5 @@
+@use "../../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss"; // Importation des icônes GitHub et LinkedIn
+
 /*** FOOTER ***/
 .footer-dynamic {
     flex-direction: row;
@@ -21,7 +23,7 @@
 }
 
 .socials-icons a>i {
-    font-size: 38px;
+    font-size: 42px;
 }
 
 .fa-github {
@@ -30,5 +32,5 @@
 
 .fa-linkedin {
     color: #0077B5;
-    margin-left: 15px;
+    margin-left: 20px;
 }
