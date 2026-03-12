@@ -42,6 +42,11 @@ main .action>a:hover {
     align-items: center;
 }
 
+.task>input {
+    transform: scale(1.3);
+    margin-right: 3px;
+}
+
 .task>input:checked+label {
     /*si label a son input coché alors {...} */
     color: #777;
