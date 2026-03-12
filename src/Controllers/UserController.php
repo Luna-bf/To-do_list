@@ -4,8 +4,6 @@ namespace src\controllers;
 
 session_start();
 
-use Exception;
-
 class UserController extends BaseController
 {
 
@@ -74,7 +72,7 @@ class UserController extends BaseController
                     $_SESSION['user_id'] = $table_row['user_id'];
                     $_SESSION['username'] = $table_row['username']; // Je stocke aussi le nom de l'utilisateur trouvé par fetch() dans la session
 
-                    header('Location: /'); // Puis je redirige l'utilisateur vers une autre page.
+                    header('Location: /home'); // Puis je redirige l'utilisateur vers une autre page.
                     exit; // Cette fonction permet de fermer le script qui exécute le formulaire, cela empêche le formulaire d'être envoyé de nouveau lorsque je rafraichi la page
 
                 } else { // Sinon j'affiche un message d'erreur
