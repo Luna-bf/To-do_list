@@ -8,14 +8,15 @@
 			{% endblock %}
 		</title>
 		<link rel="icon" type="image/x-icon" href="assets/imgs/favicon-48x48.png">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        type="text/css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" type="text/css">
 		<link rel="stylesheet" href="/style/main.css">
 	</head>
 
 	<body>
 		{% include "inc/_header.html.twig" %}
 		{% block main %}{% endblock %}
-		{% include "inc/_footer.html.twig" %}
+		{% block footer %}
+			{% include "inc/_footer.html.twig" %}
+		{% endblock %}
 	</body>
 </html>
