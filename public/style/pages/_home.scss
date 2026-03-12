@@ -9,9 +9,11 @@ main .action>h1 {
 }
 
 main .action>a {
+    display: flex;
+    flex-direction: row;
     font-family: "Poppins-Regular";
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 15px;
     background-color: #fff;
     color: #1B9675;
     border: 1px solid #1B9675;
@@ -22,8 +24,10 @@ main .action>a {
 }
 
 main .action a>i {
-    margin-right: 8px;
-    font-size: 13px;
+    margin-right: 22.5px;
+    font-size: 15px;
+    line-height: 0;
+    width: 0;
 }
 
 main .action>a:hover {
@@ -53,6 +57,10 @@ main .action>a:hover {
     text-decoration: line-through;
 }
 
+.task>label {
+    cursor: pointer;
+}
+
 /* Priorités et catégories */
 .priority-1 {
     color: red;
@@ -76,7 +84,7 @@ main .action>a:hover {
     align-items: center;
     padding: 5px 12px 5px 12px;
     border-radius: 5px;
-    font-size: 13px;
+    font-size: 13.5px;
 }
 
 .task>.edit-button {
@@ -96,7 +104,7 @@ main .action>a:hover {
     border: 1px solid #b22222;
     background-color: #fff;
     color: #b22222;
-    font-size: 13px;
+    font-size: 13.5px;
     margin-left: 8px;
 }
 
@@ -135,7 +143,7 @@ main .action>a:hover {
     padding: 8px 15px 8px 15px;
     background-color: #fff;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .action-buttons ul li button>i {
