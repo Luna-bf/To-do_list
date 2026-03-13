@@ -50,6 +50,25 @@ form .form-container .form-input>input, select {
     cursor: pointer;
 }
 
+#update-submit {
+    margin-bottom: 70px;
+}
+
+form .form-container>.form-checkbox {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 35px;
+}
+
+form .form-container .form-checkbox>input {
+    transform: scale(1.2);
+}
+
+form .form-container .form-checkbox>label {
+    font-family: "Poppins-Light";
+    margin-left: 8px;
+}
+
 .error-message {
     font-family: "Poppins-Regular";
     color: firebrick;
