@@ -114,7 +114,7 @@ class TaskController extends BaseController
                 $priority = $_POST['priority'];
                 $task_name = $_POST['task_name'];
                 $is_complete = $_POST['is_complete'];
-                
+
                 if (!empty($category) && !empty($priority) && !empty($task_name)) {
 
                     // Je récupère les valeurs saisies dans le formulaire puis je met à jour la tâche
@@ -138,28 +138,32 @@ class TaskController extends BaseController
 
     public function deleteTask()
     {
-        // Si le token n'existe pas OU qu'il existe mais qu'il ne correspond pas au token créé par la session...
-        if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
-            throw new Exception("Le token CSRF est invalide.");
-        } else {
-            // Je récupère l'id de la tâche à supprimer
-            $task_id = $_POST['task_id'];
+        $user_id = $_SESSION['user_id'];
+        $task_id = $_POST['task_id']; // Je récupère l'id de la tâche à supprimer
+        $task = $this->db->findTask($task_id, 'tasks'); // J'appelle la méthode findTask() pour qu'elle récupère la tâche à supprimer
 
-            // J'apelle la méthode deleteTask pour qu'elle supprime cette tâche du tableau "tasks"
-            $statement = $this->db->deleteTask($task_id, 'tasks');
-
-            if (!$statement) {
-                throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
+        if ($task['user_id'] === $user_id) {
+            // Si le token n'existe pas OU qu'il existe mais qu'il ne correspond pas au token créé par la session...
+            if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+                throw new Exception("Le token CSRF est invalide.");
             } else {
-                header('Location: /home'); // Je redirige vers la page home
-                exit;
+                // J'apelle la méthode deleteTask pour qu'elle supprime cette tâche du tableau "tasks"
+                $statement = $this->db->deleteTask($task_id, 'tasks');
+
+                if (!$statement) {
+                    throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
+                } else {
+                    header('Location: /home'); // Je redirige vers la page home
+                    exit;
+                }
             }
+        } else {
+            throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
         }
     }
 
     public function deleteAllTasks()
     {
-
         $user_id = $_SESSION['user_id'];
         $tasks = $this->db->findUserTasks($user_id, 'tasks');
 
