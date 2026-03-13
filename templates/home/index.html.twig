@@ -14,8 +14,8 @@
 		<section class="d-flex all-tasks">
 			<ul>
 				{% for task in tasks %}
-					<li class="d-flex task" id="{{ task.task_id }}">
-						<input type="checkbox" name="{{ task.task_id }}" id="{{ task.task_id }}" value="{{ task.is_complete }}" {% if task.is_complete === 1 %}checked{% endif %} />
+					<li class="d-flex task" id="task-{{ task.task_id }}">
+						<input type="checkbox" name="is_complete" id="{{ task.task_id }}" {% if task.is_complete == 1 %}checked{% endif %} />
 						<label for="{{ task.task_id }}" class="priority-{{ task.priority_id }}">{{ task.task_name }}</label>
 						<span class="category" id="{{ task.category_id }}">({{ task.category_name }})</span>
 						{#
@@ -70,7 +70,7 @@
 			<ul class="d-flex list-unstyled">
 				<li>
 					{# La vue supervise l'affichage des données, l'état du bouton (désactivé ou non) va donc être géré par Twig et pas par le contrôleur #}
-					<button type="submit" class="delete-task-btn" {% if not tasks.is_complete %}disabled{% endif %}><i class="fa-solid fa-square-check"></i>Supprimer les tâches terminées</button>
+					<button type="submit" class="delete-task-btn" {% if task.is_complete === 0 %}disabled{% endif %}><i class="fa-solid fa-square-check"></i>Supprimer les tâches terminées</button>
 				</li>
 				<li>
 					<form action="/deleteAllTasks" method="post">
