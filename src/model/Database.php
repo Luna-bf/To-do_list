@@ -136,7 +136,7 @@ class Database
         );
 
         $statement->execute(['task_id' => $task_id]); // Exécute la requête préparée puis renvoie un résultat true ou false
-        return $statement->fetchAll(PDO::FETCH_ASSOC); // Récupère les données de la requête
+        return $statement->fetch(PDO::FETCH_ASSOC); // Récupère les données de la requête
     }
 
     public function getCategories()
