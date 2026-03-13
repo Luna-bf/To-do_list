@@ -8,60 +8,60 @@
 {% endblock %}
 
 {% block main %}
-	<main class="d-flex form-main">
-		{% for taskData in task %}
-			{#
-									L'action du formulaire doit bien contenir l'identifiant de la tâche, sinon l'identifiant ne pourra pas être récupéré
-									par le formulaire, ce qui me renverra vers une page d'erreur.
-									#}
-			<form action="/task/updateTask?id={{ taskData.task_id }}" method="post">
-				<div class="form-container">
-					<h1>Modifiez la tâche</h1>
+	<main
+		class="d-flex form-main">
+		{#
+		L'action du formulaire doit bien contenir l'identifiant de la tâche, sinon l'identifiant ne pourra pas être récupéré
+		par le formulaire, ce qui me renverra vers une page d'erreur.
+		#}
+		<form action="/task/updateTask?id={{ task.task_id }}" method="post">
+			<div class="form-container">
+				<h1>Modifiez la tâche</h1>
 
-					<!-- Nom de la tâche -->
-					<div class="d-flex form-input">
-						<label for="task_name" class="form-label">Nom de la tâche :</label>
-						<input type="text" name="task_name" id="{{ taskData.task_id }}" value="{{ taskData.task_name }}" required/>
-					</div>
-
-					<!-- Catégories -->
-					<div class="d-flex form-input">
-						<label for="category">Catégorie :</label>
-						<select name="category" id="category">
-							{% for category in categories %}
-								<option value="{{ category.category_id }}" id="{{ category.category_id }}">{{ category.category_name }}</option>
-							{% endfor %}
-						</select>
-					</div>
-
-					<!-- Priorité -->
-					<div class="d-flex form-input">
-						<label for="priority">Priorité :</label>
-						<select name="priority" id="priority">
-							{% for priority in priorities %}
-								<option value="{{ priority.priority_id }}" id="{{ priority.priority_id }}">{{ priority.priority_name }}</option>
-							{% endfor %}
-						</select>
-					</div>
-					<!-- Est terminée -->
-					<div
-						class="d-flex form-checkbox">
-						{# Je crée une condition if dans l'input pour gérer son état (coché ou non) #}
-						<input type="checkbox" name="is_complete" id="is_complete" value="{{ taskData.is_complete }}" {% if taskData.is_complete === 1 %}checked{% endif %}/>
-						<label for="is_complete">Terminée</label>
-					</div>
-
-					<div class="error-message">
-						<p>{{ message }}</p>
-					</div>
-
-					<!-- Bouton de validation -->
-					<div class="d-flex submit-input" id="update-submit">
-						<input type="submit" name="update" class="d-flex" value="Modifier la tâche"/>
-					</div>
+				<!-- Nom de la tâche -->
+				<div class="d-flex form-input">
+					<label for="task_name" class="form-label">Nom de la tâche :</label>
+					<input type="text" name="task_name" id="{{ task.task_id }}" value="{{ task.task_name }}" required/>
 				</div>
-			</form>
-		{% endfor %}
+
+				<!-- Catégories -->
+				<div class="d-flex form-input">
+					<label for="category">Catégorie :</label>
+					<select name="category" id="category">
+						{% for category in categories %}
+							<option value="{{ category.category_id }}" id="{{ category.category_id }}">{{ category.category_name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<!-- Priorité -->
+				<div class="d-flex form-input">
+					<label for="priority">Priorité :</label>
+					<select name="priority" id="priority">
+						{% for priority in priorities %}
+							<option value="{{ priority.priority_id }}" id="{{ priority.priority_id }}">{{ priority.priority_name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<!-- Est terminée -->
+				<div
+					class="d-flex form-checkbox">
+					{# Je crée une condition if dans l'input pour gérer l'état du checkbox (coché ou non) #}
+					<input type="checkbox" name="is_complete" id="is_complete" {% if task.is_complete == 1 %}checked{% endif %}/>
+					<label for="is_complete">Terminée</label>
+				</div>
+
+				<div class="error-message">
+					<p>{{ message }}</p>
+				</div>
+
+				<!-- Bouton de validation -->
+				<div class="d-flex submit-input" id="update-submit">
+					<input type="submit" name="update" class="d-flex" value="Modifier la tâche"/>
+				</div>
+			</div>
+		</form>
 	</main>
 {% endblock %}
 
