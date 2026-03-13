@@ -49,7 +49,7 @@ class TaskController extends BaseController
                 $message = "Vous n'avez aucune tâche.";
             }
         }
-        
+
         $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities, 'message' => $message, 'username' => $username, 'user_id' => $user_id, 'class' => $class]);
     }
 
@@ -97,11 +97,11 @@ class TaskController extends BaseController
     {
         $username = $_SESSION['username'];
         $user_id = $_SESSION['user_id'];
-        $task_id = $_GET['id'];
-        $is_complete = $_POST['is_complete'];
+        $task_id = $_GET['id']; // Récupère l'identifiant passé dans l'URL
+        $is_complete = null; // Par défaut, la valeur du checkbox est 0 (false)
         $updatedTask = null;
         $message = "";
-        
+
         if (isset($task_id)) {
 
             $categories = $this->db->getCategories('categories');
@@ -113,10 +113,10 @@ class TaskController extends BaseController
                 $category = $_POST['category'];
                 $priority = $_POST['priority'];
                 $task_name = $_POST['task_name'];
-                $is_complete = isset($_POST['is_complete']) ? 1 : 0; // J'utilise l'opérateur ternaire : si is_complete existe (coché) alors il est égal à 1, sinon s'il est égal à zéro (pas coché) alors il est égal à zéro
-
+                $is_complete = $_POST['is_complete'];
+                
                 if (!empty($category) && !empty($priority) && !empty($task_name)) {
-                    
+
                     // Je récupère les valeurs saisies dans le formulaire puis je met à jour la tâche
                     $updatedTask = $this->db->updateTask($category, $priority, $task_name, $is_complete, $task_id);
 
