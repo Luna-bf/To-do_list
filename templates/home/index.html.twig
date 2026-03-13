@@ -15,8 +15,8 @@
 			<ul>
 				{% for task in tasks %}
 					<li class="d-flex task" id="{{ task.task_id }}">
-						<input type="checkbox" name="{{ task.task_id }}" id="task-{{ task.task_id }}"/>
-						<label for="task-{{ task.task_id }}" class="priority-{{ task.priority_id }}">{{ task.task_name }}</label>
+						<input type="checkbox" name="{{ task.task_id }}" id="{{ task.task_id }}" value="{{ task.is_complete }}" {% if task.is_complete === 1 %}checked{% endif %} />
+						<label for="{{ task.task_id }}" class="priority-{{ task.priority_id }}">{{ task.task_name }}</label>
 						<span class="category" id="{{ task.category_id }}">({{ task.category_name }})</span>
 						{#
 						- Je crée un lien vers la route (/form/updateTask) que je complète passant l'identifiant de la tâche à
@@ -69,12 +69,14 @@
 		<div class="d-flex action-buttons">
 			<ul class="d-flex list-unstyled">
 				<li>
-					<button type="submit" class="delete-task-btn"><i class="fa-solid fa-square-check"></i>Supprimer les tâches terminées</button>
+					{# La vue supervise l'affichage des données, l'état du bouton (désactivé ou non) va donc être géré par Twig et pas par le contrôleur #}
+					<button type="submit" class="delete-task-btn" {% if not tasks.is_complete %}disabled{% endif %}><i class="fa-solid fa-square-check"></i>Supprimer les tâches terminées</button>
 				</li>
 				<li>
 					<form action="/deleteAllTasks" method="post">
 						<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-						<button type="submit" class="delete-all-btn"><i class="fa-solid fa-trash"></i>Supprimer toutes les tâches</button>
+						{# Si le nombre d'éléments présent dans le tableau "tasks" est inférieur à 1 (vide), alors le bouton est désactivé #}
+						<button type="submit" class="delete-all-btn" {% if tasks|length < 1 %}disabled{% endif %}><i class="fa-solid fa-trash"></i>Supprimer toutes les tâches</button>
 					</form>
 				</li>
 			</ul>
