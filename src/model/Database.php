@@ -157,10 +157,10 @@ class Database
         return $task->execute(['user_id' => $user_id, 'category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name]);
     }
 
-    public function updateTask($category, $priority, $task_name, $task_id)
+    public function updateTask($category, $priority, $task_name, $is_complete, $task_id)
     {
-        $task = $this->pdo->prepare("UPDATE tasks SET category_id = :category_id, priority_id = :priority_id, task_name = :task_name WHERE task_id = :task_id");
-        return $task->execute(['category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name, 'task_id' => $task_id]);
+        $task = $this->pdo->prepare("UPDATE tasks SET category_id = :category_id, priority_id = :priority_id, task_name = :task_name, is_complete = :is_complete WHERE task_id = :task_id");
+        return $task->execute(['category_id' => $category, 'priority_id' => $priority, 'task_name' => $task_name, 'is_complete' => $is_complete, 'task_id' => $task_id]);
     }
 
     public function deleteTask($task_id)
