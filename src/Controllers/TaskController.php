@@ -9,11 +9,12 @@ use Exception;
 // La classe TaskController hérite de la classe BaseController : elle récupère ses propriétés et méthodes
 class TaskController extends BaseController
 {
-    
+
     // La méthode render() permet d'appeler un fichier spécifique grâce à son chemin d'accès et de lui transmettre des données (voir BaseController.php)
     // Cette méthode va appeler les méthodes de la classe Database nécessaires à l'affichage des tâches
     public function index()
     {
+
         // J'initialise le token CSRF dans la méthode qui affiche toutes les tâches, pour que toutes les tâches ai un token CSRF
         if (!isset($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(128));
@@ -22,13 +23,12 @@ class TaskController extends BaseController
         // Initialisation des variables (comme ça elles restent accessible en dehors de la condition if)
         $username = null; // Par défaut, username est égal à null (aucune valeur)
         $user_id = null; // Par défaut, user_id est égal à null (aucune valeur)
-        $csrf_token = $_SESSION['csrf_token'];
+        $csrf_token = $_SESSION['csrf_token']; // Je récupère le token CSRF
         $tasks = []; // tasks sera un tableau associatif, pareil pour $categories et $priorities
         $categories = [];
         $priorities = [];
         $message = "";
         $class = "";
-        // $isDisabled = false;
 
         if (isset($_SESSION['user_id'])) {
 
@@ -47,10 +47,9 @@ class TaskController extends BaseController
 
             if (empty($tasks)) {
                 $message = "Vous n'avez aucune tâche.";
-                // $isDisabled = true;
             }
         }
-
+        
         $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities, 'message' => $message, 'username' => $username, 'user_id' => $user_id, 'class' => $class]);
     }
 
@@ -82,7 +81,7 @@ class TaskController extends BaseController
 
                 // Si la tâche a bien été créée, je redirige vers la page d'accueil
                 if ($task) {
-                    header('Location: /home'); // Redirection vers la page d'accueil (la racine, soit : '/')
+                    header('Location: /home'); // Je redirige vers la page home
                     exit;
                 }
             } else {
@@ -99,9 +98,10 @@ class TaskController extends BaseController
         $username = $_SESSION['username'];
         $user_id = $_SESSION['user_id'];
         $task_id = $_GET['id'];
+        $is_complete = $_POST['is_complete'];
         $updatedTask = null;
         $message = "";
-
+        
         if (isset($task_id)) {
 
             $categories = $this->db->getCategories('categories');
@@ -113,14 +113,15 @@ class TaskController extends BaseController
                 $category = $_POST['category'];
                 $priority = $_POST['priority'];
                 $task_name = $_POST['task_name'];
+                $is_complete = isset($_POST['is_complete']) ? 1 : 0; // J'utilise l'opérateur ternaire : si is_complete existe (coché) alors il est égal à 1, sinon s'il est égal à zéro (pas coché) alors il est égal à zéro
 
                 if (!empty($category) && !empty($priority) && !empty($task_name)) {
-
-                    // Je récupère les valeurs saisies dans le formulaire
-                    $updatedTask = $this->db->updateTask($category, $priority, $task_name, $task_id);
+                    
+                    // Je récupère les valeurs saisies dans le formulaire puis je met à jour la tâche
+                    $updatedTask = $this->db->updateTask($category, $priority, $task_name, $is_complete, $task_id);
 
                     if ($updatedTask) {
-                        header('Location: /home'); // Je redirige vers la page d'accueil (la racine, soit : '/')
+                        header('Location: /home'); // Je redirige vers la page home
                         exit;
                     }
                 } else {
@@ -150,7 +151,7 @@ class TaskController extends BaseController
             if (!$statement) {
                 throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
             } else {
-                header('Location: /home'); // Je redirige vers la page d'accueil (la racine, soit : '/')
+                header('Location: /home'); // Je redirige vers la page home
                 exit;
             }
         }
@@ -176,7 +177,7 @@ class TaskController extends BaseController
                     if (!$statement) {
                         throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
                     } else {
-                        header('Location: /home'); // Je redirige vers la page d'accueil (la racine, soit : '/')
+                        header('Location: /home'); // Je redirige vers la page home
                         exit;
                     }
                 }
