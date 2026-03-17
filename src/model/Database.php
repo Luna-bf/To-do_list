@@ -70,6 +70,12 @@ class Database
         return $statement;
     }
 
+    public function findUser($user_id) {
+        $statement = $this->pdo->prepare('SELECT * FROM users WHERE user_id = :user_id');
+        $statement->execute([":user_id" => $user_id]);
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
     // Raccourci pour avoir ce type de commentaire : / + ** + Entrée
     /**
      * Récupère toutes les lignes (enregistrements) de la table en fonction de l'id d'un utilisateur précis
