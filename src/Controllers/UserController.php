@@ -88,6 +88,13 @@ class UserController extends BaseController
         $this->render('form/login.html.twig', ['email' => $email, 'password' => $password, 'message' => $message]);
     }
 
+    public function profile() {
+        $user_id = $_SESSION['user_id'];
+        $username = $_SESSION['username'];
+        
+        $this->render('user/index.html.twig', ['user_id' => $user_id, 'username' => $username]);
+    }
+
     public function logout()
     {
         if (session_status() == PHP_SESSION_ACTIVE) {
