@@ -52,6 +52,10 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
     case '/user/account':
         (new UserController())->account();
         break;
+
+    case '/user/editPassword':
+        (new UserController())->editPassword();
+        break;
         
     default:
         echo "Page introuvable.";

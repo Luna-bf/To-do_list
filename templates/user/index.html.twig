@@ -36,7 +36,7 @@
 
 				<!-- Bouton de validation -->
 				<div class="d-flex submit-input" id="update-submit">
-					<input type="submit" name="update" class="d-flex" value="Enregistrer les modifications"/>
+					<input type="submit" name="update-infos" class="d-flex" value="Enregistrer les modifications"/>
 				</div>
 			</div>
 		</form>
@@ -48,8 +48,8 @@
 			<ul class="d-flex list-unstyled">
 				<li>
 					{# La vue supervise l'affichage des données, l'état du bouton (désactivé ou non) va donc être géré par Twig et pas par le contrôleur #}
-					<a href="#" class="edit-password-link d-flex">
-						<i class="fa-solid fa-arrows-rotate"></i>Réinitialiser le mot de passe</a>
+					<a href="/user/editPassword" class="edit-password-link d-flex">
+						<i class="fa-solid fa-arrows-rotate"></i>Modifier le mot de passe</a>
 				</li>
 				<li>
 					<form action="/deleteAllTasks" method="post">
