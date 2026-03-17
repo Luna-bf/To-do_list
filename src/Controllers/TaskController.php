@@ -21,7 +21,7 @@ class TaskController extends BaseController
         }
 
         // Initialisation des variables (comme ça elles restent accessible en dehors de la condition if)
-        $username = null; // Par défaut, username est égal à null (aucune valeur)
+        $user = null; // Par défaut, username est égal à null (aucune valeur)
         $user_id = null; // Par défaut, user_id est égal à null (aucune valeur)
         $csrf_token = $_SESSION['csrf_token']; // Je récupère le token CSRF
         $tasks = []; // tasks sera un tableau associatif, pareil pour $categories et $priorities
@@ -32,8 +32,8 @@ class TaskController extends BaseController
 
         if (isset($_SESSION['user_id'])) {
 
-            $username = $_SESSION['username']; // Récupère le nom de l'utilisateur pour l'afficher dans la page
             $user_id = $_SESSION['user_id']; // Récupère l'identifiant de l'utilisateur pour l'afficher dans la page
+            $user = $this->db->findUser($user_id);
             $csrf_token = $_SESSION['csrf_token'];
             $tasks = $this->db->findUserTasks($user_id, 'tasks'); // Je récupère toutes les données de la table tasks grâce à la méthode findUserTasks et les stocke dans un tableau "tasks"
             $categories = $this->db->getCategories('categories');
@@ -50,7 +50,7 @@ class TaskController extends BaseController
             }
         }
 
-        $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities, 'message' => $message, 'username' => $username, 'user_id' => $user_id, 'class' => $class]);
+        $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities, 'message' => $message, 'user' => $user, 'user_id' => $user_id, 'class' => $class]);
     }
 
     public function createTask()
@@ -60,8 +60,8 @@ class TaskController extends BaseController
         - Le nom de l'utilisateur et son identifiant unique dans la session
         - Toutes les catégories et priorités depuis la base de données grâce aux méthodes définies dans le modèle
         */
-        $username = $_SESSION['username'];
         $user_id = $_SESSION['user_id'];
+        $user = $this->db->findUser($user_id);
         $categories = $this->db->getCategories('categories');
         $priorities = $this->db->getPriorities('priorities');
         $message = "";
@@ -90,13 +90,13 @@ class TaskController extends BaseController
         }
 
         // Je passe les catégories, les priorités et la tâche que je créé en tant que valeurs à la page
-        $this->render('home/task/createTask.html.twig', ['user_id' => $user_id, 'username' => $username, 'categories' => $categories, 'priorities' => $priorities, 'category' => $category, 'priority' => $priority, 'task' => $task, 'message' => $message]);
+        $this->render('home/task/createTask.html.twig', ['user_id' => $user_id, 'user' => $user, 'categories' => $categories, 'priorities' => $priorities, 'category' => $category, 'priority' => $priority, 'task' => $task, 'message' => $message]);
     }
 
     public function updateTask()
     {
-        $username = $_SESSION['username'];
         $user_id = $_SESSION['user_id'];
+        $user = $this->db->findUser($user_id);
         $task_id = $_GET['id']; // Récupère l'identifiant passé dans l'URL
         $is_complete = null; // Par défaut, la valeur du checkbox est 0 (false)
         $updatedTask = null;
@@ -133,7 +133,7 @@ class TaskController extends BaseController
         }
 
         // Je passe les catégories, les priorités et la tâche modifiée en tant que valeurs à la page
-        $this->render('home/task/updateTask.html.twig', ['user_id' => $user_id, 'username' => $username, 'categories' => $categories, 'priorities' => $priorities, 'task' => $task, 'updatedTask' => $updatedTask, 'message' => $message]);
+        $this->render('home/task/updateTask.html.twig', ['user_id' => $user_id, 'user' => $user, 'categories' => $categories, 'priorities' => $priorities, 'task' => $task, 'updatedTask' => $updatedTask, 'message' => $message]);
     }
 
     public function deleteTask()
