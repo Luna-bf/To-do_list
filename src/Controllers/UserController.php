@@ -88,7 +88,7 @@ class UserController extends BaseController
         $this->render('form/login.html.twig', ['email' => $email, 'password' => $password, 'message' => $message]);
     }
 
-    public function profile() {
+    public function account() {
         $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'];
         
