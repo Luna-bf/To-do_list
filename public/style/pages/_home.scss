@@ -156,17 +156,17 @@ main .action>a:hover {
     cursor: pointer;
 }
 
-.action-buttons ul li>.delete-task-btn {
+.action-buttons ul li form>.delete-task-btn {
     border: 1px solid #1C1E7B;
     color: #1C1E7B;
     margin-right: 30px;
 }
 
-.action-buttons ul li>.delete-task-btn:hover {
+.action-buttons ul li form>.delete-task-btn:hover {
     background-color: #1C1E7B;
 }
 
-.action-buttons ul li>.delete-task-btn:disabled {
+.action-buttons ul li form>.delete-task-btn:disabled {
     border: 1px solid #1C1E7B89;
     color: #1C1E7B89;
     pointer-events: none;
