@@ -88,6 +88,13 @@ class UserController extends BaseController
         $this->render('form/login.html.twig', ['email' => $email, 'password' => $password, 'message' => $message]);
     }
 
+    public function findUser() {
+        $user_id = $_SESSION['user_id']; // Je récupère l'identifiant de l'utilisateur présent dans la session
+        $user = $this->db->findUser($user_id); // Je recherche l'utilisateur grâce à l'id récupéré dans la session
+
+        $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user]);
+    }
+
     public function updateUsername()
     {
         $user_id = $_SESSION['user_id']; // Je récupère l'identifiant de l'utilisateur présent dans la session
@@ -105,7 +112,7 @@ class UserController extends BaseController
                 $updatedUsername = $this->db->updateUsername($username, $user_id);
 
                 if ($updatedUsername) {
-                    header('Location: ../home');
+                    header('Location: /user/account');
                     exit;
                 }
             } else {
@@ -114,6 +121,35 @@ class UserController extends BaseController
         }
 
         $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'username' => $username, 'message' => $message]);
+    }
+
+    public function updateEmail()
+    {
+
+        $user_id = $_SESSION['user_id']; // Je récupère l'identifiant de l'utilisateur présent dans la session
+        $user = $this->db->findUser($user_id); // Je recherche l'utilisateur grâce à l'id récupéré dans la session
+        $email = null;
+        $message = "";
+
+        if (isset($_POST['update_email'])) {
+
+            $email = htmlspecialchars(trim($_POST['email'])); // Champ de saisie nommé "email"
+            $message = "";
+
+            if (!empty($email)) {
+
+                $updatedEmail = $this->db->updateEmail($email, $user_id);
+
+                if ($updatedEmail) {
+                    header('Location: /user/account');
+                    exit;
+                }
+            } else {
+                $message = "Le champ de saisie doit être rempli.";
+            }
+        }
+
+        $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'email' => $email, 'message' => $message]);
     }
 
     public function logout()

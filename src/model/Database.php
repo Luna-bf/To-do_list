@@ -82,6 +82,12 @@ class Database
         return $updateName->execute(['username' => $username, 'user_id' => $user_id]);
     }
 
+    public function updateEmail($email, $user_id)
+    {
+        $updateMail = $this->pdo->prepare("UPDATE users SET email = :email WHERE user_id = :user_id");
+        return $updateMail->execute(['email' => $email, 'user_id' => $user_id]);
+    }
+
     // Raccourci pour avoir ce type de commentaire : / + ** + Entrée
     /**
      * Récupère toutes les lignes (enregistrements) de la table en fonction de l'id d'un utilisateur précis
