@@ -69,9 +69,9 @@ class TaskController extends BaseController
         if (isset($_POST['add'])) {
 
             // Je récupère les valeurs du formulaire
-            $task_name = $_POST['task_name'];
-            $category = $_POST['category'];
-            $priority = $_POST['priority'];
+            $task_name = htmlspecialchars($_POST['task_name']);
+            $category = htmlspecialchars($_POST['category']);
+            $priority = htmlspecialchars($_POST['priority']);
 
             // Je vérifie que tous les champs du formulaire sont remplis
             if (!empty($category) && !empty($priority) && !empty($task_name)) {
@@ -110,10 +110,10 @@ class TaskController extends BaseController
 
             if (isset($_POST['update'])) {
 
-                $category = $_POST['category'];
-                $priority = $_POST['priority'];
-                $task_name = $_POST['task_name'];
-                $is_complete = $_POST['is_complete'];
+                $category = htmlspecialchars($_POST['category']);
+                $priority = htmlspecialchars($_POST['priority']);
+                $task_name = htmlspecialchars($_POST['task_name']);
+                $is_complete = htmlspecialchars($_POST['is_complete']);
 
                 if (!empty($category) && !empty($priority) && !empty($task_name)) {
 
