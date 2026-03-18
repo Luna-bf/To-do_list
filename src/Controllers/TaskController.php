@@ -27,8 +27,9 @@ class TaskController extends BaseController
         $tasks = []; // tasks sera un tableau associatif, pareil pour $categories et $priorities
         $categories = [];
         $priorities = [];
-        $message = "";
         $class = "";
+        $message = "";
+        $isComplete = false;
 
         if (isset($_SESSION['user_id'])) {
 
@@ -39,18 +40,28 @@ class TaskController extends BaseController
             $categories = $this->db->getCategories('categories');
             $priorities = $this->db->getPriorities('priorities');
 
+            // Vérifie le nombre de tâches de l'utilisateur pour changer le style du footer (position absolue ou dynamique)
             if (count($tasks) >= 5) {
                 $class = "footer-dynamic";
             } else {
                 $class = "footer-absolute";
             }
 
+            // Vérifie la valeur de "is_complete" pour définir l'état d'un des boutons de suppression (désactivé ou activé)
+            foreach($tasks as $task) {
+                if($task['is_complete'] === 1) {
+                    $isComplete = true;
+                    break;
+                }
+            }
+
+            // Affiche un message si l'utilisateur n'a aucune tâche
             if (empty($tasks)) {
                 $message = "Vous n'avez aucune tâche.";
             }
         }
 
-        $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities, 'message' => $message, 'user' => $user, 'user_id' => $user_id, 'class' => $class]);
+        $this->render('home/index.html.twig', ['csrf_token' => $csrf_token, 'tasks' => $tasks, 'categories' => $categories, 'priorities' => $priorities, 'message' => $message, 'user' => $user, 'user_id' => $user_id, 'class' => $class, 'isComplete' => $isComplete]);
     }
 
     public function createTask()
