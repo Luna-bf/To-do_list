@@ -9,68 +9,70 @@
 
 {% block main %}
 	<main class="d-flex profile-form">
-		<form action="/user/index?id={{ user.user_id }}" method="post">
-			<div class="form-container">
-				<h1>Votre profil</h1>
+		<h1>Votre profil</h1>
 
+		<form action="/user/updateUsername?id={{ user.user_id }}" method="post">
+			<div
+				class="form-container">
 				<!-- Nom de l'utilisateur -->
 				<div class="d-flex form-input">
 					<label for="username" class="form-label">Nom d'utilisateur</label>
 					<div class="d-flex input-button">
-					<input type="text" name="username" id="username" placeholder="{{ user.username }}"/>
+						<input type="text" name="username" id="username" placeholder="{{ user.username }}"/>
 						<div class="d-flex update-submit">
-							<input type="submit" name="update-username" class="d-flex" value="Modifier"/>
+							<input type="submit" id="update_username" name="update_username" class="d-flex" value="Modifier"/>
 						</div>
 					</div>
 				</div>
+			</div>
+		</form>
 
-				<!-- Adresse mail -->
+		<!-- Adresse mail -->
+		<form action="/user/updateEmail?id={{ user.user_id }}" method="post">
+			<div class="form-container">
 				<div class="d-flex form-input">
 					<label for="email" class="form-label">Adresse mail</label>
 					<div class="d-flex input-button">
 						<input type="email" name="email" id="email" placeholder="{{ user.email }}"/>
 						<div class="d-flex update-submit">
-							<input type="submit" name="update-email" class="d-flex" value="Modifier"/>
+							<input type="submit" id="update_email" name="update_email" class="d-flex" value="Modifier"/>
 						</div>
 					</div>
-				</div>
-
-				<div class="error-message">
-					<p>{{ message }}</p>
 				</div>
 			</div>
 		</form>
 
-		<hr>
-
-		<div class="d-flex account-action-buttons">
-			<h2>Autres actions</h2>
-			<ul class="d-flex list-unstyled">
-				<li>
-					<a href="/user/editPassword" class="edit-password-link d-flex">
-						<i class="fa-solid fa-arrows-rotate"></i>Modifier le mot de passe</a>
-				</li>
-				<li>
-					<form action="/deleteAllTasks" method="post">
-						<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-						<button type="submit" class="delete-account-btn">
-							<i class="fa-solid fa-triangle-exclamation"></i>Supprimer mon compte</button>
-					</form>
-				</li>
-			</ul>
+		<div class="error-message">
+			<p>{{ message }}</p>
 		</div>
-	</main>
-{% endblock %}
+	</div>
 
-{% block footer %}
-	<footer class="footer-dynamic">
-		<div class="socials-icons d-flex">
-			<a href="https://github.com/Luna-bf" target="_blank">
-				<i class="fa-brands fa-github"></i>
-			</a>
-			<a href="https://www.linkedin.com/in/luna-buratti-fayolle/" target="_blank">
-				<i class="fa-brands fa-linkedin"></i>
-			</a>
-		</div>
-	</footer>
-{% endblock %}
+	<hr>
+
+	<div class="d-flex account-action-buttons">
+		<h2>Autres actions</h2>
+		<ul class="d-flex list-unstyled">
+			<li>
+				<a href="/user/editPassword" class="edit-password-link d-flex">
+					<i class="fa-solid fa-arrows-rotate"></i>Modifier le mot de passe</a>
+			</li>
+			<li>
+				<form action="/deleteAllTasks" method="post">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+					<button type="submit" class="delete-account-btn">
+						<i class="fa-solid fa-triangle-exclamation"></i>Supprimer mon compte</button>
+				</form>
+			</li>
+		</ul>
+	</div>
+</main>{% endblock %}{% block footer %}
+<footer class="footer-dynamic">
+	<div class="socials-icons d-flex">
+		<a href="https://github.com/Luna-bf" target="_blank">
+			<i class="fa-brands fa-github"></i>
+		</a>
+		<a href="https://www.linkedin.com/in/luna-buratti-fayolle/" target="_blank">
+			<i class="fa-brands fa-linkedin"></i>
+		</a>
+	</div>
+</footer>{% endblock %}
