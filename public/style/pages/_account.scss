@@ -3,7 +3,44 @@
     align-items: center;
 }
 
+.profile-form > form {
+    width: 35%;
+}
+
+form .form-container .form-input .input-button>input, select {
+    font-family: "Poppins-Light";
+    background-color: #F6F6F6;
+    border: 1px solid #B8B8B8;
+    border-radius: 5px;
+    padding: 6.5px;
+    font-size: 14.2px;
+    width: 100%;
+}
+
+form .form-container .form-input .input-button>.update-submit {
+    margin-left: 12px;
+    height: 38px;
+}
+
+form .form-container .form-input .input-button .update-submit>input {
+    font-family: "Poppins-Light";
+    background-color: #333D65;
+    color: #fff;
+    border: 1px solid #333D65;
+    border-radius: 5px;
+    padding: 8px 40px;
+    font-size: 14px;
+    margin: 0 auto;
+}
+
+form .form-container .form-input .input-button .update-submit>input:hover {
+    background-color: #455491;
+    border: 1px solid #455491;
+    cursor: pointer;
+}
+
 .profile-form>hr {
+    margin-top: 50px;
     width: 70%;
 }
 
