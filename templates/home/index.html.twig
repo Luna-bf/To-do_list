@@ -70,7 +70,7 @@
 			<ul class="d-flex list-unstyled">
 				<li>
 					{# La vue supervise l'affichage des données, l'état du bouton (désactivé ou non) va donc être géré par Twig et pas par le contrôleur #}
-					<button type="submit" class="delete-task-btn" {% if tasks.is_complete|length < 1 %}disabled{% endif %}><i class="fa-solid fa-square-check"></i>Supprimer les tâches terminées</button>
+					<button type="submit" class="delete-task-btn" {% if not isComplete %}disabled{% endif %}><i class="fa-solid fa-square-check"></i>Supprimer les tâches terminées</button>
 				</li>
 				<li>
 					<form action="/deleteAllTasks" method="post">
