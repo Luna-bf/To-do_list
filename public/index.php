@@ -45,6 +45,10 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
         (new TaskController())->deleteTask();
         break;
 
+    case '/deleteCompletedTasks':
+        (new TaskController())->deleteCompletedTasks();
+        break;
+
     case '/deleteAllTasks':
         (new TaskController())->deleteAllTasks();
         break;
