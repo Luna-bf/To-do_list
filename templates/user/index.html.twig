@@ -8,35 +8,35 @@
 {% endblock %}
 
 {% block main %}
-	<main
-		class="d-flex profile-form">
-		{#
-								L'action du formulaire doit bien contenir l'identifiant de la tâche, sinon l'identifiant ne pourra pas être récupéré
-								par le formulaire, ce qui me renverra vers une page d'erreur.
-								#}
-		<form action="/task/updateTask?id={{ task.task_id }}" method="post">
+	<main class="d-flex profile-form">
+		<form action="/user/index?id={{ user.user_id }}" method="post">
 			<div class="form-container">
 				<h1>Votre profil</h1>
 
 				<!-- Nom de l'utilisateur -->
 				<div class="d-flex form-input">
 					<label for="username" class="form-label">Nom d'utilisateur</label>
-					<input type="text" name="username" id="username" value="{{ task.task_name }}" required/>
+					<div class="d-flex input-button">
+					<input type="text" name="username" id="username" placeholder="{{ user.username }}"/>
+						<div class="d-flex update-submit">
+							<input type="submit" name="update-username" class="d-flex" value="Modifier"/>
+						</div>
+					</div>
 				</div>
 
 				<!-- Adresse mail -->
 				<div class="d-flex form-input">
 					<label for="email" class="form-label">Adresse mail</label>
-					<input type="email" name="email" id="email" value="{{ task.task_name }}" required/>
+					<div class="d-flex input-button">
+						<input type="email" name="email" id="email" placeholder="{{ user.email }}"/>
+						<div class="d-flex update-submit">
+							<input type="submit" name="update-email" class="d-flex" value="Modifier"/>
+						</div>
+					</div>
 				</div>
 
 				<div class="error-message">
 					<p>{{ message }}</p>
-				</div>
-
-				<!-- Bouton de validation -->
-				<div class="d-flex submit-input" id="update-submit">
-					<input type="submit" name="update-infos" class="d-flex" value="Enregistrer les modifications"/>
 				</div>
 			</div>
 		</form>
@@ -47,7 +47,6 @@
 			<h2>Autres actions</h2>
 			<ul class="d-flex list-unstyled">
 				<li>
-					{# La vue supervise l'affichage des données, l'état du bouton (désactivé ou non) va donc être géré par Twig et pas par le contrôleur #}
 					<a href="/user/editPassword" class="edit-password-link d-flex">
 						<i class="fa-solid fa-arrows-rotate"></i>Modifier le mot de passe</a>
 				</li>
