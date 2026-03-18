@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Votre profil - Todo List PHP
+{% block title %}Votre compte - Todo List PHP
 {% endblock %}
 
 {% block favicon %}
@@ -9,7 +9,7 @@
 
 {% block main %}
 	<main class="d-flex profile-form">
-		<h1>Votre profil</h1>
+		<h1>Votre compte</h1>
 
 		<form action="/user/updateUsername?id={{ user.user_id }}" method="post">
 			<div
