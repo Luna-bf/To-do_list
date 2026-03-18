@@ -76,6 +76,12 @@ class Database
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function updateUsername($username, $user_id)
+    {
+        $updateName = $this->pdo->prepare("UPDATE users SET username = :username WHERE user_id = :user_id");
+        return $updateName->execute(['username' => $username, 'user_id' => $user_id]);
+    }
+
     // Raccourci pour avoir ce type de commentaire : / + ** + Entrée
     /**
      * Récupère toutes les lignes (enregistrements) de la table en fonction de l'id d'un utilisateur précis

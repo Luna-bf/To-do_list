@@ -50,11 +50,7 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
         break;
 
     case '/user/account':
-        (new UserController())->account();
-        break;
-
-    case '/user/editPassword':
-        (new UserController())->editPassword();
+        (new UserController())->updateUsername();
         break;
         
     default:

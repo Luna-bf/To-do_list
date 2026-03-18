@@ -88,18 +88,32 @@ class UserController extends BaseController
         $this->render('form/login.html.twig', ['email' => $email, 'password' => $password, 'message' => $message]);
     }
 
-    public function account() {
-        $user_id = $_SESSION['user_id'];
-        $username = $_SESSION['username'];
-        
-        $this->render('user/index.html.twig', ['user_id' => $user_id, 'username' => $username]);
-    }
+    public function updateUsername()
+    {
+        $user_id = $_SESSION['user_id']; // Je récupère l'identifiant de l'utilisateur présent dans la session
+        $user = $this->db->findUser($user_id); // Je recherche l'utilisateur grâce à l'id récupéré dans la session
+        $username = null;
+        $message = "";
 
-    public function editPassword() {
-        $user_id = $_SESSION['user_id'];
-        $username = $_SESSION['username'];
-        
-        $this->render('user/editPassword.html.twig', ['user_id' => $user_id, 'username' => $username]);
+        if (isset($_POST['update_username'])) {
+
+            // Récupère la valeur du champ de saisie "username"
+            $username = htmlspecialchars($_POST['username']);
+
+            if (!empty($username)) {
+
+                $updatedUsername = $this->db->updateUsername($username, $user_id);
+
+                if ($updatedUsername) {
+                    header('Location: ../home');
+                    exit;
+                }
+            } else {
+                $message = "Le champ de saisie doit être rempli.";
+            }
+        }
+
+        $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'username' => $username, 'message' => $message]);
     }
 
     public function logout()
