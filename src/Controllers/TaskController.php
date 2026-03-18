@@ -48,8 +48,8 @@ class TaskController extends BaseController
             }
 
             // Vérifie la valeur de "is_complete" pour définir l'état d'un des boutons de suppression (désactivé ou activé)
-            foreach($tasks as $task) {
-                if($task['is_complete'] === 1) {
+            foreach ($tasks as $task) {
+                if ($task['is_complete'] === 1) {
                     $isComplete = true;
                     break;
                 }
@@ -170,6 +170,33 @@ class TaskController extends BaseController
             }
         } else {
             throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
+        }
+    }
+
+    public function deleteCompletedTasks()
+    {
+        $user_id = $_SESSION['user_id'];
+        $tasks = $this->db->findUserTasks($user_id, 'tasks'); // Je récupère toutes les données de la table tasks grâce à la méthode findUserTasks et les stocke dans un tableau "tasks"    
+
+        foreach ($tasks as $task) {
+            if ($task['user_id'] === $user_id) {
+                // Si le token n'existe pas OU qu'il existe mais qu'il ne correspond pas au token créé par la session...
+                if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+                    throw new Exception("Le token CSRF est invalide.");
+                } else {
+                    // J'apelle la méthode deleteTask pour qu'elle supprime cette tâche du tableau "tasks"
+                    $statement = $this->db->deleteCompletedTasks();
+
+                    if (!$statement) {
+                        throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
+                    } else {
+                        header('Location: /home'); // Je redirige vers la page home
+                        exit;
+                    }
+                }
+            } else {
+                throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
+            }
         }
     }
 
