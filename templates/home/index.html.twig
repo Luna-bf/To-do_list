@@ -69,8 +69,11 @@
 		<div class="d-flex action-buttons">
 			<ul class="d-flex list-unstyled">
 				<li>
-					{# Si isComplete est égal à false, le bouton est désactivé. #}
-					<button type="submit" class="delete-task-btn" {% if not isComplete %}disabled{% endif %}><i class="fa-solid fa-square-check"></i>Supprimer les tâches terminées</button>
+					<form action="/deleteCompletedTasks" method="post">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+						{# Si isComplete est égal à false, le bouton est désactivé. #}
+						<button type="submit" class="delete-task-btn" {% if not isComplete %}disabled{% endif %}><i class="fa-solid fa-square-check"></i>Supprimer les tâches terminées</button>					
+					</form>
 				</li>
 				<li>
 					<form action="/deleteAllTasks" method="post">
