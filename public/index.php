@@ -61,6 +61,14 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
         (new UserController())->updateEmail();
         break;
 
+    case '/user/editPassword':
+        (new UserController())->updatePassword();
+        break;
+
+    case '/user/deleteAccount':
+        (new UserController())->deleteAccount();
+        break;
+
     default:
         echo "Page introuvable.";
         break;
