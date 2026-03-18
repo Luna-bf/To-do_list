@@ -11,35 +11,47 @@
 	<main
 		class="d-flex form-main">
 		{#
-		L'action du formulaire doit bien contenir l'identifiant de la tâche, sinon l'identifiant ne pourra pas être récupéré
-		par le formulaire, ce qui me renverra vers une page d'erreur.
-		#}
+								L'action du formulaire doit bien contenir l'identifiant de la tâche, sinon l'identifiant ne pourra pas être récupéré
+								par le formulaire, ce qui me renverra vers une page d'erreur.
+								#}
 		<form action="/task/updateTask?id={{ task.task_id }}" method="post">
 			<div class="form-container">
 				<h1>Modifiez la tâche</h1>
 
-				<!-- Nom de la tâche -->
+				{# Nom de la tâche #}
 				<div class="d-flex form-input">
 					<label for="task_name" class="form-label">Nom de la tâche</label>
 					<input type="text" name="task_name" id="{{ task.task_id }}" value="{{ task.task_name }}" required/>
 				</div>
 
-				<!-- Catégories -->
+				{# Catégories #}
 				<div class="d-flex form-input">
 					<label for="category">Catégorie</label>
 					<select name="category" id="category">
 						{% for category in categories %}
-							<option value="{{ category.category_id }}" id="{{ category.category_id }}">{{ category.category_name }}</option>
+							{# Si l'identifiant de la catégorie est strictement égal à l'identifiant de la catégorie présente
+							dans la tâche, l'option portera l'attribut "selected". #}
+							{% if category.category_id === task.category_id %}
+								<option value="{{ category.category_id }}" id="{{ category.category_id }}" selected>{{ category.category_name }}</option>
+							{% else %}
+								<option value="{{ category.category_id }}" id="{{ category.category_id }}">{{ category.category_name }}</option>
+							{% endif %}
 						{% endfor %}
 					</select>
 				</div>
 
-				<!-- Priorité -->
+				{# Priorité #}
 				<div class="d-flex form-input">
 					<label for="priority">Priorité</label>
 					<select name="priority" id="priority">
 						{% for priority in priorities %}
-							<option value="{{ priority.priority_id }}" id="{{ priority.priority_id }}">{{ priority.priority_name }}</option>
+							{# Si l'identifiant de la priorité est strictement égal à l'identifiant de la priorité présente
+							dans la tâche, l'option portera l'attribut "selected". #}
+							{% if priority.priority_id === task.priority_id %}
+								<option value="{{ priority.priority_id }}" id="{{ priority.priority_id }}" selected>{{ priority.priority_name }}</option>
+							{% else %}
+								<option value="{{ priority.priority_id }}" id="{{ priority.priority_id }}">{{ priority.priority_name }}</option>
+							{% endif %}
 						{% endfor %}
 					</select>
 				</div>
@@ -48,7 +60,7 @@
 				<div
 					class="d-flex form-checkbox">
 					{# Je crée une condition if dans l'input pour gérer l'état du checkbox (coché ou non) #}
-					<input type="checkbox" name="is_complete" id="is_complete" {% if task.is_complete == 1 %}checked{% endif %}/>
+					<input type="checkbox" name="is_complete" id="is_complete" {% if task.is_complete == 1 %} checked {% endif %}/>
 					<label for="is_complete">Terminée</label>
 				</div>
 
