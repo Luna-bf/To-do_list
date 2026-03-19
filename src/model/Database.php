@@ -11,7 +11,6 @@ j'ai besoin d'accéder à la classe : ici j'indique que la classe se trouve dans
 
 namespace src\model;
 
-use InvalidArgumentException;
 use PDO; // Importation de la classe "PDO", qui va me permettre de communiquer avec la BDD
 
 // Cette classe va superviser toutes les opérations liées à la base de données
@@ -70,7 +69,8 @@ class Database
         return $statement;
     }
 
-    public function findUser($user_id) {
+    public function findUser($user_id)
+    {
         $statement = $this->pdo->prepare('SELECT * FROM users WHERE user_id = :user_id');
         $statement->execute([":user_id" => $user_id]);
         return $statement->fetch(PDO::FETCH_ASSOC);
@@ -100,17 +100,11 @@ class Database
      *
      * @return array : Cette méthode retourne un tableau
      */
-    public function findUserTasks($user_id, $table)
+    public function findUserTasks($user_id)
     {
-        $allowedTables = ['tasks'];
-        
-        if (!in_array($table, $allowedTables, true)) {
-            throw new InvalidArgumentException("Nom de table non autorisé : $table");
-        }
-
         $statement = $this->pdo->prepare(
             "SELECT t.*, c.category_name, p.priority_id
-            FROM $table as t
+            FROM tasks as t
                 JOIN categories as c on t.category_id = c.category_id
                 JOIN priorities as p on t.priority_id = p.priority_id
             WHERE t.user_id = :user_id
@@ -127,14 +121,8 @@ class Database
      * @param int $id : l'identifiant de la ligne que je veux récupérer
      * @return : Cette méthode retourne un tableau associatif si la donnée existe, ou false si elle n'existe pas
      */
-    public function findTask($task_id, $table)
+    public function findTask($task_id)
     {
-        $allowedTables = ['tasks'];
-
-        if (!in_array($table, $allowedTables, true)) {
-            throw new InvalidArgumentException("Nom de table non autorisé : $table");
-        }
-
         /*
         - Je prépare une requête qui va récupérer une seule ligne de la table grâce à un identifiant donné,
         - J'exécute la requête en passant l'identifiant récupéré en tant que paramètre dans la requête,
@@ -152,7 +140,7 @@ class Database
         // $this fait référence à l'objet actuel (ici, Database)
         $statement = $this->pdo->prepare(
             "SELECT t.*, c.category_name, p.priority_id
-            FROM $table as t
+            FROM tasks as t
                 JOIN categories as c on t.category_id = c.category_id
                 JOIN priorities as p on t.priority_id = p.priority_id
             WHERE t.task_id = :task_id
@@ -193,18 +181,14 @@ class Database
         return $task->execute(["task_id" => $task_id]);
     }
 
-    public function deleteCompletedTasks() {
+    public function deleteCompletedTasks()
+    {
         $statement = $this->pdo->prepare("DELETE FROM tasks WHERE is_complete = 1");
         return $statement->execute();
     }
 
-    public function deleteAllTasks($user_id, $table) {
-        $allowedTables = ['tasks'];
-
-        if (!in_array($table, $allowedTables, true)) {
-            throw new InvalidArgumentException("Nom de table non autorisé : $table");
-        }
-
+    public function deleteAllTasks($user_id)
+    {
         $tasks = $this->pdo->prepare("DELETE FROM tasks WHERE user_id = :user_id");
         return $tasks->execute(["user_id" => $user_id]);
     }

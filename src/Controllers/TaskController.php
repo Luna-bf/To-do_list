@@ -36,7 +36,7 @@ class TaskController extends BaseController
             $user_id = $_SESSION['user_id']; // Récupère l'identifiant de l'utilisateur pour l'afficher dans la page
             $user = $this->db->findUser($user_id);
             $csrf_token = $_SESSION['csrf_token'];
-            $tasks = $this->db->findUserTasks($user_id, 'tasks'); // Je récupère toutes les données de la table tasks grâce à la méthode findUserTasks et les stocke dans un tableau "tasks"
+            $tasks = $this->db->findUserTasks($user_id); // Je récupère toutes les données de la table tasks grâce à la méthode findUserTasks et les stocke dans un tableau "tasks"
             $categories = $this->db->getCategories('categories');
             $priorities = $this->db->getPriorities('priorities');
 
@@ -117,7 +117,7 @@ class TaskController extends BaseController
 
             $categories = $this->db->getCategories('categories');
             $priorities = $this->db->getPriorities('priorities');
-            $task = $this->db->findTask($task_id, 'tasks');
+            $task = $this->db->findTask($task_id);
 
             if (isset($_POST['update'])) {
 
@@ -151,7 +151,7 @@ class TaskController extends BaseController
     {
         $user_id = $_SESSION['user_id'];
         $task_id = $_POST['task_id']; // Je récupère l'id de la tâche à supprimer
-        $task = $this->db->findTask($task_id, 'tasks'); // J'appelle la méthode findTask() pour qu'elle récupère la tâche à supprimer
+        $task = $this->db->findTask($task_id); // J'appelle la méthode findTask() pour qu'elle récupère la tâche à supprimer
 
         if ($task['user_id'] === $user_id) {
             // Si le token n'existe pas OU qu'il existe mais qu'il ne correspond pas au token créé par la session...
@@ -159,7 +159,7 @@ class TaskController extends BaseController
                 throw new Exception("Le token CSRF est invalide.");
             } else {
                 // J'apelle la méthode deleteTask pour qu'elle supprime cette tâche du tableau "tasks"
-                $statement = $this->db->deleteTask($task_id, 'tasks');
+                $statement = $this->db->deleteTask($task_id);
 
                 if (!$statement) {
                     throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
@@ -176,7 +176,7 @@ class TaskController extends BaseController
     public function deleteCompletedTasks()
     {
         $user_id = $_SESSION['user_id'];
-        $tasks = $this->db->findUserTasks($user_id, 'tasks'); // Je récupère toutes les données de la table tasks grâce à la méthode findUserTasks et les stocke dans un tableau "tasks"    
+        $tasks = $this->db->findUserTasks($user_id); // Je récupère toutes les données de la table tasks grâce à la méthode findUserTasks et les stocke dans un tableau "tasks"    
 
         foreach ($tasks as $task) {
             if ($task['user_id'] === $user_id) {
@@ -203,7 +203,7 @@ class TaskController extends BaseController
     public function deleteAllTasks()
     {
         $user_id = $_SESSION['user_id'];
-        $tasks = $this->db->findUserTasks($user_id, 'tasks');
+        $tasks = $this->db->findUserTasks($user_id);
 
         // Je récupère de l'id de l'utilisateur associé à la tâche afin de comparer avec celui présent dans la session actuelle
         foreach ($tasks as $task) {
@@ -214,7 +214,7 @@ class TaskController extends BaseController
                     throw new Exception("Le token CSRF est invalide.");
                 } else {
                     // J'apelle la méthode deleteTask pour qu'elle supprime cette tâche du tableau "tasks"
-                    $statement = $this->db->deleteAllTasks($user_id, 'tasks');
+                    $statement = $this->db->deleteAllTasks($user_id);
 
                     if (!$statement) {
                         throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
