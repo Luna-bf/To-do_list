@@ -2,6 +2,8 @@
 
 namespace src\controllers;
 
+use Exception;
+
 session_start();
 
 class UserController extends BaseController
@@ -88,11 +90,17 @@ class UserController extends BaseController
         $this->render('form/login.html.twig', ['email' => $email, 'password' => $password, 'message' => $message]);
     }
 
-    public function findUser() {
+    public function findUser()
+    {
+        if (!isset($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(128));
+        }
+
+        $csrf_token = $_SESSION['csrf_token']; // Je récupère le token CSRF
         $user_id = $_SESSION['user_id']; // Je récupère l'identifiant de l'utilisateur présent dans la session
         $user = $this->db->findUser($user_id); // Je recherche l'utilisateur grâce à l'id récupéré dans la session
 
-        $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user]);
+        $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'csrf_token' => $csrf_token]);
     }
 
     public function updateUsername()
@@ -134,7 +142,6 @@ class UserController extends BaseController
         if (isset($_POST['update_email'])) {
 
             $email = htmlspecialchars(trim($_POST['email'])); // Champ de saisie nommé "email"
-            $message = "";
 
             if (!empty($email)) {
 
@@ -159,6 +166,30 @@ class UserController extends BaseController
             session_destroy(); // Cette méthode permet d'arrêter une session
             header('Location: ../form/login'); // Une fois que la session est arrêtée, je redirige l'utilisateur vers le formulaire de connexion
             exit;
+        }
+    }
+
+    public function deleteAccount()
+    {
+        $user_id = $_SESSION['user_id']; // Je récupère l'id de la tâche à supprimer
+        $user = $this->db->findUser($user_id);
+
+        if ($user['user_id'] === $user_id) {
+            // Si le token n'existe pas OU qu'il existe mais qu'il ne correspond pas au token créé par la session...
+            if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+                throw new Exception("Le token CSRF est invalide.");
+            } else {
+                $statement = $this->db->deleteAccount($user_id);
+
+                if (!$statement) {
+                    throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
+                } else {
+                    header('Location: /'); // Je redirige vers la page d'inscription
+                    exit;
+                }
+            }
+        } else {
+            throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
         }
     }
 }
