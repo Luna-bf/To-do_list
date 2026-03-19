@@ -14,7 +14,7 @@
 		<form action="/user/updateUsername?id={{ user.user_id }}" method="post">
 			<div
 				class="form-container">
-				<!-- Nom de l'utilisateur -->
+				{# Nom de l'utilisateur #}
 				<div class="d-flex form-input">
 					<label for="username" class="form-label">Nom d'utilisateur</label>
 					<div class="d-flex input-button">
@@ -27,7 +27,7 @@
 			</div>
 		</form>
 
-		<!-- Adresse mail -->
+		{# Adresse mail #}
 		<form action="/user/updateEmail?id={{ user.user_id }}" method="post">
 			<div class="form-container">
 				<div class="d-flex form-input">
