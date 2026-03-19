@@ -38,7 +38,7 @@ class UserController extends BaseController
                     if (!$user) { // Si le contenu de la variable $resultat retourne false, alors...
                         $message = "Une erreur est survenue, l'inscription n'a pas pu être effectuée.";
                     } else {
-                        header('Location: login');
+                        header('Location: /form/login');
                         exit;
                     }
                 }
