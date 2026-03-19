@@ -88,6 +88,12 @@ class Database
         return $updateMail->execute(['email' => $email, 'user_id' => $user_id]);
     }
 
+    public function deleteAccount($user_id)
+    {
+        $account = $this->pdo->prepare("DELETE FROM users WHERE user_id = :user_id");
+        return $account->execute(["user_id" => $user_id]);
+    }
+
     // Raccourci pour avoir ce type de commentaire : / + ** + Entrée
     /**
      * Récupère toutes les lignes (enregistrements) de la table en fonction de l'id d'un utilisateur précis
