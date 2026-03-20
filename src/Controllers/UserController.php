@@ -29,17 +29,30 @@ class UserController extends BaseController
                 if ($result > 0) {
                     $message = "Cette adresse mail est déjà associée à un compte.";
                 } else {
-                    // Je hache (hash) le mot de passe
-                    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                    /*
+                    La fonction preg_match() vérifie que la chaîne de caractères présente dans la variable $password contient :
+                    - au moins une lettre minuscule
+                    - au moins une lettre majuscule
+                    - au moins un chiffre
+                    - au moins un caractère spécial : @#-_$%^&+=§!?
+                    - que la chaîne de caractères contient au minimum 8 caractères et au maximum 30 caractères
+                    */
+                    if (preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,30}$/', $password)) {
 
-                    // Puis je créé l'utilisateur
-                    $user = $this->db->registration($email, $username, $hashed_password);
+                        // Je hache (hash) le mot de passe
+                        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                    if (!$user) { // Si le contenu de la variable $resultat retourne false, alors...
-                        $message = "Une erreur est survenue, l'inscription n'a pas pu être effectuée.";
+                        // Puis je créé l'utilisateur
+                        $user = $this->db->registration($email, $username, $hashed_password);
+
+                        if (!$user) { // Si le contenu de la variable $resultat retourne false, alors...
+                            $message = "Une erreur est survenue, l'inscription n'a pas pu être effectuée.";
+                        } else {
+                            header('Location: /form/login');
+                            exit;
+                        }
                     } else {
-                        header('Location: /form/login');
-                        exit;
+                        $message = "Le mot de passe doit contenir au moins 1 majuscule, 1 chiffre, 1 caractère spécial et comporter au moins 8 caractères.";
                     }
                 }
             } else {
@@ -174,19 +187,21 @@ class UserController extends BaseController
 
                 if ($user && password_verify($oldPassword, $user['password'])) {
 
-                    if ($newPassword) {
+                    if (preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,30}$/', $newPassword)) {
 
                         if ($newPassword === $confirmPassword) {
 
                             // Je hache (hash) le nouveau mot de passe
                             $hashed_password = password_hash($confirmPassword, PASSWORD_DEFAULT);
-                            
+
                             // Puis je le met à jour
                             $confirmedPassword = $this->db->updatePassword($hashed_password);
                             $successMessage = "Le mot de passe a été modifié avec succès.";
                         } else {
                             $message = "Le mot de passe saisi ne correspond pas au nouveau mot de passe.";
                         }
+                    } else {
+                        $message = "Le mot de passe doit contenir au moins 1 majuscule, 1 chiffre, 1 caractère spécial et comporter au moins 8 caractères.";
                     }
                 } else {
                     $message = "Le mot de passe saisi ne correspond pas au mot de passe actuel.";
