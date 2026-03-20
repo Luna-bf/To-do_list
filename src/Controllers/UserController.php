@@ -159,6 +159,46 @@ class UserController extends BaseController
         $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'email' => $email, 'message' => $message]);
     }
 
+    public function updatePassword()
+    {
+        $user_id = $_SESSION['user_id'];
+        $user = $this->db->findUser($user_id);
+
+        if (isset($_POST['update-password'])) {
+
+            $oldPassword = htmlspecialchars(trim($_POST['old_password']));
+            $newPassword = htmlspecialchars(trim($_POST['new_password']));
+            $confirmPassword = htmlspecialchars(trim($_POST['confirm_password']));
+
+            if (!empty($oldPassword) && !empty($newPassword) && !empty($confirmPassword)) {
+
+                if ($user && password_verify($oldPassword, $user['password'])) {
+
+                    if ($newPassword) {
+
+                        if ($newPassword === $confirmPassword) {
+
+                            // Je hache (hash) le nouveau mot de passe
+                            $hashed_password = password_hash($confirmPassword, PASSWORD_DEFAULT);
+                            
+                            // Puis je le met à jour
+                            $confirmedPassword = $this->db->updatePassword($hashed_password);
+                            $successMessage = "Le mot de passe a été modifié avec succès.";
+                        } else {
+                            $message = "Le mot de passe saisi ne correspond pas au nouveau mot de passe.";
+                        }
+                    }
+                } else {
+                    $message = "Le mot de passe saisi ne correspond pas au mot de passe actuel.";
+                }
+            } else {
+                $message = "Tous les champs de saisie doivent être remplis.";
+            }
+        }
+
+        $this->render('user/editPassword.html.twig', ['user_id' => $user_id, 'user' => $user, 'oldPassword' => $oldPassword, 'newPassword' => $newPassword, 'confirmPassword' => $confirmPassword, 'hashed_password' => $hashed_password, 'confirmedPassword' => $confirmedPassword, 'message' => $message, 'successMessage' => $successMessage]);
+    }
+
     public function logout()
     {
         if (session_status() == PHP_SESSION_ACTIVE) {

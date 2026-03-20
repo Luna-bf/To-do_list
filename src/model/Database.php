@@ -115,6 +115,12 @@ class Database
         return $statement->fetchAll(PDO::FETCH_ASSOC); // Récupère les données de la requête
     }
 
+    public function updatePassword($password)
+    {
+        $statement = $this->pdo->prepare('UPDATE users SET password = :password');
+        return $statement->execute([':password' => $password]);
+    }
+
     /**
      * Récupère une ligne (enregistrement) de la table
      *
