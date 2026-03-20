@@ -158,11 +158,21 @@ class UserController extends BaseController
 
             if (!empty($email)) {
 
-                $updatedEmail = $this->db->updateEmail($email, $user_id);
+                // Vérifie si l'adresse mail saisie existe
+                $emailValidation = $this->db->checkIfEmailExists($email);
 
-                if ($updatedEmail) {
-                    header('Location: /user/account');
-                    exit;
+                // Si l'adresse mail saisie par l'utilisateur n'existe pas...
+                if (!$emailValidation) {
+
+                    // Je met à jour l'adresse mail de l'utilisateur
+                    $updatedEmail = $this->db->updateEmail($email, $user_id);
+
+                    if ($updatedEmail) {
+                        header('Location: /user/account');
+                        exit;
+                    }
+                } else {
+                    $message = "Cette adresse mail est déjà associée à un compte.";
                 }
             } else {
                 $message = "Le champ de saisie doit être rempli.";
