@@ -18,8 +18,16 @@
 }
 
 /* socials-icons */
+.socials-icons {
+    justify-content: center;
+}
+
 .socials-icons a>i {
     font-size: 42px;
+}
+
+.fa-github {
+    color: #000000;
 }
 
 .fa-linkedin {
