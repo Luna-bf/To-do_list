@@ -16584,17 +16584,17 @@ main .action > a:hover {
   cursor: pointer;
 }
 
-.action-buttons ul li > .delete-task-btn {
+.action-buttons ul li form > .delete-task-btn {
   border: 1px solid #1C1E7B;
   color: #1C1E7B;
   margin-right: 30px;
 }
 
-.action-buttons ul li > .delete-task-btn:hover {
+.action-buttons ul li form > .delete-task-btn:hover {
   background-color: #1C1E7B;
 }
 
-.action-buttons ul li > .delete-task-btn:disabled {
+.action-buttons ul li form > .delete-task-btn:disabled {
   border: 1px solid rgba(28, 30, 123, 0.537254902);
   color: rgba(28, 30, 123, 0.537254902);
   pointer-events: none;
@@ -16647,7 +16647,7 @@ form .form-container .form-input > input, select {
 }
 
 .form-container > .submit-input {
-  margin-top: 50px;
+  margin: 50px 0 70px 0;
 }
 
 .form-container .submit-input > input[type=submit] {
@@ -16667,10 +16667,6 @@ form .form-container .form-input > input, select {
   cursor: pointer;
 }
 
-#update-submit {
-  margin-bottom: 70px;
-}
-
 form .form-container > .form-checkbox {
   flex-direction: row;
   align-items: center;
@@ -16686,9 +16682,118 @@ form .form-container .form-checkbox > label {
   margin-left: 8px;
 }
 
-.error-message {
+.form-message {
   font-family: "Poppins-Regular";
-  color: firebrick;
   text-align: center;
   margin-top: 35px;
+}
+
+.error-message {
+  color: firebrick;
+}
+
+.success-message {
+  color: forestgreen;
+}
+
+.profile-form {
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-form > form {
+  width: 38%;
+}
+
+.profile-form > h1 {
+  margin: 70px 0 25px 0;
+}
+
+form .form-container .form-input .input-button > input, select {
+  font-family: "Poppins-Light";
+  background-color: #F6F6F6;
+  border: 1px solid #B8B8B8;
+  border-radius: 5px;
+  padding: 6.5px;
+  font-size: 14.2px;
+  width: 100%;
+}
+
+form .form-container .form-input .input-button > .update-submit {
+  margin-left: 12px;
+  height: 38px;
+}
+
+form .form-container .form-input .input-button .update-submit > input {
+  font-family: "Poppins-Light";
+  background-color: #333D65;
+  color: #fff;
+  border: 1px solid #333D65;
+  border-radius: 5px;
+  padding: 8px 40px;
+  font-size: 14px;
+  margin: 0 auto;
+}
+
+form .form-container .form-input .input-button .update-submit > input:hover {
+  background-color: #455491;
+  border: 1px solid #455491;
+  cursor: pointer;
+}
+
+.profile-form > hr {
+  margin-top: 50px;
+  width: 70%;
+}
+
+.account-action-buttons {
+  flex-direction: column;
+  margin: 70px 0 80px 0;
+}
+
+.account-action-buttons > h2 {
+  text-transform: none;
+  margin-bottom: 50px;
+}
+
+.account-action-buttons ul li > .edit-password-link {
+  align-items: center;
+  padding: 8px 25px;
+  font-family: "Poppins-Regular";
+  color: #DC9B2C;
+  border: 1px solid #DC9B2C;
+  border-radius: 5px;
+  font-size: 15px;
+  margin-right: 30px;
+}
+
+.account-action-buttons ul li .edit-password-link > i {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.account-action-buttons ul li > .edit-password-link:hover {
+  background-color: #DC9B2C;
+  color: #fff;
+}
+
+.account-action-buttons ul li form > .delete-account-btn {
+  font-family: "Poppins-Regular";
+  padding: 8px 15px 8px 15px;
+  background-color: #fff;
+  border-radius: 5px;
+  font-size: 15px;
+  border: 1px solid #b22222;
+  color: #b22222;
+}
+
+.account-action-buttons ul li form .delete-account-btn > i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.account-action-buttons ul li form > .delete-account-btn:hover {
+  background-color: #b22222;
+  color: #fff;
+  cursor: pointer;
 }/*# sourceMappingURL=main.css.map */
