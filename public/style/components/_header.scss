@@ -4,13 +4,31 @@ nav {
     align-items: center;
     background-color: #333D65;
     color: #fff;
-    padding: 1.3em;
+    padding: 1.5em;
 }
 
 nav>h2 {
     font-family: "Poppins-Light", sans-serif;
     font-weight: 300;
     text-transform: uppercase;
+}
+
+nav>.language-forms {
+    align-items: center;
+}
+
+nav .language-forms>form {
+    width: 18.5%;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+nav .language-forms form>input {
+    width: 100%;
+}
+
+nav .language-forms>p {
+    margin: 0 13px 0 13px;
 }
 
 nav>ul {
