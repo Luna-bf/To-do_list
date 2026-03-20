@@ -1,27 +1,27 @@
 {% block header %}
 	<header>
-		<nav class="d-flex">
+		<nav class="d-flex align-items-center justify-content-between text-white">
 			<div class="d-flex language-forms">
 				<form action="" method="post" class="d-flex">
-					<input type="image" src="/assets/imgs/flags/france-flag-80x53.png" alt="France flag">
+					<input type="image" src="/assets/imgs/flags/france-flag-80x53.png" alt="France flag" class="w-100">
 				</form>
 				<p>|</p>
 				<form action="" method="post" class="d-flex">
-					<input type="image" src="/assets/imgs/flags/uk-flag-80x53.png" alt="France flag">
+					<input type="image" src="/assets/imgs/flags/uk-flag-80x53.png" alt="France flag" class="w-100">
 				</form>
 			</div>
-			<ul class="d-flex actions">
+			<ul class="d-flex actions list-unstyled">
 				{% if user_id %}
-					<li class="d-flex nav-links">
-						<a href="/logout">Déconnexion</a>
+					<li class="d-flex">
+						<a href="/logout" class="text-white text-decoration-none">Déconnexion</a>
 						<p>|</p>
-						<a href="/user/account">{{ user.username }}</a>
+						<a href="/user/account" class="text-white text-decoration-none">{{ user.username }}</a>
 					</li>
 				{% else %}
-					<li class="d-flex nav-links">
-						<a href="/">Inscription</a>
+					<li class="d-flex">
+						<a href="/" class="text-white text-decoration-none">Inscription</a>
 						<p>|</p>
-						<a href="/form/login">Connexion</a>
+						<a href="/form/login" class="text-white text-decoration-none">Connexion</a>
 					</li>
 				{% endif %}
 			</ul>
