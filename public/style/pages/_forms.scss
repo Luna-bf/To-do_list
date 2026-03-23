@@ -27,6 +27,7 @@ form .form-container .form-input>input, select {
     border-radius: 5px;
     padding: 6.5px;
     font-size: 14.2px;
+    text-overflow: ellipsis;
 }
 
 .form-container>.submit-input {
