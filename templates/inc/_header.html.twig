@@ -10,7 +10,13 @@
 					<input type="image" src="/assets/imgs/flags/uk-flag-80x53.png" alt="France flag">
 				</form>
 			</div>
+
+			<input type="checkbox" id="check">
+
 			<ul class="d-flex actions">
+				<label for="check" class="close-menu">
+					<i class="fa-solid fa-xmark"></i>
+				</label>
 				{% if user_id %}
 					<li class="d-flex nav-links">
 						<a href="/logout">Déconnexion</a>
@@ -25,6 +31,10 @@
 					</li>
 				{% endif %}
 			</ul>
+
+			<label for="check" class="open-menu">
+				<i class="fa-solid fa-bars"></i>
+			</label>
 		</nav>
 	</header>
 {% endblock %}
