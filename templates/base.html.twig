@@ -11,9 +11,11 @@
 			<link rel="icon" type="image/x-icon" href="assets/imgs/favicon-48x48.png">
 		{% endblock %}
 		<link rel="stylesheet" href="/style/main.css">
+		<script src="/js/app.js" defer></script>
 	</head>
 
 	<body>
+		<div id="cover-background"></div>
 		{% include "inc/_header.html.twig" %}
 		{% block main %}{% endblock %}
 		{% block footer %}
