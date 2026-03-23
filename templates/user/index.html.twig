@@ -18,6 +18,7 @@
 				<div class="d-flex form-input">
 					<label for="username" class="form-label">Nom d'utilisateur</label>
 					<div class="d-flex input-button">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 						<input type="text" name="username" id="username" placeholder="{{ user.username }}"/>
 						<div class="d-flex update-submit">
 							<input type="submit" id="update_username" name="update_username" class="d-flex" value="Modifier"/>
@@ -33,6 +34,7 @@
 				<div class="d-flex form-input">
 					<label for="email" class="form-label">Adresse mail</label>
 					<div class="d-flex input-button">
+						<input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
 						<input type="email" name="email" id="email" placeholder="{{ user.email }}"/>
 						<div class="d-flex update-submit">
 							<input type="submit" id="update_email" name="update_email" class="d-flex" value="Modifier"/>
@@ -53,7 +55,7 @@
 		<h2>Autres actions</h2>
 		<ul class="d-flex list-unstyled">
 			<li>
-				<a href="/user/editPassword" class="edit-password-link d-flex">
+				<a href="/user/updatePassword" class="edit-password-link d-flex">
 					<i class="fa-solid fa-arrows-rotate"></i>Modifier le mot de passe</a>
 			</li>
 			<li>
