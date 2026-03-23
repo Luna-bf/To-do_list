@@ -106,7 +106,7 @@ class UserController extends BaseController
     public function findUser()
     {
         if (!isset($_SESSION['csrf_token'])) {
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(128));
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         }
 
         $csrf_token = $_SESSION['csrf_token']; // Je récupère le token CSRF
@@ -123,25 +123,35 @@ class UserController extends BaseController
         $username = null;
         $message = "";
 
-        if (isset($_POST['update_username'])) {
+        if ($user['user_id'] === $user_id) {
 
-            // Récupère la valeur du champ de saisie "username"
-            $username = htmlspecialchars($_POST['username']);
-
-            if (!empty($username)) {
-
-                $updatedUsername = $this->db->updateUsername($username, $user_id);
-
-                if ($updatedUsername) {
-                    header('Location: /user/account');
-                    exit;
-                }
+            // Si le token n'existe pas OU qu'il existe mais qu'il ne correspond pas au token créé par la session...
+            if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+                throw new Exception("Le token CSRF est invalide.");
             } else {
-                $message = "Le champ de saisie doit être rempli.";
+
+                if (isset($_POST['update_username'])) {
+
+                    // Récupère la valeur du champ de saisie "username"
+                    $username = htmlspecialchars($_POST['username']);
+
+                    if (!empty($username)) {
+
+                        $updatedUsername = $this->db->updateUsername($username, $user_id);
+
+                        if ($updatedUsername) {
+                            unset($_SESSION['csrf_token']);
+                            header('Location: /user/account');
+                            exit;
+                        }
+                    } else {
+                        $message = "Le champ de saisie doit être rempli.";
+                    }
+                }
+
+                $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'username' => $username, 'message' => $message]);
             }
         }
-
-        $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'username' => $username, 'message' => $message]);
     }
 
     public function updateEmail()
@@ -149,80 +159,97 @@ class UserController extends BaseController
 
         $user_id = $_SESSION['user_id']; // Je récupère l'identifiant de l'utilisateur présent dans la session
         $user = $this->db->findUser($user_id); // Je recherche l'utilisateur grâce à l'id récupéré dans la session
+        $csrf_token = $_POST['csrf_token'];
         $email = null;
         $message = "";
 
-        if (isset($_POST['update_email'])) {
+        if ($user['user_id'] === $user_id) {
 
-            $email = htmlspecialchars(trim($_POST['email'])); // Champ de saisie nommé "email"
-
-            if (!empty($email)) {
-
-                // Vérifie si l'adresse mail saisie existe
-                $emailValidation = $this->db->checkIfEmailExists($email);
-
-                // Si l'adresse mail saisie par l'utilisateur n'existe pas...
-                if (!$emailValidation) {
-
-                    // Je met à jour l'adresse mail de l'utilisateur
-                    $updatedEmail = $this->db->updateEmail($email, $user_id);
-
-                    if ($updatedEmail) {
-                        header('Location: /user/account');
-                        exit;
-                    }
-                } else {
-                    $message = "Cette adresse mail est déjà associée à un compte.";
-                }
+            if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+                throw new Exception("Le token CSRF est invalide.");
             } else {
-                $message = "Le champ de saisie doit être rempli.";
+
+                if (isset($_POST['update_email'])) {
+
+                    $email = htmlspecialchars(trim($_POST['email'])); // Champ de saisie nommé "email"
+
+                    if (!empty($email)) {
+
+                        // Vérifie si l'adresse mail saisie existe
+                        $emailValidation = $this->db->checkIfEmailExists($email);
+
+                        // Si l'adresse mail saisie par l'utilisateur n'existe pas...
+                        if (!$emailValidation) {
+
+                            // Je met à jour l'adresse mail de l'utilisateur
+                            $updatedEmail = $this->db->updateEmail($email, $user_id);
+
+                            if ($updatedEmail) {
+                                unset($_SESSION['csrf_token']);
+                                header('Location: /user/account');
+                                exit;
+                            }
+                        } else {
+                            $message = "Cette adresse mail est déjà associée à un compte.";
+                        }
+                    } else {
+                        $message = "Le champ de saisie doit être rempli.";
+                    }
+                }
+
+                $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'email' => $email, 'message' => $message, 'csrf_token' => $csrf_token]);
             }
         }
-
-        $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'email' => $email, 'message' => $message]);
     }
 
     public function updatePassword()
     {
         $user_id = $_SESSION['user_id'];
         $user = $this->db->findUser($user_id);
+        // $csrf_token = $_SESSION['csrf_token'];
 
-        if (isset($_POST['update-password'])) {
+        if ($user['user_id'] === $user_id) {
 
-            $oldPassword = htmlspecialchars(trim($_POST['old_password']));
-            $newPassword = htmlspecialchars(trim($_POST['new_password']));
-            $confirmPassword = htmlspecialchars(trim($_POST['confirm_password']));
+            /*if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+                throw new Exception("Le token CSRF est invalide.");
+            } else {*/
+                if (isset($_POST['update-password'])) {
 
-            if (!empty($oldPassword) && !empty($newPassword) && !empty($confirmPassword)) {
+                    $oldPassword = htmlspecialchars(trim($_POST['old_password']));
+                    $newPassword = htmlspecialchars(trim($_POST['new_password']));
+                    $confirmPassword = htmlspecialchars(trim($_POST['confirm_password']));
 
-                if ($user && password_verify($oldPassword, $user['password'])) {
+                    if (!empty($oldPassword) && !empty($newPassword) && !empty($confirmPassword)) {
 
-                    if (preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,30}$/', $newPassword)) {
+                        if ($user && password_verify($oldPassword, $user['password'])) {
 
-                        if ($newPassword === $confirmPassword) {
+                            if (preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,30}$/', $newPassword)) {
 
-                            // Je hache (hash) le nouveau mot de passe
-                            $hashed_password = password_hash($confirmPassword, PASSWORD_DEFAULT);
+                                if ($newPassword === $confirmPassword) {
 
-                            // Puis je le met à jour
-                            $confirmedPassword = $this->db->updatePassword($hashed_password);
-                            $successMessage = "Le mot de passe a été modifié avec succès.";
+                                    // Je hache (hash) le nouveau mot de passe
+                                    $hashed_password = password_hash($confirmPassword, PASSWORD_DEFAULT);
+
+                                    // Puis je le met à jour
+                                    $confirmedPassword = $this->db->updatePassword($hashed_password);
+                                    $successMessage = "Le mot de passe a été modifié avec succès.";
+                                } else {
+                                    $message = "Le mot de passe saisi ne correspond pas au nouveau mot de passe.";
+                                }
+                            } else {
+                                $message = "Le mot de passe doit contenir au moins 1 majuscule, 1 chiffre, 1 caractère spécial et comporter au moins 8 caractères.";
+                            }
                         } else {
-                            $message = "Le mot de passe saisi ne correspond pas au nouveau mot de passe.";
+                            $message = "Le mot de passe saisi ne correspond pas au mot de passe actuel.";
                         }
                     } else {
-                        $message = "Le mot de passe doit contenir au moins 1 majuscule, 1 chiffre, 1 caractère spécial et comporter au moins 8 caractères.";
+                        $message = "Tous les champs de saisie doivent être remplis.";
                     }
-                } else {
-                    $message = "Le mot de passe saisi ne correspond pas au mot de passe actuel.";
                 }
-            } else {
-                $message = "Tous les champs de saisie doivent être remplis.";
+
+                $this->render('user/updatePassword.html.twig', ['user_id' => $user_id, 'user' => $user, 'oldPassword' => $oldPassword, 'newPassword' => $newPassword, 'confirmPassword' => $confirmPassword, 'hashed_password' => $hashed_password, 'confirmedPassword' => $confirmedPassword, 'message' => $message, 'successMessage' => $successMessage]);
             }
         }
-
-        $this->render('user/editPassword.html.twig', ['user_id' => $user_id, 'user' => $user, 'oldPassword' => $oldPassword, 'newPassword' => $newPassword, 'confirmPassword' => $confirmPassword, 'hashed_password' => $hashed_password, 'confirmedPassword' => $confirmedPassword, 'message' => $message, 'successMessage' => $successMessage]);
-    }
 
     public function logout()
     {
