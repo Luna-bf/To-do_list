@@ -51,7 +51,7 @@ main .action>a:hover {
     margin-right: 5px;
 }
 
-.task>input:checked+label {
+.task input:checked+.task-infos>label {
     /*si label a son input coché alors {...} */
     color: #777;
     text-decoration: line-through;
