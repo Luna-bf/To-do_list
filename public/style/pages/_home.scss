@@ -48,7 +48,7 @@ main .action>a:hover {
 
 .task>input {
     transform: scale(1.3);
-    margin-right: 3px;
+    margin-right: 10px;
 }
 
 .task>input:checked+label {
@@ -57,7 +57,7 @@ main .action>a:hover {
     text-decoration: line-through;
 }
 
-.task>label {
+.task .task-infos>label {
     cursor: pointer;
 }
 
@@ -79,7 +79,12 @@ main .action>a:hover {
     margin-right: 10px;
 }
 
-.task>.edit-button, .task .delete-button form>.delete {
+.task-actions {
+    flex-direction: row;
+}
+
+.task .task-actions>.edit-button,
+.task .task-actions .delete-button form>.delete {
     font-family: "Poppins-Regular";
     align-items: center;
     padding: 5px 12px 5px 12px;
@@ -87,20 +92,21 @@ main .action>a:hover {
     font-size: 13.5px;
 }
 
-.task>.edit-button {
+.task .task-actions>.edit-button {
     border: 1px solid #198754;
     background-color: #fff;
     color: #198754;
+    text-decoration: none;
 }
 
-.task>.edit-button:hover {
+.task .task-actions>.edit-button:hover {
     border: 1px solid #198754;
     background-color: #198754;
     color: #fff;
     cursor: pointer;
 }
 
-.task .delete-button form>.delete {
+.task .task-actions .delete-button form>.delete {
     border: 1px solid #b22222;
     background-color: #fff;
     color: #b22222;
@@ -108,7 +114,7 @@ main .action>a:hover {
     margin-left: 8px;
 }
 
-.task .delete-button form>.delete:hover {
+.task .task-actions .delete-button form>.delete:hover {
     border: 1px solid #b22222;
     background-color: #b22222;
     color: #fff;
@@ -119,12 +125,13 @@ main .action>a:hover {
     font-family: "Poppins-Regular";
 }
 
-.task>label,
-.task>span {
+.task .task-infos>label,
+.task .task-infos>span {
     margin-left: 5px;
 }
 
-.task .edit-button>i, .task .delete-button form .delete>i {
+.task .task-actions .edit-button>i,
+.task .task-actions .delete-button form .delete>i {
     margin-right: 7px;
 }
 
@@ -138,7 +145,8 @@ main .action>a:hover {
     margin-bottom: 80px;
 }
 
-.action-buttons ul li>button, .action-buttons ul li form>button {
+.action-buttons ul li>button,
+.action-buttons ul li form>button {
     font-family: "Poppins-Regular";
     padding: 8px 15px 8px 15px;
     background-color: #fff;
@@ -151,7 +159,8 @@ main .action>a:hover {
     font-size: 14px;
 }
 
-.action-buttons ul li>button:hover, .action-buttons ul li form>button:hover {
+.action-buttons ul li>button:hover,
+.action-buttons ul li form>button:hover {
     color: #fff;
     cursor: pointer;
 }
