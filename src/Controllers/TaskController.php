@@ -17,7 +17,7 @@ class TaskController extends BaseController
 
         // J'initialise le token CSRF dans la méthode qui affiche toutes les tâches, pour que toutes les tâches ai un token CSRF
         if (!isset($_SESSION['csrf_token'])) {
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(128));
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         }
 
         // Initialisation des variables (comme ça elles restent accessible en dehors de la condition if)
@@ -92,6 +92,7 @@ class TaskController extends BaseController
 
                 // Si la tâche a bien été créée, je redirige vers la page d'accueil
                 if ($task) {
+                    unset($_SESSION['csrf_token']);
                     header('Location: /home'); // Je redirige vers la page home
                     exit;
                 }
@@ -132,6 +133,7 @@ class TaskController extends BaseController
                     $updatedTask = $this->db->updateTask($category, $priority, $task_name, $is_complete, $task_id);
 
                     if ($updatedTask) {
+                        unset($_SESSION['csrf_token']);
                         header('Location: /home'); // Je redirige vers la page home
                         exit;
                     }
@@ -164,6 +166,7 @@ class TaskController extends BaseController
                 if (!$statement) {
                     throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
                 } else {
+                    unset($_SESSION['csrf_token']);
                     header('Location: /home'); // Je redirige vers la page home
                     exit;
                 }
@@ -190,6 +193,7 @@ class TaskController extends BaseController
                     if (!$statement) {
                         throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
                     } else {
+                        unset($_SESSION['csrf_token']);
                         header('Location: /home'); // Je redirige vers la page home
                         exit;
                     }
@@ -219,6 +223,7 @@ class TaskController extends BaseController
                     if (!$statement) {
                         throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
                     } else {
+                        unset($_SESSION['csrf_token']);
                         header('Location: /home'); // Je redirige vers la page home
                         exit;
                     }
