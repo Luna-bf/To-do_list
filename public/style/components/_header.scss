@@ -49,3 +49,18 @@ li>a {
     text-decoration: none;
     color: #fff;
 }
+
+.open-menu, .close-menu {
+    display: none;
+    cursor: pointer;
+}
+
+.close-menu {
+    font-size: 1.7rem;
+    top: 20px;
+    right: 20px;
+}
+
+#check {
+    display: none;
+}
