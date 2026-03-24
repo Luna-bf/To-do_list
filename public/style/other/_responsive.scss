@@ -1,0 +1,909 @@
+@media (min-width: 0px) and (max-width: 575.98px) {
+    /*** HEADER ***/
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        z-index: 3;
+        flex-direction: column;
+        justify-content: center;
+        width: 55%;
+        height: 100vh;
+        font-size: 21px;
+        background-color: #000000;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    li>a {
+        font-size: 23.5px;
+    }
+
+    .nav-links>p {
+        margin: 30px 0 30px 0;
+        transform: rotate(90deg);
+    }
+
+    .open-menu,
+    .close-menu {
+        display: block;
+    }
+
+    .close-menu {
+        position: absolute;
+    }
+
+    .open-menu>.fa-bars {
+        font-size: 28px;
+    }
+
+    #check:checked~ul {
+        right: 0;
+        width: 60%;
+    }
+
+    .cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    /*** END HEADER ***/
+
+    /*** FORMS ***/
+    main>form {
+        width: 60%;
+    }
+
+    form .form-container .form-input>label {
+        font-size: 16.5px;
+    }
+
+    form .form-container .form-input>input,
+    select {
+        font-size: 14.7px;
+    }
+
+    .form-container .submit-input>input[type="submit"] {
+        font-size: 15.5px;
+    }
+
+    form .form-container .form-checkbox>label {
+        font-size: 16.5px;
+    }
+
+    /*** END FORMS ***/
+
+    /*** HOME ***/
+    main>.action {
+        margin-top: 80px;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    main .action>h1 {
+        margin-bottom: 60px;
+    }
+
+    main .action>a {
+        border: 1.5px solid #1B9675;
+        font-size: 16px;
+        margin-bottom: 80px;
+        padding: 10px 17px 10px 17px;
+    }
+
+    main .action a>i {
+        font-size: 16px;
+    }
+
+    .all-tasks {
+        margin: 0 auto;
+        width: 85%;
+    }
+
+    .all-tasks ul>li {
+        margin-bottom: 40px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .all-tasks ul li>.task-infos {
+        font-size: 17.5px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .task-actions {
+        flex-direction: row;
+        margin-top: 15px;
+    }
+
+    .task .task-actions>.edit-button,
+    .task .task-actions .delete-button form>.delete {
+        font-family: "Poppins-Regular";
+        align-items: center;
+        padding: 7px 14px 7px 14px;
+        border-radius: 5px;
+        font-size: 14.5px;
+    }
+
+    .task .task-actions>.edit-button {
+        border: 1.5px solid #198754;
+        background-color: #fff;
+        color: #198754;
+    }
+
+    .task .task-actions .delete-button form>.delete {
+        border: 1.5px solid #b22222;
+        background-color: #fff;
+        color: #b22222;
+        margin-left: 8px;
+    }
+
+    .task-message {
+        font-family: "Poppins-Regular";
+    }
+
+    .task .task-info>label,
+    .task .task-info>span {
+        margin-left: 5px;
+    }
+
+    .task .edit-button>i,
+    .task .delete-button form .delete>i {
+        margin-right: 7px;
+    }
+
+    .action-buttons {
+        justify-content: center;
+    }
+
+    .action-buttons>ul {
+        align-items: center;
+        flex-direction: column;
+        margin-top: 80px;
+        margin-bottom: 100px;
+    }
+
+    .action-buttons ul li>button,
+    .action-buttons ul li form>button {
+        font-family: "Poppins-Regular";
+        padding: 10px 17px 10px 17px;
+        border-radius: 5px;
+        font-size: 15.5px;
+    }
+
+    .action-buttons ul li button>i {
+        margin-right: 8px;
+    }
+
+    .action-buttons ul li form>.delete-task-btn {
+        margin-right: 0;
+        margin-bottom: 25px;
+    }
+
+    /*** END HOME ***/
+
+    /*** ACCOUNT PAGE ***/
+    .profile-form>form {
+        width: 65%;
+    }
+
+    form .form-container .form-input .input-button .update-submit>input {
+        padding: 4px 24px;
+    }
+
+    .account-action-buttons>h2 {
+        font-size: 27px;
+    }
+
+    .account-action-buttons>ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .account-action-buttons ul li>.edit-password-link {
+        padding: 10px 27px;
+        font-size: 16px;
+        margin-bottom: 30px;
+        margin-right: 0;
+    }
+
+    .account-action-buttons ul li .edit-password-link>i {
+        margin-right: 10px;
+        font-size: 15px;
+    }
+
+    .account-action-buttons ul li form>.delete-account-btn {
+        padding: 10px 17px 10px 17px;
+        font-size: 16px;
+    }
+
+    .account-action-buttons ul li form .delete-account-btn>i {
+        margin-right: 8px;
+        font-size: 15px;
+    }
+
+    /*** END ACCOUNT PAGE ***/
+
+    /*** FOOTER ***/
+    .footer-absolute {
+        position: static;
+    }
+
+    /*** END FOOTER ***/
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+    /*** HEADER ***/
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        z-index: 3;
+        flex-direction: column;
+        justify-content: center;
+        width: 55%;
+        height: 100vh;
+        font-size: 21px;
+        background-color: #000000;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    li>a {
+        font-size: 23.5px;
+    }
+
+    .nav-links>p {
+        margin: 30px 0 30px 0;
+        transform: rotate(90deg);
+    }
+
+    .open-menu,
+    .close-menu {
+        display: block;
+    }
+
+    .close-menu {
+        position: absolute;
+    }
+
+    .open-menu>.fa-bars {
+        font-size: 28px;
+    }
+
+    #check:checked~ul {
+        right: 0;
+        width: 60%;
+    }
+
+    .cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    /*** END HEADER ***/
+
+    /*** FORMS ***/
+    main>form {
+        width: 60%;
+    }
+
+    form .form-container .form-input>label {
+        font-size: 16.5px;
+    }
+
+    form .form-container .form-input>input,
+    select {
+        font-size: 14.7px;
+    }
+
+    .form-container .submit-input>input[type="submit"] {
+        font-size: 15.5px;
+    }
+
+    form .form-container .form-checkbox>label {
+        font-size: 16.5px;
+    }
+
+    /*** END FORMS ***/
+
+    /*** HOME ***/
+    main>.action {
+        margin-top: 80px;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    main .action>h1 {
+        margin-bottom: 60px;
+    }
+
+    main .action>a {
+        border: 1.5px solid #1B9675;
+        font-size: 16px;
+        margin-bottom: 80px;
+        padding: 10px 17px 10px 17px;
+    }
+
+    main .action a>i {
+        font-size: 16px;
+    }
+
+    .all-tasks {
+        margin: 0 auto;
+        width: 85%;
+    }
+
+    .all-tasks ul>li {
+        margin-bottom: 40px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .all-tasks ul li>.task-infos {
+        font-size: 17.5px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .task-actions {
+        flex-direction: row;
+        margin-top: 15px;
+    }
+
+    .task .task-actions>.edit-button,
+    .task .task-actions .delete-button form>.delete {
+        font-family: "Poppins-Regular";
+        align-items: center;
+        padding: 7px 14px 7px 14px;
+        border-radius: 5px;
+        font-size: 14.5px;
+    }
+
+    .task .task-actions>.edit-button {
+        border: 1.5px solid #198754;
+        background-color: #fff;
+        color: #198754;
+    }
+
+    .task .task-actions .delete-button form>.delete {
+        border: 1.5px solid #b22222;
+        background-color: #fff;
+        color: #b22222;
+        margin-left: 8px;
+    }
+
+    .task-message {
+        font-family: "Poppins-Regular";
+    }
+
+    .task .task-info>label,
+    .task .task-info>span {
+        margin-left: 5px;
+    }
+
+    .task .edit-button>i,
+    .task .delete-button form .delete>i {
+        margin-right: 7px;
+    }
+
+    .action-buttons {
+        justify-content: center;
+    }
+
+    .action-buttons>ul {
+        align-items: center;
+        flex-direction: row;
+        // flex-wrap: wrap;
+        // justify-content: center;
+        margin-top: 70px;
+        margin-bottom: 90px;
+    }
+
+    .action-buttons ul li>button,
+    .action-buttons ul li form>button {
+        font-family: "Poppins-Regular";
+        padding: 10px 17px 10px 17px;
+        border-radius: 5px;
+        font-size: 15.5px;
+    }
+
+    .action-buttons ul li button>i {
+        margin-right: 8px;
+    }
+
+    .action-buttons ul li form>.delete-task-btn {
+        margin-right: 0;
+        margin-right: 25px;
+    }
+
+    /*** END HOME ***/
+
+    /*** ACCOUNT PAGE ***/
+    .profile-form>form {
+        width: 65%;
+    }
+
+    form .form-container .form-input .input-button .update-submit>input {
+        padding: 4px 24px;
+    }
+
+    .account-action-buttons>h2 {
+        font-size: 27px;
+    }
+
+    .account-action-buttons>ul {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .account-action-buttons ul li>.edit-password-link {
+        padding: 10px 27px;
+        font-size: 16px;
+    }
+
+    .account-action-buttons ul li .edit-password-link>i {
+        margin-right: 10px;
+        font-size: 15px;
+    }
+
+    .account-action-buttons ul li form>.delete-account-btn {
+        padding: 10px 17px 10px 17px;
+        font-size: 16px;
+    }
+
+    .account-action-buttons ul li form .delete-account-btn>i {
+        margin-right: 8px;
+        font-size: 15px;
+    }
+
+    /*** END ACCOUNT PAGE ***/
+
+    /*** FOOTER ***/
+    .footer-absolute {
+        position: static;
+    }
+
+    /*** END FOOTER ***/
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+    /*** HEADER ***/
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        z-index: 3;
+        flex-direction: column;
+        justify-content: center;
+        width: 55%;
+        height: 100vh;
+        font-size: 21px;
+        background-color: #000000;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    li>a {
+        font-size: 23.5px;
+    }
+
+    .nav-links>p {
+        margin: 30px 0 30px 0;
+        transform: rotate(90deg);
+    }
+
+    .open-menu,
+    .close-menu {
+        display: block;
+    }
+
+    .close-menu {
+        position: absolute;
+    }
+
+    .open-menu>.fa-bars {
+        font-size: 28px;
+    }
+
+    #check:checked~ul {
+        right: 0;
+        width: 60%;
+    }
+
+    .cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    /*** END HEADER ***/
+
+    /*** FORMS ***/
+    main>form {
+        width: 60%;
+    }
+
+    form .form-container .form-input>label {
+        font-size: 16.5px;
+    }
+
+    form .form-container .form-input>input,
+    select {
+        font-size: 14.7px;
+    }
+
+    .form-container .submit-input>input[type="submit"] {
+        font-size: 15.5px;
+    }
+
+    form .form-container .form-checkbox>label {
+        font-size: 16.5px;
+    }
+
+    /*** END FORMS ***/
+
+    /*** HOME ***/
+    main>.action {
+        margin-top: 80px;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    main .action>h1 {
+        margin-bottom: 60px;
+    }
+
+    main .action>a {
+        border: 1.5px solid #1B9675;
+        font-size: 16px;
+        margin-bottom: 80px;
+        padding: 10px 17px 10px 17px;
+    }
+
+    main .action a>i {
+        font-size: 16px;
+    }
+
+    .all-tasks {
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    .all-tasks ul>li {
+        margin-bottom: 40px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .all-tasks ul li>.task-infos {
+        font-size: 16.5px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .task-actions {
+        flex-direction: row;
+    }
+
+    .task .task-actions>.edit-button,
+    .task .task-actions .delete-button form>.delete {
+        font-family: "Poppins-Regular";
+        align-items: center;
+        padding: 7px 14px 7px 14px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .task .task-actions>.edit-button {
+        border: 1.5px solid #198754;
+        background-color: #fff;
+        color: #198754;
+    }
+
+    .task .task-actions .delete-button form>.delete {
+        border: 1.5px solid #b22222;
+        background-color: #fff;
+        color: #b22222;
+        margin-left: 8px;
+    }
+
+    .task-message {
+        font-family: "Poppins-Regular";
+    }
+
+    .task .task-info>label,
+    .task .task-info>span {
+        margin-left: 5px;
+    }
+
+    .task .edit-button>i,
+    .task .delete-button form .delete>i {
+        margin-right: 7px;
+    }
+
+    .action-buttons {
+        justify-content: center;
+    }
+
+    .action-buttons>ul {
+        align-items: center;
+        flex-direction: row;
+        margin-top: 70px;
+        margin-bottom: 90px;
+    }
+
+    .action-buttons ul li>button,
+    .action-buttons ul li form>button {
+        font-family: "Poppins-Regular";
+        padding: 10px 17px 10px 17px;
+        border-radius: 5px;
+        font-size: 15.5px;
+    }
+
+    .action-buttons ul li button>i {
+        margin-right: 8px;
+    }
+
+    .action-buttons ul li form>.delete-task-btn {
+        margin-right: 0;
+        margin-right: 25px;
+    }
+
+    /*** END HOME ***/
+
+    /*** ACCOUNT PAGE ***/
+    .profile-form>form {
+        width: 65%;
+    }
+
+    form .form-container .form-input .input-button .update-submit>input {
+        padding: 4px 24px;
+    }
+
+    .account-action-buttons>h2 {
+        font-size: 27px;
+    }
+
+    .account-action-buttons>ul {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .account-action-buttons ul li>.edit-password-link {
+        padding: 10px 27px;
+        font-size: 16px;
+    }
+
+    .account-action-buttons ul li .edit-password-link>i {
+        margin-right: 10px;
+        font-size: 15px;
+    }
+
+    .account-action-buttons ul li form>.delete-account-btn {
+        padding: 10px 17px 10px 17px;
+        font-size: 16px;
+    }
+
+    .account-action-buttons ul li form .delete-account-btn>i {
+        margin-right: 8px;
+        font-size: 15px;
+    }
+
+    /*** END ACCOUNT PAGE ***/
+
+    /*** FOOTER ***/
+    .footer-absolute {
+        position: static;
+    }
+    /*** END FOOTER ***/
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    
+
+    /*** HEADER ***/
+    /*** END HEADER ***/
+
+    /*** FORMS ***/
+    main>form {
+        width: 40%;
+    }
+
+    form .form-container .form-input>label {
+        font-size: 16.3px;
+    }
+
+    form .form-container .form-input>input,
+    select {
+        font-size: 14.5px;
+    }
+
+    .form-container .submit-input>input[type="submit"] {
+        font-size: 16.3px;
+    }
+
+    form .form-container .form-checkbox>label {
+        font-size: 16.3px;
+    }
+
+    /*** END FORMS ***/
+
+    /*** HOME ***/
+    main>.action {
+        margin-top: 80px;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    main .action>h1 {
+        margin-bottom: 60px;
+    }
+
+    main .action>a {
+        border: 1.5px solid #1B9675;
+        font-size: 15.5px;
+        margin-bottom: 80px;
+        padding: 10px 17px 10px 17px;
+    }
+
+    main .action a>i {
+        font-size: 15.5px;
+    }
+
+    .all-tasks {
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    .all-tasks ul>li {
+        margin-bottom: 40px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .all-tasks ul li>.task-infos {
+        font-size: 17px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .task-actions {
+        flex-direction: row;
+    }
+
+    .task .task-actions>.edit-button,
+    .task .task-actions .delete-button form>.delete {
+        font-family: "Poppins-Regular";
+        align-items: center;
+        padding: 8px 15px 8px 15px;
+        border-radius: 5px;
+        font-size: 14.5px;
+    }
+
+    .task .task-actions>.edit-button {
+        border: 1.5px solid #198754;
+        background-color: #fff;
+        color: #198754;
+    }
+
+    .task .task-actions .delete-button form>.delete {
+        border: 1.5px solid #b22222;
+        background-color: #fff;
+        color: #b22222;
+        margin-left: 8px;
+    }
+
+    .task-message {
+        font-family: "Poppins-Regular";
+    }
+
+    .task .task-info>label,
+    .task .task-info>span {
+        margin-left: 5px;
+    }
+
+    .task .edit-button>i,
+    .task .delete-button form .delete>i {
+        margin-right: 7px;
+    }
+
+    .action-buttons {
+        justify-content: center;
+    }
+
+    .action-buttons>ul {
+        align-items: center;
+        flex-direction: row;
+        margin-top: 70px;
+        margin-bottom: 90px;
+    }
+
+    .action-buttons ul li>button,
+    .action-buttons ul li form>button {
+        font-family: "Poppins-Regular";
+        padding: 10px 17px 10px 17px;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+
+    .action-buttons ul li button>i {
+        margin-right: 8px;
+    }
+
+    .action-buttons ul li form>.delete-task-btn {
+        margin-right: 0;
+        margin-right: 25px;
+    }
+
+    /*** END HOME ***/
+
+    /*** ACCOUNT PAGE ***/
+    .profile-form>form {
+        width: 50%;
+    }
+
+    form .form-container .form-input .input-button .update-submit>input {
+        padding: 7px 30px;
+    }
+
+    .account-action-buttons>h2 {
+        font-size: 25px;
+    }
+
+    .account-action-buttons>ul {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .account-action-buttons ul li>.edit-password-link {
+        padding: 8px 25px;
+        font-size: 15px;
+    }
+
+    .account-action-buttons ul li .edit-password-link>i {
+        margin-right: 10px;
+        font-size: 15.5px;
+    }
+    
+    .account-action-buttons ul li form .delete-account-btn>i {
+        margin-right: 8px;
+        font-size: 15px;
+    }
+    /*** END ACCOUNT PAGE ***/
+
+    /*** FOOTER ***/
+    .footer-absolute {
+        position: static;
+    }
+    /*** END FOOTER ***/
+}
