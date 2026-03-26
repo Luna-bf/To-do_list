@@ -3,3 +3,4 @@ vendor/
 old/
 tests/
 node_modules
+.env
