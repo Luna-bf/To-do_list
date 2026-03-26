@@ -11,15 +11,14 @@
 	<main class="d-flex profile-form">
 		<h1>Votre compte</h1>
 
-		<form action="/user/updateUsername?id={{ user.user_id }}" method="post">
-			<div
-				class="form-container">
+		<form action="/user/updateUsername?id={{ user.user_id }}" method="POST">
+			<div class="form-container">
 				{# Nom de l'utilisateur #}
 				<div class="d-flex form-input">
 					<label for="username" class="form-label">Nom d'utilisateur</label>
 					<div class="d-flex input-button">
-						<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 						<input type="text" name="username" id="username" placeholder="{{ user.username }}"/>
+						<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 						<div class="d-flex update-submit">
 							<input type="submit" id="update_username" name="update_username" class="d-flex" value="Modifier"/>
 						</div>
@@ -29,14 +28,14 @@
 		</form>
 
 		{# Adresse mail #}
-		<form action="/user/updateEmail?id={{ user.user_id }}" method="post">
+		<form action="/user/updateEmail?id={{ user.user_id }}" method="POST">
 			<div class="form-container">
 				<div class="d-flex form-input">
 					<label for="email" class="form-label">Adresse mail</label>
 					<div class="d-flex input-button">
-						<input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
 						<input type="email" name="email" id="email" placeholder="{{ user.email }}"/>
 						<div class="d-flex update-submit">
+							<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 							<input type="submit" id="update_email" name="update_email" class="d-flex" value="Modifier"/>
 						</div>
 					</div>
