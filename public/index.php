@@ -3,12 +3,15 @@
 // J'importe les contrôleurs à l'aide de leur namespace
 use src\controllers\TaskController;
 use src\controllers\UserController;
+use Dotenv\Dotenv;
 
 // Je défini le chemin d'accès de chaque dossier ici :
-define('ROOT', dirname(__DIR__)); // dirname(__DIR__) va récupérer le nom du dossier parent (ici "Trouver-Ma-Traduction") et le stocker dans la constante nommée "ROOT"
+define('ROOT', dirname(__DIR__)); // dirname(__DIR__) va récupérer le nom du dossier parent (ici "To-do_List") et le stocker dans la constante nommée "ROOT"
 define('TEMPLATES', ROOT . '/templates'); //Je déclare une constante nommée "VIEWS" qui prend comme valeur la racine du projet concaténé avec la chaine de caractères "/views", ce qui donne le chemin complet suivant : racine_du_projet/views
 
 require_once ROOT . "/vendor/autoload.php"; // Va charger toutes les librairies présentes dans le dossier vendors ainsi que les classes du dossier src. Cela remplace la fonction spl_autoload que j'avais déclaré avant (voir fichier spl-autoload.php dans le dossier src)
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../')->load(); // Charge les variables du fichier .env
 
 /* PATH_INFO contient le chemin de l'URL, par exemple : si l'URL appelé est "/home" alors le chemin de l'URL sera
 "http://localhost/home". J'utilise l'opérateur de fusion (coalescing operator) afin de vérifier si PATH_INFO existe, si

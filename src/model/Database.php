@@ -18,13 +18,22 @@ class Database
 {
     // Déclaration des propriétés qui vont constituer la connexion à la base de données
     private $pdo;
-    private $host = 'localhost';
-    private $db_name = 'todolist_db';
-    private $user = 'root';
-    private $password = '';
+    private $host = null;
+    private $db_name = null;
+    private $user = null;
+    private $password = null;
 
     public function __construct()
     {
+        /*
+        Je récupère les variables déclarées dans le fichier .env grâce à la variable superglobal $_ENV, puis je les assigne aux
+        différentes propriétés déclarées plus haut.
+        */
+        $this->host = $_ENV['HOST'];
+        $this->db_name = $_ENV['DB_NAME'];
+        $this->user = $_ENV['USER'];
+        $this->password = $_ENV['PASSWORD'];
+
         // Instance mise à la ligne pour qu'elle soit plus lisible
         $this->pdo = new PDO(
             "mysql:host=$this->host;dbname=$this->db_name",
