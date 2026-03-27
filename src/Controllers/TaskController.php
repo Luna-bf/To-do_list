@@ -185,7 +185,10 @@ class TaskController extends BaseController
         $task_id = $_POST['task_id']; // Je récupère l'id de la tâche à supprimer
         $task = $this->db->findTask($task_id); // J'appelle la méthode findTask() pour qu'elle récupère la tâche à supprimer
 
-        if ($task['user_id'] === $user_id) {
+        if (((int)$task['task_id'] !== (int)$task_id) || ((int)$_POST['task_id'] !== (int)$task['task_id']) || ((int)$task['user_id'] !== (int)$user_id)) {
+            throw new Exception("L'identifiant de la tâche est invalide.");
+
+        } else {
             // Si le token n'existe pas OU qu'il existe mais qu'il ne correspond pas au token créé par la session...
             if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
                 throw new Exception("Le token CSRF est invalide.");
@@ -201,8 +204,6 @@ class TaskController extends BaseController
                     exit;
                 }
             }
-        } else {
-            throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
         }
     }
 
@@ -212,7 +213,9 @@ class TaskController extends BaseController
         $tasks = $this->db->findUserTasks($user_id); // Je récupère toutes les données de la table tasks grâce à la méthode findUserTasks et les stocke dans un tableau "tasks"    
 
         foreach ($tasks as $task) {
-            if ($task['user_id'] === $user_id) {
+            if (((int)$task['task_id'] !== (int)$task['task_id']) || ((int)$_POST['task_id'] !== (int)$task['task_id']) || ((int)$task['user_id'] !== (int)$user_id)) {
+                throw new Exception("L'identifiant de l'une des tâches est invalide.");
+            } else {
                 // Si le token n'existe pas OU qu'il existe mais qu'il ne correspond pas au token créé par la session...
                 if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
                     throw new Exception("Le token CSRF est invalide.");
@@ -228,8 +231,6 @@ class TaskController extends BaseController
                         exit;
                     }
                 }
-            } else {
-                throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
             }
         }
     }
@@ -243,7 +244,9 @@ class TaskController extends BaseController
         foreach ($tasks as $task) {
 
             // Je compare l'id de l'utilisateur présent dans chaque tâche afin de le comparer avec celui présent dans la session actuelle
-            if ($task['user_id'] === $user_id) {
+            if (((int)$task['task_id'] !== (int)$task['task_id']) || ((int)$_POST['task_id'] !== (int)$task['task_id']) || ((int)$task['user_id'] !== (int)$user_id)) {
+                throw new Exception("L'identifiant de l'une des tâches est invalide.");
+            } else {
                 if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
                     throw new Exception("Le token CSRF est invalide.");
                 } else {
@@ -258,8 +261,6 @@ class TaskController extends BaseController
                         exit;
                     }
                 }
-            } else {
-                throw new Exception("Une erreur est survenue : La suppression n'a pas pu être effectuée.");
             }
         }
     }
