@@ -8,6 +8,14 @@ session_start();
 
 class UserController extends BaseController
 {
+    private function generateCsrfToken()
+    {
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+
+        return $_SESSION['csrf_token'];
+    }
 
     public function register()
     {
@@ -103,13 +111,10 @@ class UserController extends BaseController
         $this->render('form/login.html.twig', ['email' => $email, 'password' => $password, 'message' => $message]);
     }
 
-    public function findUser()
+    // Cette méthode sert à afficher la page contenant les formulaires et à générer un token pour ceux-ci
+    public function userAccount()
     {
-        if (!isset($_SESSION['csrf_token'])) {
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-        }
-
-        $csrf_token = $_SESSION['csrf_token']; // Je récupère le token CSRF
+        $csrf_token = $this->generateCsrfToken();
         $user_id = $_SESSION['user_id']; // Je récupère l'identifiant de l'utilisateur présent dans la session
         $user = $this->db->findUser($user_id); // Je recherche l'utilisateur grâce à l'id récupéré dans la session
 
@@ -120,18 +125,19 @@ class UserController extends BaseController
     {
         $user_id = $_SESSION['user_id']; // Je récupère l'identifiant de l'utilisateur présent dans la session
         $user = $this->db->findUser($user_id); // Je recherche l'utilisateur grâce à l'id récupéré dans la session
-        $username = null;
+        $username = $user['username'];
         $message = "";
 
-        if ($user['user_id'] === $user_id) {
+        if (isset($_POST['update_username'])) {
 
-            // Si le token n'existe pas OU qu'il existe mais qu'il ne correspond pas au token créé par la session...
-            if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
-                throw new Exception("Le token CSRF est invalide.");
+            if (((int)$user['user_id'] !== (int)$user_id) || ((int)$_POST['user_id'] !== (int)$user['user_id'])) {
+                throw new Exception("Identifiant invalide.");
             } else {
 
-                if (isset($_POST['update_username'])) {
-
+                // Si le token n'existe pas OU qu'il existe mais qu'il ne correspond pas au token créé par la session...
+                if (empty($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+                    throw new Exception("Le token CSRF est invalide.");
+                } else {                    
                     // Récupère la valeur du champ de saisie "username"
                     $username = htmlspecialchars($_POST['username']);
 
@@ -148,37 +154,35 @@ class UserController extends BaseController
                         $message = "Le champ de saisie doit être rempli.";
                     }
                 }
-
-                $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'username' => $username, 'message' => $message]);
             }
         }
+
+        $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'username' => $username, 'message' => $message]);
     }
 
     public function updateEmail()
     {
-
         $user_id = $_SESSION['user_id']; // Je récupère l'identifiant de l'utilisateur présent dans la session
         $user = $this->db->findUser($user_id); // Je recherche l'utilisateur grâce à l'id récupéré dans la session
-        $csrf_token = $_POST['csrf_token'];
         $email = null;
         $message = "";
 
-        if ($user['user_id'] === $user_id) {
+        if (isset($_POST['update_email'])) {
 
-            if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
-                throw new Exception("Le token CSRF est invalide.");
+            if (((int)$user['user_id'] !== (int)$user_id) || ((int)$_POST['user_id'] !== (int)$user['user_id'])) {
+                throw new Exception("Identifiant invalide.");
             } else {
+                if (empty($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+                    throw new Exception("Le token CSRF est invalide.");
+                } else {
+                    if (!empty($_POST['email'])) {
 
-                if (isset($_POST['update_email'])) {
-
-                    $email = htmlspecialchars(trim($_POST['email'])); // Champ de saisie nommé "email"
-
-                    if (!empty($email)) {
+                        $email = htmlspecialchars(trim($_POST['email'])); // Champ de saisie nommé "email"if (!empty($email)) {
 
                         // Vérifie si l'adresse mail saisie existe
                         $emailValidation = $this->db->checkIfEmailExists($email);
 
-                        // Si l'adresse mail saisie par l'utilisateur n'existe pas...
+                        // Si l'adresse mail saisie par l'utilisateur n'existe pas (si aucun autre utilisateur ne possède cet email)...
                         if (!$emailValidation) {
 
                             // Je met à jour l'adresse mail de l'utilisateur
@@ -196,25 +200,48 @@ class UserController extends BaseController
                         $message = "Le champ de saisie doit être rempli.";
                     }
                 }
-
-                $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'email' => $email, 'message' => $message, 'csrf_token' => $csrf_token]);
             }
         }
+
+        $this->render('user/index.html.twig', ['user_id' => $user_id, 'user' => $user, 'email' => $email, 'message' => $message]);
     }
 
-    public function updatePassword()
+    // Cette méthode va afficher le formulaire (vide) dans la page
+    public function passwordForm()
     {
+        $csrf_token = $this->generateCsrfToken(); // Va donner le jeton CSRF au formulaire
         $user_id = $_SESSION['user_id'];
         $user = $this->db->findUser($user_id);
-        // $csrf_token = $_SESSION['csrf_token'];
 
-        if ($user['user_id'] === $user_id) {
+        $this->render('user/updatePassword.html.twig', ['user_id' => $user_id, 'user' => $user, 'csrf_token' => $csrf_token]);
+    }
 
-            /*if (!isset($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
-                throw new Exception("Le token CSRF est invalide.");
-            } else {*/
-                if (isset($_POST['update-password'])) {
+    // Cette méthode va traiter le formulaire (une fois rempli)
+    public function updatePassword()
+    {
+        $csrf_token = $this->generateCsrfToken(); // Va donner le jeton CSRF au formulaire
+        $user_id = $_SESSION['user_id'];
+        $user = $this->db->findUser($user_id);
+        $message = "";
 
+        if (isset($_POST['update-password'])) {
+
+            /*
+            Si l'id de l'utilisateur trouvé ($user['user_id']) ne correspond pas à l'identifiant de l'utilisateur stocké dans la
+            session actuelle ($user_id) OU que l'id de l'utilisateur récupéré dans le form ne correspond pas à l'id de l'utilisateur
+            dans la BDD, je renvoie une exception.
+
+            Note : j'utilise (int) pour convertir toutes les valeurs en nombre entier, car la donnée "user_id" est un nombre entier
+            dans la BDD.
+            */
+            if (((int)$user['user_id'] !== (int)$user_id) || ((int)$_POST['user_id'] !== (int)$user['user_id'])) {
+                throw new Exception("Identifiant invalide.");
+            } else {
+                // Si le jeton CSRF est vide ou ne correspond pas au jeton stocké dans la session, je renvoie une exception
+                if (empty($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+                    throw new Exception("Le token CSRF est invalide.");
+                } else {
+                    // Je récupère les valeurs du formulaire
                     $oldPassword = htmlspecialchars(trim($_POST['old_password']));
                     $newPassword = htmlspecialchars(trim($_POST['new_password']));
                     $confirmPassword = htmlspecialchars(trim($_POST['confirm_password']));
@@ -232,7 +259,11 @@ class UserController extends BaseController
 
                                     // Puis je le met à jour
                                     $confirmedPassword = $this->db->updatePassword($hashed_password);
-                                    $successMessage = "Le mot de passe a été modifié avec succès.";
+
+                                    if ($confirmedPassword) {
+                                        unset($_SESSION['csrf_token']); // Je supprime l'ancien jeton CSRF
+                                        header('Location: /user/account');
+                                    }
                                 } else {
                                     $message = "Le mot de passe saisi ne correspond pas au nouveau mot de passe.";
                                 }
@@ -246,10 +277,11 @@ class UserController extends BaseController
                         $message = "Tous les champs de saisie doivent être remplis.";
                     }
                 }
-
-                $this->render('user/updatePassword.html.twig', ['user_id' => $user_id, 'user' => $user, 'oldPassword' => $oldPassword, 'newPassword' => $newPassword, 'confirmPassword' => $confirmPassword, 'hashed_password' => $hashed_password, 'confirmedPassword' => $confirmedPassword, 'message' => $message, 'successMessage' => $successMessage]);
             }
         }
+
+        $this->render('user/updatePassword.html.twig', ['user_id' => $user_id, 'user' => $user, 'oldPassword' => $oldPassword, 'newPassword' => $newPassword, 'confirmPassword' => $confirmPassword, 'hashed_password' => $hashed_password, 'confirmedPassword' => $confirmedPassword, 'message' => $message, 'csrf_token' => $csrf_token]);
+    }
 
     public function logout()
     {
