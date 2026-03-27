@@ -70,6 +70,8 @@
 
 				<!-- Bouton de validation -->
 				<div class="d-flex submit-input" id="update-submit">
+					<input type="hidden" name="task_id" value="{{ task.task_id }}">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 					<input type="submit" name="update" class="d-flex" value="Modifier la tâche"/>
 				</div>
 			</div>
