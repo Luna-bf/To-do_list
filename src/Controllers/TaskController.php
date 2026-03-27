@@ -9,21 +9,23 @@ use Exception;
 // La classe TaskController hérite de la classe BaseController : elle récupère ses propriétés et méthodes
 class TaskController extends BaseController
 {
+    private function generateCsrfToken()
+    {
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+
+        return $_SESSION['csrf_token'];
+    }
 
     // La méthode render() permet d'appeler un fichier spécifique grâce à son chemin d'accès et de lui transmettre des données (voir BaseController.php)
     // Cette méthode va appeler les méthodes de la classe Database nécessaires à l'affichage des tâches
     public function index()
     {
-
-        // J'initialise le token CSRF dans la méthode qui affiche toutes les tâches, pour que toutes les tâches ai un token CSRF
-        if (!isset($_SESSION['csrf_token'])) {
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-        }
-
         // Initialisation des variables (comme ça elles restent accessible en dehors de la condition if)
         $user = null; // Par défaut, username est égal à null (aucune valeur)
         $user_id = null; // Par défaut, user_id est égal à null (aucune valeur)
-        $csrf_token = $_SESSION['csrf_token']; // Je récupère le token CSRF
+        $csrf_token = $this->generateCsrfToken(); // Je récupère le token CSRF
         $tasks = []; // tasks sera un tableau associatif, pareil pour $categories et $priorities
         $categories = [];
         $priorities = [];
@@ -105,44 +107,72 @@ class TaskController extends BaseController
         $this->render('home/task/createTask.html.twig', ['user_id' => $user_id, 'user' => $user, 'categories' => $categories, 'priorities' => $priorities, 'category' => $category, 'priority' => $priority, 'task' => $task, 'message' => $message]);
     }
 
-    public function updateTask()
+    public function updateTaskForm()
     {
+        // Jeton CSRF
+        $csrf_token = $this->generateCsrfToken();
+
+        // Utilisateur
         $user_id = $_SESSION['user_id'];
         $user = $this->db->findUser($user_id);
+
+        // Tâche
         $task_id = $_GET['id']; // Récupère l'identifiant passé dans l'URL
-        $is_complete = null; // Par défaut, la valeur du checkbox est 0 (false)
+        $task = $this->db->findTask($task_id); // Récupère la tâche grâce à l'identifiant passé dans l'URL
+        $categories = $this->db->getCategories('categories');
+        $priorities = $this->db->getPriorities('priorities');
+
+        $this->render('home/task/updateTask.html.twig', ['user_id' => $user_id, 'user' => $user, 'task_id' => $task_id, 'task' => $task, 'categories' => $categories, 'priorities' => $priorities, 'csrf_token' => $csrf_token]);
+    }
+
+    public function updateTask()
+    {
+        // Utilisateur
+        $user_id = $_SESSION['user_id'];
+        $user = $this->db->findUser($user_id);
+
+        // Tâche
+        $task_id = $_GET['id']; // Récupère l'identifiant passé dans l'URL
+        $task = $this->db->findTask($task_id); // Récupère la tâche grâce à l'identifiant passé dans l'URL
+        $categories = $this->db->getCategories('categories'); // Récupère toutes les catégories
+        $priorities = $this->db->getPriorities('priorities'); // Récupère toutes les priorités
+        $is_complete = false; // Par défaut, la valeur du checkbox est 0 (false)
         $updatedTask = null;
+
+        // Message
         $message = "";
 
-        if (isset($task_id)) {
+        if (isset($_POST['update'])) {
 
-            $categories = $this->db->getCategories('categories');
-            $priorities = $this->db->getPriorities('priorities');
-            $task = $this->db->findTask($task_id);
+            if (((int)$task['task_id'] !== (int)$task_id) || ((int)$_POST['task_id'] !== (int)$task['task_id']) || ((int)$task['user_id'] !== (int)$user_id)) {
+                throw new Exception("L'identifiant de la tâche est invalide.");
+            } else {
 
-            if (isset($_POST['update'])) {
-
-                $category = htmlspecialchars($_POST['category']);
-                $priority = htmlspecialchars($_POST['priority']);
-                $task_name = htmlspecialchars($_POST['task_name']);
-                $is_complete = htmlspecialchars($_POST['is_complete']);
-
-                if (!empty($category) && !empty($priority) && !empty($task_name)) {
-
-                    // Je récupère les valeurs saisies dans le formulaire puis je met à jour la tâche
-                    $updatedTask = $this->db->updateTask($category, $priority, $task_name, $is_complete, $task_id);
-
-                    if ($updatedTask) {
-                        unset($_SESSION['csrf_token']);
-                        header('Location: /home'); // Je redirige vers la page home
-                        exit;
-                    }
+                // Si le token n'existe pas OU qu'il existe mais qu'il ne correspond pas au token créé par la session...
+                if (empty($_POST['csrf_token']) || ($_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+                    throw new Exception("Le token CSRF est invalide.");
                 } else {
-                    $message = "Tous les champs doivent être remplis.";
+
+                    $category = htmlspecialchars($_POST['category']);
+                    $priority = htmlspecialchars($_POST['priority']);
+                    $task_name = htmlspecialchars($_POST['task_name']);
+                    $is_complete = htmlspecialchars($_POST['is_complete']);
+
+                    if (!empty($category) && !empty($priority) && !empty($task_name)) {
+
+                        // Je récupère les valeurs saisies dans le formulaire puis je met à jour la tâche
+                        $updatedTask = $this->db->updateTask($category, $priority, $task_name, $is_complete, $task_id);
+
+                        if ($updatedTask) {
+                            unset($_SESSION['csrf_token']); // Supprime le jeton CSRF actuel
+                            header('Location: /home'); // Redirige vers la page home
+                            exit;
+                        }
+                    } else {
+                        $message = "Tous les champs doivent être remplis.";
+                    }
                 }
             }
-        } else {
-            throw new Exception("Une erreur est survenue, la modification n'a pas pu être effectuée.");
         }
 
         // Je passe les catégories, les priorités et la tâche modifiée en tant que valeurs à la page
