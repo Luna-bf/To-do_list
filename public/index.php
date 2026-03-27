@@ -39,6 +39,10 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
         (new TaskController())->createTask();
         break;
 
+    case '/task/updateTaskForm':
+        (new TaskController())->updateTaskForm();
+        break;
+
     case '/task/updateTask':
         (new TaskController())->updateTask();
         break;
