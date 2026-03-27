@@ -11,9 +11,9 @@
 	<main
 		class="d-flex form-main">
 		{#
-								L'action du formulaire doit bien contenir l'identifiant de la tâche, sinon l'identifiant ne pourra pas être récupéré
-								par le formulaire, ce qui me renverra vers une page d'erreur.
-								#}
+		L'action du formulaire doit bien contenir l'identifiant de la tâche, sinon l'identifiant ne pourra pas être récupéré
+		par le formulaire, ce qui me renverra vers une page d'erreur.
+		#}
 		<form action="/task/updateTask?id={{ task.task_id }}" method="post">
 			<div class="form-container">
 				<h1>Modifiez la tâche</h1>
@@ -56,7 +56,7 @@
 					</select>
 				</div>
 
-				<!-- Est terminée -->
+				{# Est terminée #}
 				<div
 					class="d-flex form-checkbox">
 					{# Je crée une condition if dans l'input pour gérer l'état du checkbox (coché ou non) #}
@@ -68,7 +68,7 @@
 					<p>{{ message }}</p>
 				</div>
 
-				<!-- Bouton de validation -->
+				{# Bouton de validation #}
 				<div class="d-flex submit-input" id="update-submit">
 					<input type="hidden" name="task_id" value="{{ task.task_id }}">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
