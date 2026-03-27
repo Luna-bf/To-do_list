@@ -28,7 +28,7 @@
 						Note : "?id=" correspond au paramètre GET dans l'url (c'est comme si je faisais $_GET['task_id'])
 						#}
 						<div class="task-actions d-flex">
-							<a href="/task/updateTask?id={{ task.task_id }}" class="edit-button"><i class="fa-solid fa-pen"></i>Modifier</a>
+							<a href="/task/updateTaskForm?id={{ task.task_id }}" class="edit-button"><i class="fa-solid fa-pen"></i>Modifier</a>
 							<div class="delete-button">
 								<form action="/delete" method="post">
 									{#
