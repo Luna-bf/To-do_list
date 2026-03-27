@@ -56,16 +56,23 @@ switch ($_SERVER['PATH_INFO'] ?? '/') { // J'utilise un switch pour gérer les d
         (new TaskController())->deleteAllTasks();
         break;
 
+    // Redirige vers la page "account", qui affiche les formulaires
     case '/user/account':
-        (new UserController())->findUser();
+        (new UserController())->userAccount();
         break;
 
+    // Redirige vers la route "/user/updateUsername" une fois que le formulaire est envoyé
     case '/user/updateUsername':
         (new UserController())->updateUsername();
         break;
 
     case '/user/updateEmail':
         (new UserController())->updateEmail();
+        break;
+
+    // J'ajoute une page qui affiche uniquement le formulaire du mot de passe
+    case '/user/passwordForm':
+        (new UserController())->passwordForm();
         break;
 
     case '/user/updatePassword':
