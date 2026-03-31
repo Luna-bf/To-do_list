@@ -38,7 +38,7 @@
 									<input type="hidden" name="task_id" value="{{ task.task_id }}">
 									{# J'ajoute aussi un jeton CSRF pour contrer les failles CSRF #}
 									<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-									<button class="delete" id="delete"><i class="fa-solid fa-ban"></i>Supprimer</button>
+									<button class="delete" name="delete" id="delete"><i class="fa-solid fa-ban"></i>Supprimer</button>
 								</form>
 							</div>
 						</div>
@@ -74,19 +74,16 @@
 			<ul class="d-flex list-unstyled">
 				<li>
 					<form action="/deleteCompletedTasks" method="post">
-						{# Je convertis le tableau $task_ids en format JSON, celui devient donc une chaîne de caractères que je
-						passe en tant que valeur à l'input #}
-						<input type="hidden" name="task_ids" value="{{ task_ids|json_encode() }}">
 						<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 						{# Si isComplete est égal à false, le bouton est désactivé. #}
-						<button type="submit" class="delete-task-btn" {% if not isComplete %}disabled{% endif %}><i class="fa-solid fa-square-check"></i>Supprimer les tâches terminées</button>					
+						<button type="submit" name="delete_completed_tasks" class="delete-task-btn" {% if not isComplete %}disabled{% endif %}><i class="fa-solid fa-square-check"></i>Supprimer les tâches terminées</button>					
 					</form>
 				</li>
 				<li>
 					<form action="/deleteAllTasks" method="post">
 						<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 						{# Si le nombre d'éléments présent dans le tableau "tasks" est inférieur à 1 (vide), alors le bouton est désactivé #}
-						<button type="submit" class="delete-all-btn" {% if tasks|length < 1 %}disabled{% endif %}><i class="fa-solid fa-trash"></i>Supprimer toutes les tâches</button>
+						<button type="submit" name="delete_all_tasks" class="delete-all-btn" {% if tasks|length < 1 %}disabled{% endif %}><i class="fa-solid fa-trash"></i>Supprimer toutes les tâches</button>
 					</form>
 				</li>
 			</ul>
