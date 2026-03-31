@@ -11,3 +11,12 @@ burgerMenuBtn.addEventListener('click', function () {
         coverBackground.classList.remove('cover'); // Je retire la classe .cover à l'élément coverBackground
     }
 });
+
+// event représente l'événement qui vient de se produire (ici, le click du bouton faisant apparaître le burger menu)
+document.addEventListener('click', function(event) {
+
+    if(coverBackground.contains(event.target)) {
+        burgerMenuBtn.checked = false; // Je supprime l'attribut "checked"
+        coverBackground.classList.remove('cover'); // Et je retire l'effet d'assombrissement de l'écran
+    }
+});
