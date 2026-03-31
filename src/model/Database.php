@@ -196,10 +196,10 @@ class Database
         return $task->execute(["task_id" => $task_id]);
     }
 
-    public function deleteCompletedTasks()
+    public function deleteCompletedTasks($user_id)
     {
-        $statement = $this->pdo->prepare("DELETE FROM tasks WHERE is_complete = 1");
-        return $statement->execute();
+        $statement = $this->pdo->prepare("DELETE FROM tasks WHERE is_complete = 1 AND user_id = :user_id");
+        return $statement->execute(["user_id" => $user_id]);
     }
 
     public function deleteAllTasks($user_id)
