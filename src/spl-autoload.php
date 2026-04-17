@@ -1,7 +1,11 @@
 <?php
 
-// Cette méthode remplace les requires (à revoir)
-// Charge tous les fichiers de classes, je n'ai donc pas besoin d'appeler le fichier Database.php dans BaseController
+/*
+Cette méthode remplace les requires :
+
+Elle charge tous les fichiers de classes grâce au chemin donné dans la variable $path : soit les classes présentes dans le
+chemin "To-do_List/src/NomDeLaClasse.php".
+*/
 spl_autoload_register(function ($class) { // Un callback est une fonction passée en tant que paramètre à une autre fonction
     $path = ROOT . "/src/$class.php";
 
